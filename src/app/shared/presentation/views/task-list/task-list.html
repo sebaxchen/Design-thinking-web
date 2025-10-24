@@ -1,0 +1,232 @@
+<div class="task-container">
+  <div class="task-header">
+    <h2>Mis Tareas</h2>
+    <button mat-raised-button color="primary" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Añadir Tarea
+    </button>
+  </div>
+
+  <!-- Tasks Grid -->
+  <div class="tasks-container">
+    @if (taskStore.allTasks().length === 0) {
+      <div class="empty-state">
+        <mat-icon class="empty-icon">assignment_turned_in</mat-icon>
+        <h3>No hay tareas</h3>
+        <p>¡Comienza añadiendo tu primera tarea!</p>
+      </div>
+    } @else {
+      <div class="tasks-grid">
+        @for (task of taskStore.allTasks(); track task.id) {
+          <mat-card class="task-card" [class]="'task-card task-' + task.status">
+            <mat-card-content class="task-content">
+              <div class="task-main">
+                <div class="task-info">
+                  <h3 class="task-title-text" [class.completed-text]="task.status === 'completed'">
+                    {{ task.title }}
+                  </h3>
+                  @if (task.description) {
+                    <p class="task-description">{{ task.description }}</p>
+                  }
+                </div>
+              </div>
+              
+              <div class="task-meta">
+                <span 
+                  class="priority-chip"
+                  [class]="'priority-' + task.priority">
+                  <mat-icon class="priority-icon">{{ getPriorityIcon(task.priority) }}</mat-icon>
+                  {{ task.priority | titlecase }}
+                </span>
+                @if (task.category) {
+                  <span class="category-chip">
+                    {{ task.category }}
+                  </span>
+                }
+                @if (task.assignee) {
+                  <span class="assignee-chip">
+                    <mat-icon class="assignee-icon">person</mat-icon>
+                    {{ task.assignee }}
+                  </span>
+                }
+              </div>
+
+              <!-- Status Selector -->
+              <div class="task-status">
+                <app-status-selector
+                  [currentStatus]="getTaskStatusSignal(task.id)"
+                  [disabled]="enabledSignal"
+                  (statusChange)="updateStatus(task.id, $event)">
+                </app-status-selector>
+              </div>
+            </mat-card-content>
+            
+            <mat-card-actions class="task-actions">
+              <button 
+                mat-icon-button 
+                color="warn"
+                (click)="deleteTask(task.id)"
+                class="delete-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Add Task Dialog -->
+@if (isAddDialogOpen()) {
+  <div class="dialog-overlay" (click)="closeAddDialog()">
+    <div class="dialog-container" (click)="$event.stopPropagation()">
+      <!-- Enhanced Header -->
+      <div class="dialog-header">
+        <div class="header-content">
+          <div class="header-icon">
+            <mat-icon>add_task</mat-icon>
+          </div>
+          <div class="header-text">
+            <h2 class="dialog-title">Crear Nueva Tarea</h2>
+            <p class="dialog-subtitle">Organiza tu trabajo de manera eficiente</p>
+          </div>
+        </div>
+        <button mat-icon-button (click)="closeAddDialog()" class="close-btn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      
+      <!-- Enhanced Content -->
+      <mat-dialog-content class="dialog-content">
+        <div class="modal-layout">
+          <!-- Columna Izquierda -->
+          <div class="modal-column">
+            <div class="form-section">
+              <div class="section-header">
+                <mat-icon class="section-icon">person</mat-icon>
+                <h3 class="section-title">Asignar a</h3>
+              </div>
+              
+              <div class="assignee-preview">
+                <app-assignee-selector
+                  [selectedAssignee]="newTaskAssigneeSignal"
+                  [disabled]="enabledSignal"
+                  (assigneeChange)="updateNewTaskAssignee($event)">
+                </app-assignee-selector>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <div class="section-header">
+                <mat-icon class="section-icon">title</mat-icon>
+                <h3 class="section-title">Información Básica</h3>
+              </div>
+              
+              <mat-form-field appearance="outline" class="full-width enhanced-field">
+                <mat-label>Título de la tarea</mat-label>
+                <input 
+                  matInput 
+                  [(ngModel)]="newTask().title"
+                  placeholder="¿Qué necesitas hacer?"
+                  maxlength="100"
+                  class="enhanced-input">
+                <mat-hint>Máximo 100 caracteres</mat-hint>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="full-width enhanced-field">
+                <mat-label>Descripción detallada</mat-label>
+                <textarea 
+                  matInput 
+                  [(ngModel)]="newTask().description"
+                  placeholder="Describe los detalles de la tarea..."
+                  rows="4"
+                  maxlength="500"
+                  class="enhanced-textarea">
+                </textarea>
+                <mat-hint>Máximo 500 caracteres</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <!-- Columna Derecha -->
+          <div class="modal-column">
+            <div class="form-section">
+              <div class="section-header">
+                <mat-icon class="section-icon">settings</mat-icon>
+                <h3 class="section-title">Configuración</h3>
+              </div>
+              
+              <mat-form-field appearance="outline" class="full-width enhanced-field">
+                <mat-label>Prioridad</mat-label>
+                <mat-select [(ngModel)]="newTask().priority" class="enhanced-select">
+                  <mat-option value="low">
+                    <div class="priority-option">
+                      <mat-icon class="priority-icon-low">keyboard_arrow_down</mat-icon>
+                      <span>Baja</span>
+                    </div>
+                  </mat-option>
+                  <mat-option value="medium">
+                    <div class="priority-option">
+                      <mat-icon class="priority-icon-medium">remove</mat-icon>
+                      <span>Media</span>
+                    </div>
+                  </mat-option>
+                  <mat-option value="high">
+                    <div class="priority-option">
+                      <mat-icon class="priority-icon-high">priority_high</mat-icon>
+                      <span>Alta</span>
+                    </div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="full-width enhanced-field">
+                <mat-label>Categoría</mat-label>
+                <input 
+                  matInput 
+                  [(ngModel)]="newTask().category"
+                  placeholder="Ej: Trabajo, Personal, Estudio..."
+                  class="enhanced-input">
+              </mat-form-field>
+            </div>
+
+            <div class="form-section">
+              <div class="section-header">
+                <mat-icon class="section-icon">flag</mat-icon>
+                <h3 class="section-title">Estado Inicial</h3>
+              </div>
+              
+              <div class="status-preview">
+                <app-status-selector
+                  [currentStatus]="newTaskStatusSignal"
+                  [disabled]="enabledSignal"
+                  (statusChange)="updateNewTaskStatus($event)">
+                </app-status-selector>
+              </div>
+            </div>
+            
+            <!-- Botones de acción -->
+            <div class="form-section actions-section">
+              <div class="dialog-actions">
+                <button 
+                  (click)="closeAddDialog()" 
+                  class="cancel-btn">
+                  <mat-icon>close</mat-icon>
+                  Cancelar
+                </button>
+                <button 
+                  (click)="addTask()"
+                  [disabled]="!newTask().title.trim()"
+                  class="create-btn">
+                  <mat-icon>add_task</mat-icon>
+                  Crear Tarea
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+    </div>
+  </div>
+}

@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "JAVA"
+    },
+    {
+      "id": 2,
+      "name": "Sprint Boot"
+    },
+    {
+      "id": 3,
+      "name": "TypeScript"
+    },
+    {
+      "id": 4,
+      "name": "Angular 2"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Java for Beginners",
+      "description": "Java"
+    },
+    {
+      "id": 2,
+      "title": "Typescript for Beginners",
+      "description": "Typescript"
+    },
+    {
+      "id": 3,
+      "title": "Angular for Beginners",
+      "description": "Angular"
+    },
+    {
+      "id": 4,
+      "title": "Sprint Boot for Beginners",
+      "description": "Java"
+    },
+    {
+      "id": 5,
+      "title": "Sprint Boot for Beginners",
+      "description": "Java Sprint Boot"
+    },
+    {
+      "id": 6,
+      "title": "Java and Microservices",
+      "description": "Java an MS"
+    }
+  ]
+}

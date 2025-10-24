@@ -1,0 +1,65 @@
+<div class="team-container">
+  <div class="team-header">
+    <h1>Estadísticas del Equipo</h1>
+    <p>Rendimiento y progreso de cada miembro del equipo</p>
+  </div>
+  
+  <div class="team-grid">
+    @for (member of teamMembers; track member.id) {
+      <mat-card class="member-card">
+        <mat-card-header>
+          <div class="member-info">
+            <mat-card-title>{{ member.name }}</mat-card-title>
+            <mat-card-subtitle>{{ member.role }}</mat-card-subtitle>
+          </div>
+          <div class="member-header-right">
+            <div class="traffic-light" [ngClass]="getTrafficLightClass(getMemberStats(member.name).total)">
+              <div class="light-dot"></div>
+            </div>
+            <div class="member-avatar">
+              <span class="member-initials">{{ member.initials }}</span>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          @if (getMemberStats(member.name).total > 0) {
+            <div class="stats-grid">
+              <div class="stat-item">
+                <mat-icon>assignment</mat-icon>
+                <span class="stat-number">{{ getMemberStats(member.name).total }}</span>
+                <span class="stat-label">Total</span>
+              </div>
+              <div class="stat-item completed">
+                <mat-icon>check_circle</mat-icon>
+                <span class="stat-number">{{ getMemberStats(member.name).completed }}</span>
+                <span class="stat-label">Completadas</span>
+              </div>
+              <div class="stat-item in-progress">
+                <mat-icon>hourglass_empty</mat-icon>
+                <span class="stat-number">{{ getMemberStats(member.name).inProgress }}</span>
+                <span class="stat-label">En Progreso</span>
+              </div>
+              <div class="stat-item not-started">
+                <mat-icon>play_circle_outline</mat-icon>
+                <span class="stat-number">{{ getMemberStats(member.name).notStarted }}</span>
+                <span class="stat-label">Sin Iniciar</span>
+              </div>
+            </div>
+            <div class="completion-rate">
+              <div class="rate-bar">
+                <div class="rate-fill" [style.width.%]="getMemberStats(member.name).completionRate"></div>
+              </div>
+              <span class="rate-text">{{ getMemberStats(member.name).completionRate }}% Completado</span>
+            </div>
+          } @else {
+            <div class="no-tasks">
+              <mat-icon>inbox</mat-icon>
+              <p>Sin tareas asignadas</p>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>
+

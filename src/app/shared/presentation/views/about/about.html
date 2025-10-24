@@ -1,0 +1,250 @@
+<div class="about-container">
+  <!-- Header Section -->
+  <div class="about-header">
+    <h1>{{ 'about.title' | translate }}</h1>
+    <p>{{ 'about.content' | translate }}</p>
+  </div>
+
+  <!-- Tasks Overview -->
+  <div class="tasks-overview">
+    <h2>Gestión de Tareas</h2>
+    <div class="overview-stats">
+      <div class="stat-card">
+        <mat-icon>play_circle_outline</mat-icon>
+        <span class="stat-number">{{ taskStore.notStartedCount() }}</span>
+        <span class="stat-label">Sin Iniciar</span>
+      </div>
+      <div class="stat-card">
+        <mat-icon>hourglass_empty</mat-icon>
+        <span class="stat-number">{{ taskStore.inProgressCount() }}</span>
+        <span class="stat-label">En Progreso</span>
+      </div>
+      <div class="stat-card">
+        <mat-icon>check_circle</mat-icon>
+        <span class="stat-number">{{ taskStore.completedCount() }}</span>
+        <span class="stat-label">Terminadas</span>
+      </div>
+      <div class="stat-card">
+        <mat-icon>person</mat-icon>
+        <span class="stat-number">{{ getAssignedTasksCount() }}</span>
+        <span class="stat-label">Asignadas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Column Layout -->
+  <div class="tasks-columns">
+    <!-- Not Started Column -->
+    <div class="task-column not-started-column">
+      <mat-card class="column-header">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>play_circle_outline</mat-icon>
+            Sin Iniciar
+            <span class="task-count">({{ taskStore.notStartedCount() }})</span>
+          </mat-card-title>
+        </mat-card-header>
+      </mat-card>
+      
+      <div class="tasks-list">
+        @for (task of taskStore.notStartedTasks(); track task.id) {
+          <mat-card class="task-card">
+            <mat-card-content>
+              <div class="task-header">
+                <h3 class="task-title">{{ task.title }}</h3>
+                <button mat-icon-button (click)="deleteTask(task.id)" class="delete-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              
+              @if (task.description) {
+                <p class="task-description">{{ task.description }}</p>
+              }
+              
+              <div class="task-meta">
+                <span class="priority-chip priority-{{ task.priority }}">
+                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                  {{ task.priority | titlecase }}
+                </span>
+                @if (task.category) {
+                  <span class="category-chip">{{ task.category }}</span>
+                }
+                @if (task.assignee) {
+                  <span class="assignee-chip">
+                    <mat-icon class="assignee-icon">person</mat-icon>
+                    {{ task.assignee }}
+                  </span>
+                }
+              </div>
+              
+              <div class="task-status">
+                <app-status-selector
+                  [currentStatus]="getTaskStatusSignal(task.status)"
+                  [disabled]="getDisabledSignal()"
+                  (statusChange)="updateStatus(task.id, $event)">
+                </app-status-selector>
+              </div>
+
+              <div class="task-assignee">
+                <app-assignee-selector
+                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                  [disabled]="getDisabledSignal()"
+                  (assigneeChange)="updateAssignee(task.id, $event)">
+                </app-assignee-selector>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+        
+        @if (taskStore.notStartedTasks().length === 0) {
+          <div class="empty-state">
+            <mat-icon>inbox</mat-icon>
+            <p>No hay tareas sin iniciar</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- In Progress Column -->
+    <div class="task-column in-progress-column">
+      <mat-card class="column-header">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>hourglass_empty</mat-icon>
+            En Progreso
+            <span class="task-count">({{ taskStore.inProgressCount() }})</span>
+          </mat-card-title>
+        </mat-card-header>
+      </mat-card>
+      
+      <div class="tasks-list">
+        @for (task of taskStore.inProgressTasks(); track task.id) {
+          <mat-card class="task-card">
+            <mat-card-content>
+              <div class="task-header">
+                <h3 class="task-title">{{ task.title }}</h3>
+                <button mat-icon-button (click)="deleteTask(task.id)" class="delete-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              
+              @if (task.description) {
+                <p class="task-description">{{ task.description }}</p>
+              }
+              
+              <div class="task-meta">
+                <span class="priority-chip priority-{{ task.priority }}">
+                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                  {{ task.priority | titlecase }}
+                </span>
+                @if (task.category) {
+                  <span class="category-chip">{{ task.category }}</span>
+                }
+                @if (task.assignee) {
+                  <span class="assignee-chip">
+                    <mat-icon class="assignee-icon">person</mat-icon>
+                    {{ task.assignee }}
+                  </span>
+                }
+              </div>
+              
+              <div class="task-status">
+                <app-status-selector
+                  [currentStatus]="getTaskStatusSignal(task.status)"
+                  [disabled]="getDisabledSignal()"
+                  (statusChange)="updateStatus(task.id, $event)">
+                </app-status-selector>
+              </div>
+
+              <div class="task-assignee">
+                <app-assignee-selector
+                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                  [disabled]="getDisabledSignal()"
+                  (assigneeChange)="updateAssignee(task.id, $event)">
+                </app-assignee-selector>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+        
+        @if (taskStore.inProgressTasks().length === 0) {
+          <div class="empty-state">
+            <mat-icon>work_outline</mat-icon>
+            <p>No hay tareas en progreso</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Completed Column -->
+    <div class="task-column completed-column">
+      <mat-card class="column-header">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>check_circle</mat-icon>
+            Terminadas
+            <span class="task-count">({{ taskStore.completedCount() }})</span>
+          </mat-card-title>
+        </mat-card-header>
+      </mat-card>
+      
+      <div class="tasks-list">
+        @for (task of taskStore.completedTasks(); track task.id) {
+          <mat-card class="task-card">
+            <mat-card-content>
+              <div class="task-header">
+                <h3 class="task-title completed">{{ task.title }}</h3>
+                <button mat-icon-button (click)="deleteTask(task.id)" class="delete-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              
+              @if (task.description) {
+                <p class="task-description">{{ task.description }}</p>
+              }
+              
+              <div class="task-meta">
+                <span class="priority-chip priority-{{ task.priority }}">
+                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                  {{ task.priority | titlecase }}
+                </span>
+                @if (task.category) {
+                  <span class="category-chip">{{ task.category }}</span>
+                }
+                @if (task.assignee) {
+                  <span class="assignee-chip">
+                    <mat-icon class="assignee-icon">person</mat-icon>
+                    {{ task.assignee }}
+                  </span>
+                }
+              </div>
+              
+              <div class="task-status">
+                <app-status-selector
+                  [currentStatus]="getTaskStatusSignal(task.status)"
+                  [disabled]="getDisabledSignal()"
+                  (statusChange)="updateStatus(task.id, $event)">
+                </app-status-selector>
+              </div>
+
+              <div class="task-assignee">
+                <app-assignee-selector
+                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                  [disabled]="getDisabledSignal()"
+                  (assigneeChange)="updateAssignee(task.id, $event)">
+                </app-assignee-selector>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+        
+        @if (taskStore.completedTasks().length === 0) {
+          <div class="empty-state">
+            <mat-icon>task_alt</mat-icon>
+            <p>No hay tareas terminadas</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
