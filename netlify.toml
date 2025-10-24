@@ -3,7 +3,7 @@
   publish = "dist/learning-center/browser"
   
   # Comando de build
-  command = "npm install && npm run build"
+  command = "npm start"
 
 [build.environment]
   # Versión de Node.js
