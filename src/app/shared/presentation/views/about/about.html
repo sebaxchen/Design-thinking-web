@@ -1,13 +1,11 @@
 <div class="about-container">
   <!-- Header Section -->
   <div class="about-header">
-    <h1>{{ 'about.title' | translate }}</h1>
-    <p>{{ 'about.content' | translate }}</p>
+    <h1>Gestión de Tareas</h1>
   </div>
 
   <!-- Tasks Overview -->
   <div class="tasks-overview">
-    <h2>Gestión de Tareas</h2>
     <div class="overview-stats">
       <div class="stat-card">
         <mat-icon>play_circle_outline</mat-icon>
@@ -66,9 +64,6 @@
                   <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
                   {{ task.priority | titlecase }}
                 </span>
-                @if (task.category) {
-                  <span class="category-chip">{{ task.category }}</span>
-                }
                 @if (task.assignee) {
                   <span class="assignee-chip">
                     <mat-icon class="assignee-icon">person</mat-icon>
@@ -137,9 +132,6 @@
                   <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
                   {{ task.priority | titlecase }}
                 </span>
-                @if (task.category) {
-                  <span class="category-chip">{{ task.category }}</span>
-                }
                 @if (task.assignee) {
                   <span class="assignee-chip">
                     <mat-icon class="assignee-icon">person</mat-icon>
@@ -208,9 +200,6 @@
                   <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
                   {{ task.priority | titlecase }}
                 </span>
-                @if (task.category) {
-                  <span class="category-chip">{{ task.category }}</span>
-                }
                 @if (task.assignee) {
                   <span class="assignee-chip">
                     <mat-icon class="assignee-icon">person</mat-icon>

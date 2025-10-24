@@ -276,18 +276,6 @@
   height: 12px;
 }
 
-.category-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  height: 24px;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  color: #1565c0;
-  border: 1px solid rgba(33, 150, 243, 0.2);
-}
 
 /* Task Status */
 .task-status {

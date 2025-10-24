@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../application/user.service';
+import { AuthService } from '../../../application/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -28,11 +29,14 @@ export class Header {
 
   options = [
     { link: '/home', label: 'option.home', icon: 'home' },
-    { link: '/about', label: 'option.about', icon: 'info' },
-    { link: '/learning/categories', label: 'option.categories', icon: 'category' }
+    { link: '/about', label: 'Gestión de Tareas', icon: 'info' },
+    { link: '/learning/categories', label: 'Trabajo en Equipo', icon: 'group' }
   ];
 
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    public authService: AuthService
+  ) {}
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -40,5 +44,9 @@ export class Header {
 
   closeMenu() {
     this.isMenuOpen = false;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
+import { TeamService, TeamMember } from '../../../application/team.service';
 
 export interface Person {
   id: string;
@@ -260,39 +261,17 @@ export class AssigneeSelector {
   @Output() assigneeChange = new EventEmitter<string>();
 
   isDropdownOpen = signal(false);
+  private teamService = inject(TeamService);
 
-  people: Person[] = [
-    {
-      id: '1',
-      name: 'Martín García',
-      initials: 'MG',
-      role: 'Administrator'
-    },
-    {
-      id: '2',
-      name: 'Ana López',
-      initials: 'AL',
-      role: 'Developer'
-    },
-    {
-      id: '3',
-      name: 'Carlos Ruiz',
-      initials: 'CR',
-      role: 'Designer'
-    },
-    {
-      id: '4',
-      name: 'María Fernández',
-      initials: 'MF',
-      role: 'Manager'
-    },
-    {
-      id: '5',
-      name: 'David Sánchez',
-      initials: 'DS',
-      role: 'Tester'
-    }
-  ];
+  // Convertir TeamMember a Person para compatibilidad
+  get people(): Person[] {
+    return this.teamService.allMembers().map(member => ({
+      id: member.id,
+      name: member.name,
+      initials: member.avatar,
+      role: member.role
+    }));
+  }
 
   toggleDropdown(): void {
     if (!this.disabled()) {

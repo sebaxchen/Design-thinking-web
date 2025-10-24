@@ -1,3 +1,5 @@
 <app-header/>
 <router-outlet/>
-<app-footer-content/>
+@if (authService.getIsAuthenticated()()) {
+  <app-footer-content/>
+}

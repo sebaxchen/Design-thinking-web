@@ -8,15 +8,15 @@ export class TaskStore {
   private tasks = signal<Task[]>([]);
 
   // Computed values
-  readonly allTasks = computed(() => this.tasks());
+  readonly allTasks = computed(() => this.tasks().sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
   readonly notStartedTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'not-started')
+    this.tasks().filter(task => task.status === 'not-started').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
   );
   readonly inProgressTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'in-progress')
+    this.tasks().filter(task => task.status === 'in-progress').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
   );
   readonly completedTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'completed')
+    this.tasks().filter(task => task.status === 'completed').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
   );
   readonly taskCount = computed(() => this.tasks().length);
   readonly completedCount = computed(() => this.completedTasks().length);
@@ -32,7 +32,7 @@ export class TaskStore {
       description: request.description || '',
       status: request.status || 'not-started',
       priority: request.priority || 'medium',
-      category: request.category || 'General',
+      category: request.category,
       assignee: request.assignee || '',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -95,6 +95,10 @@ export class TaskStore {
   }
 
   getTasksByPriority(priority: 'low' | 'medium' | 'high'): Task[] {
-    return this.tasks().filter(task => task.priority === priority);
+    return this.tasks().filter(task => task.priority === priority).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  getTasksByAssignee(assignee: string): Task[] {
+    return this.tasks().filter(task => task.assignee === assignee).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
 }

@@ -1,19 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { Task, TaskStatus } from '../../../../learning/domain/model/task.entity';
 import { StatusSelector } from '../../components/status-selector/status-selector';
 import { AssigneeSelector } from '../../components/assignee-selector/assignee-selector';
+import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [
     CommonModule,
-    TranslatePipe,
     MatCard,
     MatCardContent,
     MatCardHeader,
@@ -27,13 +27,30 @@ import { AssigneeSelector } from '../../components/assignee-selector/assignee-se
 })
 export class About {
   constructor(public taskStore: TaskStore) {}
+  
+  private dialog = inject(MatDialog);
 
   updateStatus(id: string, status: TaskStatus): void {
     this.taskStore.updateStatus(id, status);
   }
 
   deleteTask(id: string): void {
-    this.taskStore.deleteTask(id);
+    const task = this.taskStore.getTaskById(id);
+    if (!task) return;
+
+    const dialogRef = this.dialog.open(ConfirmDeleteTaskModal, {
+      width: '400px',
+      maxWidth: '90vw',
+      disableClose: false,
+      panelClass: 'custom-dialog-container',
+      data: { taskTitle: task.title }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.taskStore.deleteTask(id);
+      }
+    });
   }
 
   getPriorityIcon(priority: string): string {

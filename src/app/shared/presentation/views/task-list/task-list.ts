@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -8,11 +8,12 @@ import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
 // MatChip not available in this Angular Material version
-import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialog } from '@angular/material/dialog';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { Task, CreateTaskRequest, TaskStatus } from '../../../../learning/domain/model/task.entity';
 import { StatusSelector } from '../../components/status-selector/status-selector';
 import { AssigneeSelector } from '../../components/assignee-selector/assignee-selector';
+import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
 
 @Component({
   selector: 'app-task-list',
@@ -31,7 +32,6 @@ import { AssigneeSelector } from '../../components/assignee-selector/assignee-se
     MatCard,
     MatCardContent,
     MatCardActions,
-    MatDialogActions,
     MatDialogContent,
     StatusSelector,
     AssigneeSelector
@@ -45,7 +45,6 @@ export class TaskList {
     title: '',
     description: '',
     priority: 'medium',
-    category: 'General',
     status: 'not-started',
     assignee: ''
   });
@@ -58,6 +57,8 @@ export class TaskList {
   constructor(
     public taskStore: TaskStore
   ) {}
+
+  private dialog = inject(MatDialog);
 
   openAddDialog(): void {
     this.isAddDialogOpen.set(true);
@@ -76,7 +77,22 @@ export class TaskList {
   }
 
   deleteTask(id: string): void {
-    this.taskStore.deleteTask(id);
+    const task = this.taskStore.getTaskById(id);
+    if (!task) return;
+
+    const dialogRef = this.dialog.open(ConfirmDeleteTaskModal, {
+      width: '400px',
+      maxWidth: '90vw',
+      disableClose: false,
+      panelClass: 'custom-dialog-container',
+      data: { taskTitle: task.title }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.taskStore.deleteTask(id);
+      }
+    });
   }
 
   updateStatus(id: string, status: TaskStatus): void {
@@ -125,7 +141,6 @@ export class TaskList {
       title: '',
       description: '',
       priority: 'medium',
-      category: 'General',
       status: 'not-started',
       assignee: ''
     });

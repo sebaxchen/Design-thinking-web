@@ -1,19 +1,48 @@
 <div class="task-container">
-  <div class="task-header">
-    <h2>Mis Tareas</h2>
-    <button mat-raised-button color="primary" (click)="openAddDialog()">
-      <mat-icon>add</mat-icon>
-      Añadir Tarea
-    </button>
+  <div class="task-header" [class.no-button]="taskStore.allTasks().length === 0">
+    <h2>Mis Notas</h2>
+    @if (taskStore.allTasks().length > 0) {
+      <button mat-raised-button color="primary" (click)="openAddDialog()">
+        <mat-icon>add</mat-icon>
+        Añadir Nota
+      </button>
+    }
   </div>
 
   <!-- Tasks Grid -->
   <div class="tasks-container">
     @if (taskStore.allTasks().length === 0) {
       <div class="empty-state">
-        <mat-icon class="empty-icon">assignment_turned_in</mat-icon>
-        <h3>No hay tareas</h3>
-        <p>¡Comienza añadiendo tu primera tarea!</p>
+        <div class="empty-state-content">
+          <div class="empty-icon-container">
+            <mat-icon class="empty-icon">task_alt</mat-icon>
+            <div class="icon-decoration"></div>
+          </div>
+          <h2 class="empty-title">¡Tu lista de notas está vacía!</h2>
+          <p class="empty-description">
+            Organiza tu día de manera eficiente creando tu primera nota.
+            <br>
+            Mantén el control de todo lo que necesitas recordar.
+          </p>
+          <div class="empty-features">
+            <div class="feature-item">
+              <mat-icon class="feature-icon">person</mat-icon>
+              <span>Asigna notas</span>
+            </div>
+            <div class="feature-item">
+              <mat-icon class="feature-icon">flag</mat-icon>
+              <span>Establece prioridades</span>
+            </div>
+            <div class="feature-item">
+              <mat-icon class="feature-icon">trending_up</mat-icon>
+              <span>Haz seguimiento</span>
+            </div>
+          </div>
+          <button mat-raised-button color="primary" class="empty-cta" (click)="openAddDialog()">
+            <mat-icon>add</mat-icon>
+            Crear mi primera nota
+          </button>
+        </div>
       </div>
     } @else {
       <div class="tasks-grid">
@@ -38,11 +67,6 @@
                   <mat-icon class="priority-icon">{{ getPriorityIcon(task.priority) }}</mat-icon>
                   {{ task.priority | titlecase }}
                 </span>
-                @if (task.category) {
-                  <span class="category-chip">
-                    {{ task.category }}
-                  </span>
-                }
                 @if (task.assignee) {
                   <span class="assignee-chip">
                     <mat-icon class="assignee-icon">person</mat-icon>
@@ -88,7 +112,7 @@
             <mat-icon>add_task</mat-icon>
           </div>
           <div class="header-text">
-            <h2 class="dialog-title">Crear Nueva Tarea</h2>
+            <h2 class="dialog-title">Crear Nueva Nota</h2>
             <p class="dialog-subtitle">Organiza tu trabajo de manera eficiente</p>
           </div>
         </div>
@@ -124,11 +148,11 @@
               </div>
               
               <mat-form-field appearance="outline" class="full-width enhanced-field">
-                <mat-label>Título de la tarea</mat-label>
+                <mat-label>Título de la nota</mat-label>
                 <input 
                   matInput 
                   [(ngModel)]="newTask().title"
-                  placeholder="¿Qué necesitas hacer?"
+                  placeholder="¿Qué necesitas recordar?"
                   maxlength="100"
                   class="enhanced-input">
                 <mat-hint>Máximo 100 caracteres</mat-hint>
@@ -139,7 +163,7 @@
                 <textarea 
                   matInput 
                   [(ngModel)]="newTask().description"
-                  placeholder="Describe los detalles de la tarea..."
+                  placeholder="Describe los detalles de la nota..."
                   rows="4"
                   maxlength="500"
                   class="enhanced-textarea">
@@ -181,14 +205,6 @@
                 </mat-select>
               </mat-form-field>
               
-              <mat-form-field appearance="outline" class="full-width enhanced-field">
-                <mat-label>Categoría</mat-label>
-                <input 
-                  matInput 
-                  [(ngModel)]="newTask().category"
-                  placeholder="Ej: Trabajo, Personal, Estudio..."
-                  class="enhanced-input">
-              </mat-form-field>
             </div>
 
             <div class="form-section">
@@ -220,7 +236,7 @@
                   [disabled]="!newTask().title.trim()"
                   class="create-btn">
                   <mat-icon>add_task</mat-icon>
-                  Crear Tarea
+                  Crear Nota
                 </button>
               </div>
             </div>

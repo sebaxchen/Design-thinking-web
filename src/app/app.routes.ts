@@ -1,15 +1,29 @@
 import { Routes } from '@angular/router';
 import {Home} from './shared/presentation/views/home/home';
+import { AuthGuard } from './shared/application/auth.guard';
 
 const about = () => import('./shared/presentation/views/about/about').then(m => m.About);
 const pageNotFound = () => import('./shared/presentation/views/page-not-found/page-not-found')
   .then(m => m.PageNotFound);
-const baseTitle = 'ACME Learning Center';
+const login = () => import('./shared/presentation/views/login/login').then(m => m.Login);
+const register = () => import('./shared/presentation/views/register/register').then(m => m.Register);
+
+const baseTitle = 'NoteTo';
 export const routes: Routes = [
-  { path: 'home', component: Home, title: `${baseTitle} - Home` },
-  { path: 'about', loadComponent: about, title: `${baseTitle} - About` },
+  { 
+    path: 'auth', 
+    children: [
+      { path: 'login', loadComponent: login, title: `${baseTitle} - Iniciar Sesión` },
+      { path: 'register', loadComponent: register, title: `${baseTitle} - Registro` },
+      { path: '', redirectTo: 'login', pathMatch: 'full' }
+    ]
+  },
+  { path: 'login', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: 'register', redirectTo: '/auth/register', pathMatch: 'full' },
+  { path: 'home', component: Home, title: `${baseTitle} - Home`, canActivate: [AuthGuard] },
+  { path: 'about', loadComponent: about, title: `${baseTitle} - About`, canActivate: [AuthGuard] },
   { path: 'learning', loadChildren: () =>
-  import('./learning/presentation/views/learning.routes').then(m => m.learningRoutes)},
-  { path: '', redirectTo: '/home', pathMatch:'full' },
+  import('./learning/presentation/views/learning.routes').then(m => m.learningRoutes), canActivate: [AuthGuard]},
+  { path: '', redirectTo: '/auth/login', pathMatch:'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Page Not Found` },
 ];

@@ -1,26 +1,41 @@
 <div class="team-container">
   <div class="team-header">
-    <h1>Estadísticas del Equipo</h1>
-    <p>Rendimiento y progreso de cada miembro del equipo</p>
+    <div class="header-content">
+      <div class="header-text">
+        <h1>Trabajo en Equipo</h1>
+        <p>Rendimiento y progreso de cada miembro del equipo</p>
+      </div>
+      <button mat-raised-button color="primary" (click)="openAddMemberModal()" class="add-member-btn">
+        <mat-icon>person_add</mat-icon>
+        Añadir Miembro
+      </button>
+    </div>
   </div>
   
   <div class="team-grid">
-    @for (member of teamMembers; track member.id) {
+         @for (member of teamMembers(); track member.id) {
       <mat-card class="member-card">
-        <mat-card-header>
-          <div class="member-info">
-            <mat-card-title>{{ member.name }}</mat-card-title>
-            <mat-card-subtitle>{{ member.role }}</mat-card-subtitle>
-          </div>
-          <div class="member-header-right">
-            <div class="traffic-light" [ngClass]="getTrafficLightClass(getMemberStats(member.name).total)">
-              <div class="light-dot"></div>
-            </div>
-            <div class="member-avatar">
-              <span class="member-initials">{{ member.initials }}</span>
-            </div>
-          </div>
-        </mat-card-header>
+               <mat-card-header>
+                 <div class="member-info">
+                   <mat-card-title>{{ member.name }}</mat-card-title>
+                   <mat-card-subtitle>{{ member.role }}</mat-card-subtitle>
+                 </div>
+                 <div class="member-header-right">
+                   <div class="traffic-light" [ngClass]="getTrafficLightClass(getMemberStats(member.name).total)">
+                     <div class="light-dot"></div>
+                   </div>
+                   <div class="member-avatar" (click)="openWorkerProfileModal(member)" title="Ver perfil">
+                     <span class="member-initials">{{ member.avatar }}</span>
+                   </div>
+                   <button 
+                     mat-icon-button 
+                     (click)="openDeleteMemberModal(member.name)"
+                     class="delete-member-btn"
+                     title="Eliminar miembro">
+                     <mat-icon>delete</mat-icon>
+                   </button>
+                 </div>
+               </mat-card-header>
         <mat-card-content>
           @if (getMemberStats(member.name).total > 0) {
             <div class="stats-grid">
