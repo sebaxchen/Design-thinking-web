@@ -26,7 +26,7 @@ describe('TaskStore', () => {
     expect(service.allTasks()[0].title).toBe('Test Task');
   });
 
-  it('should toggle task completion', () => {
+  it('should update task status', () => {
     const taskRequest: CreateTaskRequest = {
       title: 'Test Task'
     };
@@ -34,12 +34,12 @@ describe('TaskStore', () => {
     service.addTask(taskRequest);
     const taskId = service.allTasks()[0].id;
     
-    expect(service.pendingCount()).toBe(1);
+    expect(service.notStartedCount()).toBe(1);
     expect(service.completedCount()).toBe(0);
 
-    service.toggleTask(taskId);
+    service.updateStatus(taskId, 'completed');
     
-    expect(service.pendingCount()).toBe(0);
+    expect(service.notStartedCount()).toBe(0);
     expect(service.completedCount()).toBe(1);
   });
 
@@ -68,13 +68,13 @@ describe('TaskStore', () => {
     const updateRequest: UpdateTaskRequest = {
       id: taskId,
       title: 'Updated Title',
-      completed: true
+      status: 'completed'
     };
 
     service.updateTask(updateRequest);
     
     const updatedTask = service.getTaskById(taskId);
     expect(updatedTask?.title).toBe('Updated Title');
-    expect(updatedTask?.completed).toBe(true);
+    expect(updatedTask?.status).toBe('completed');
   });
 });

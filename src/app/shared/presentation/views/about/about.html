@@ -1,31 +1,115 @@
 <div class="about-container">
   <!-- Header Section -->
   <div class="about-header">
-    <h1>Gestión de Tareas</h1>
+    <div class="header-content">
+      <div class="header-icon">
+        <mat-icon>dashboard</mat-icon>
+      </div>
+      <h1>Gestión de Tareas</h1>
+      <p>Organiza, prioriza y gestiona tus tareas de manera eficiente con nuestro sistema inteligente de gestión de proyectos</p>
+      <div class="header-stats">
+        <div class="header-stat">
+          <mat-icon>trending_up</mat-icon>
+          <span>Productividad</span>
+        </div>
+        <div class="header-stat">
+          <mat-icon>group</mat-icon>
+          <span>Colaboración</span>
+        </div>
+        <div class="header-stat">
+          <mat-icon>analytics</mat-icon>
+          <span>Análisis</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Tasks Overview -->
   <div class="tasks-overview">
+    <div class="overview-header">
+      <h2>Resumen de Tareas</h2>
+      <p>Mantén el control total de tu flujo de trabajo</p>
+    </div>
     <div class="overview-stats">
-      <div class="stat-card">
-        <mat-icon>play_circle_outline</mat-icon>
-        <span class="stat-number">{{ taskStore.notStartedCount() }}</span>
-        <span class="stat-label">Sin Iniciar</span>
+      <div class="stat-card not-started">
+        <div class="stat-icon">
+          <mat-icon>play_circle_outline</mat-icon>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ taskStore.notStartedCount() }}</span>
+          <span class="stat-label">Sin Iniciar</span>
+          <div class="stat-progress">
+            <div class="progress-bar" [style.width.%]="getProgressPercentage('not-started')"></div>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <mat-icon>hourglass_empty</mat-icon>
-        <span class="stat-number">{{ taskStore.inProgressCount() }}</span>
-        <span class="stat-label">En Progreso</span>
+      <div class="stat-card in-progress">
+        <div class="stat-icon">
+          <mat-icon>hourglass_empty</mat-icon>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ taskStore.inProgressCount() }}</span>
+          <span class="stat-label">En Progreso</span>
+          <div class="stat-progress">
+            <div class="progress-bar" [style.width.%]="getProgressPercentage('in-progress')"></div>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <mat-icon>check_circle</mat-icon>
-        <span class="stat-number">{{ taskStore.completedCount() }}</span>
-        <span class="stat-label">Terminadas</span>
+      <div class="stat-card completed">
+        <div class="stat-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ taskStore.completedCount() }}</span>
+          <span class="stat-label">Terminadas</span>
+          <div class="stat-progress">
+            <div class="progress-bar" [style.width.%]="getProgressPercentage('completed')"></div>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <mat-icon>person</mat-icon>
-        <span class="stat-number">{{ getAssignedTasksCount() }}</span>
-        <span class="stat-label">Asignadas</span>
+      <div class="stat-card assigned">
+        <div class="stat-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ getAssignedTasksCount() }}</span>
+          <span class="stat-label">Asignadas</span>
+          <div class="stat-progress">
+            <div class="progress-bar" [style.width.%]="getProgressPercentage('assigned')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional Stats Row -->
+    <div class="additional-stats">
+      <div class="additional-stat-card">
+        <mat-icon>schedule</mat-icon>
+        <div class="stat-info">
+          <span class="stat-value">{{ getTotalTasks() }}</span>
+          <span class="stat-desc">Total Tareas</span>
+        </div>
+      </div>
+      <div class="additional-stat-card">
+        <mat-icon>priority_high</mat-icon>
+        <div class="stat-info">
+          <span class="stat-value">{{ getHighPriorityCount() }}</span>
+          <span class="stat-desc">Alta Prioridad</span>
+        </div>
+      </div>
+      <div class="additional-stat-card">
+        <mat-icon>group</mat-icon>
+        <div class="stat-info">
+          <span class="stat-value">{{ getTeamMembersCount() }}</span>
+          <span class="stat-desc">Miembros</span>
+        </div>
+      </div>
+      <div class="additional-stat-card">
+        <mat-icon>trending_up</mat-icon>
+        <div class="stat-info">
+          <span class="stat-value">{{ getCompletionRate() }}%</span>
+          <span class="stat-desc">Completado</span>
+        </div>
       </div>
     </div>
   </div>

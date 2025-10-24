@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TeamService } from './team.service';
 
 export interface User {
   id: string;
@@ -14,13 +15,16 @@ export interface User {
 export class AuthService {
   private currentUser = signal<User | null>(null);
   private isAuthenticated = signal(false);
+  private teamService = inject(TeamService);
 
   constructor(private router: Router) {
     // Verificar si hay un usuario guardado en localStorage
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
-      this.currentUser.set(JSON.parse(savedUser));
+      const user = JSON.parse(savedUser);
+      this.currentUser.set(user);
       this.isAuthenticated.set(true);
+      this.addUserToTeamIfNeeded(user);
     }
   }
 
@@ -48,6 +52,7 @@ export class AuthService {
       this.currentUser.set(user);
       this.isAuthenticated.set(true);
       localStorage.setItem('currentUser', JSON.stringify(user));
+      this.addUserToTeamIfNeeded(user);
       return true;
     }
     
@@ -78,6 +83,7 @@ export class AuthService {
     this.currentUser.set(user);
     this.isAuthenticated.set(true);
     localStorage.setItem('currentUser', JSON.stringify(user));
+    this.addUserToTeamIfNeeded(user);
     return true;
   }
 
@@ -103,5 +109,26 @@ export class AuthService {
   getUserInitials(): string {
     const name = this.getUserName();
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  }
+
+  private addUserToTeamIfNeeded(user: User) {
+    // Verificar si el usuario ya está en el equipo
+    const existingMembers = this.teamService.allMembers();
+    const userExists = existingMembers.some(member => member.name === user.name);
+    
+    if (!userExists) {
+      // Añadir al usuario al equipo automáticamente
+      const teamMember = {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        email: user.email,
+        avatar: '', // Avatar vacío por defecto
+        joinDate: new Date()
+      };
+      
+      this.teamService.addMember(teamMember);
+      console.log('Usuario añadido automáticamente al equipo:', user.name);
+    }
   }
 }

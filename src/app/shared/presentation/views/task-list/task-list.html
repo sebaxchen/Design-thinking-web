@@ -14,9 +14,14 @@
     @if (taskStore.allTasks().length === 0) {
       <div class="empty-state">
         <div class="empty-state-content">
-          <div class="empty-icon-container">
-            <mat-icon class="empty-icon">task_alt</mat-icon>
-            <div class="icon-decoration"></div>
+          <div class="empty-animation-container">
+            <app-lottie-animation 
+              animationPath="assets/animations/empty-box.json"
+              width="200px"
+              height="200px"
+              [loop]="true"
+              [autoplay]="true">
+            </app-lottie-animation>
           </div>
           <h2 class="empty-title">¡Tu lista de notas está vacía!</h2>
           <p class="empty-description">

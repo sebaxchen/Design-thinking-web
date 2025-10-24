@@ -62,7 +62,8 @@ export class AddMemberModal {
         name: this.name(),
         email: this.email(),
         role: this.role(),
-        avatar: this.getInitials(this.name())
+        avatar: this.getInitials(this.name()),
+        joinDate: new Date() // Agregar fecha de ingreso actual
       };
 
       // Simular guardado

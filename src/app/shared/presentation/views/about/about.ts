@@ -82,4 +82,41 @@ export class About {
   getAssignedTasksCount(): number {
     return this.taskStore.allTasks().filter(task => task.assignee && task.assignee.trim() !== '').length;
   }
+
+  getTotalTasks(): number {
+    return this.taskStore.allTasks().length;
+  }
+
+  getHighPriorityCount(): number {
+    return this.taskStore.allTasks().filter(task => task.priority === 'high').length;
+  }
+
+  getTeamMembersCount(): number {
+    // This would need to be injected from a team service
+    return 5; // Placeholder for now
+  }
+
+  getCompletionRate(): number {
+    const total = this.getTotalTasks();
+    if (total === 0) return 0;
+    return Math.round((this.taskStore.completedCount() / total) * 100);
+  }
+
+  getProgressPercentage(type: string): number {
+    const total = this.getTotalTasks();
+    if (total === 0) return 0;
+    
+    switch (type) {
+      case 'not-started':
+        return (this.taskStore.notStartedCount() / total) * 100;
+      case 'in-progress':
+        return (this.taskStore.inProgressCount() / total) * 100;
+      case 'completed':
+        return (this.taskStore.completedCount() / total) * 100;
+      case 'assigned':
+        return (this.getAssignedTasksCount() / total) * 100;
+      default:
+        return 0;
+    }
+  }
 }

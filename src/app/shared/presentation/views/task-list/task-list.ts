@@ -14,6 +14,7 @@ import { Task, CreateTaskRequest, TaskStatus } from '../../../../learning/domain
 import { StatusSelector } from '../../components/status-selector/status-selector';
 import { AssigneeSelector } from '../../components/assignee-selector/assignee-selector';
 import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
+import { LottieAnimationComponent } from '../../components/lottie-animation/lottie-animation.component';
 
 @Component({
   selector: 'app-task-list',
@@ -34,7 +35,8 @@ import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-mod
     MatCardActions,
     MatDialogContent,
     StatusSelector,
-    AssigneeSelector
+    AssigneeSelector,
+    LottieAnimationComponent
   ],
   templateUrl: './task-list.html',
   styleUrl: './task-list.css'
