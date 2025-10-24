@@ -3,7 +3,7 @@
   publish = "dist/learning-center/browser"
   
   # Comando de build
-  command = "npm run build"
+  command = "npm install && npm run build"
 
 [build.environment]
   # Versión de Node.js
@@ -11,6 +11,9 @@
   
   # Variables de entorno
   NODE_ENV = "production"
+  
+  # Variables específicas para Angular
+  NG_CLI_ANALYTICS = "false"
 
 # Redirecciones para SPA (Single Page Application)
 [[redirects]]

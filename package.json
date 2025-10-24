@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
-    "build:dev": "ng build --configuration development",
-    "build:prod": "ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "preview": "ng serve --configuration production"
+    "build": "npx ng build --configuration production",
+    "build:dev": "npx ng build --configuration development",
+    "build:prod": "npx ng build --configuration production",
+    "watch": "npx ng build --watch --configuration development",
+    "preview": "npx ng serve --configuration production"
   },
   "prettier": {
     "printWidth": 100,
@@ -45,5 +45,9 @@
     "@angular/cli": "^20.3.2",
     "@angular/compiler-cli": "^20.3.0",
     "typescript": "~5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
