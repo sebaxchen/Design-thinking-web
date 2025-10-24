@@ -1,0 +1,45 @@
+<div class="splash-container">
+  <!-- Partículas de fondo -->
+  <div class="particles">
+    <div class="particle" *ngFor="let particle of particles"></div>
+  </div>
+  
+  <div class="splash-content">
+    <!-- Logo principal -->
+    <div class="logo-container">
+      <div class="logo-wrapper">
+        <mat-icon class="logo-icon">schedule</mat-icon>
+        <div class="logo-glow"></div>
+        <div class="logo-ring"></div>
+      </div>
+    </div>
+    
+    <!-- Nombre de la aplicación -->
+    <h1 class="app-name">
+      <span class="app-name-letter" *ngFor="let letter of appNameLetters; let i = index">{{ letter }}</span>
+    </h1>
+    
+    <!-- Eslogan -->
+    <p class="app-slogan">
+      <span class="slogan-word" *ngFor="let word of sloganWords; let i = index">{{ word }}</span>
+    </p>
+    
+    <!-- Indicador de carga mejorado -->
+    <div class="loading-section">
+      <div class="loading-text">Cargando...</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="loading-dots">
+        <span class="dot" *ngFor="let dot of loadingDots"></span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Efectos de luz -->
+  <div class="light-effects">
+    <div class="light-beam light-beam-1"></div>
+    <div class="light-beam light-beam-2"></div>
+    <div class="light-beam light-beam-3"></div>
+  </div>
+</div>

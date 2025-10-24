@@ -3,7 +3,6 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../application/user.service';
 import { AuthService } from '../../../application/auth.service';
@@ -18,8 +17,7 @@ import { AuthService } from '../../../application/auth.service';
     MatButton,
     MatIcon,
     RouterLink,
-    RouterLinkActive,
-    TranslatePipe
+    RouterLinkActive
   ],
   templateUrl: './header.html',
   styleUrl: './header.css'
@@ -28,7 +26,8 @@ export class Header {
   isMenuOpen = false;
 
   options = [
-    { link: '/home', label: 'option.home', icon: 'home' },
+    { link: '/home', label: 'Inicio', icon: 'home' },
+    { link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { link: '/about', label: 'Gestión de Tareas', icon: 'info' },
     { link: '/learning/categories', label: 'Trabajo en Equipo', icon: 'group' }
   ];

@@ -1,6 +1,6 @@
 <div class="container-with-spacing">
-  <h1>{{ 'page-not-found.title' | translate  }}</h1>
-  <div [innerHTML]="'page-not-found.content' | translate: { invalidPath: invalidPath }"></div>
+  <h1>Página no encontrada</h1>
+  <div>La ruta <strong>{{ invalidPath }}</strong> no es válida</div>
 </div>
-<button mat-button (click)="navigateToHome()">{{ 'page-not-found.go-home' | translate }}</button>
+<button mat-button (click)="navigateToHome()">Ir al inicio</button>
 

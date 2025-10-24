@@ -16,7 +16,7 @@
             routerLinkActive="active"
             class="nav-link">
             <mat-icon class="nav-icon">{{ option.icon }}</mat-icon>
-            <span class="nav-text">{{ option.label | translate }}</span>
+            <span class="nav-text">{{ option.label }}</span>
           </a>
         }
       </nav>
@@ -74,7 +74,7 @@
           (click)="closeMenu()"
           class="mobile-nav-link">
           <mat-icon class="mobile-nav-icon">{{ option.icon }}</mat-icon>
-          <span class="mobile-nav-text">{{ option.label | translate }}</span>
+          <span class="mobile-nav-text">{{ option.label }}</span>
         </a>
       }
     </div>
