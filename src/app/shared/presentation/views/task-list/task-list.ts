@@ -43,6 +43,7 @@ import { LottieAnimationComponent } from '../../components/lottie-animation/lott
 })
 export class TaskList {
   isAddDialogOpen = signal(false);
+  showSuccessAnimation = signal(false);
   newTask = signal<CreateTaskRequest>({
     title: '',
     description: '',
@@ -75,7 +76,15 @@ export class TaskList {
     if (this.newTask().title.trim()) {
       this.taskStore.addTask(this.newTask());
       this.closeAddDialog();
+      this.showSuccessConfirmation();
     }
+  }
+
+  showSuccessConfirmation(): void {
+    this.showSuccessAnimation.set(true);
+    setTimeout(() => {
+      this.showSuccessAnimation.set(false);
+    }, 3000);
   }
 
   deleteTask(id: string): void {
@@ -148,5 +157,10 @@ export class TaskList {
     });
     this.newTaskStatusSignal.set('not-started');
     this.newTaskAssigneeSignal.set('');
+  }
+
+  isFormValid(): boolean {
+    const task = this.newTask();
+    return !!(task.title && task.title.trim().length > 0);
   }
 }

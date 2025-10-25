@@ -2,10 +2,10 @@
   <!-- Hero Section -->
   <div class="team-hero">
     <div class="hero-content">
+      <div class="hero-icon">
+        <mat-icon>groups</mat-icon>
+      </div>
       <div class="hero-text">
-        <div class="hero-icon">
-          <mat-icon>groups</mat-icon>
-        </div>
         <h1>Trabajo en Equipo</h1>
         <p>Gestiona el rendimiento y progreso de cada miembro del equipo de manera eficiente</p>
       </div>
@@ -114,29 +114,37 @@
                   <div class="stat-icon">
                     <mat-icon>assignment</mat-icon>
                   </div>
-                  <span class="stat-number">{{ getMemberStats(member.name).total }}</span>
-                  <span class="stat-label">Total</span>
+                  <div class="stat-content">
+                    <span class="stat-number">{{ getMemberStats(member.name).total }}</span>
+                    <span class="stat-label">Total</span>
+                  </div>
                 </div>
                 <div class="stat-item completed">
                   <div class="stat-icon">
                     <mat-icon>check_circle</mat-icon>
                   </div>
-                  <span class="stat-number">{{ getMemberStats(member.name).completed }}</span>
-                  <span class="stat-label">Completadas</span>
+                  <div class="stat-content">
+                    <span class="stat-number">{{ getMemberStats(member.name).completed }}</span>
+                    <span class="stat-label">Completadas</span>
+                  </div>
                 </div>
                 <div class="stat-item in-progress">
                   <div class="stat-icon">
                     <mat-icon>hourglass_empty</mat-icon>
                   </div>
-                  <span class="stat-number">{{ getMemberStats(member.name).inProgress }}</span>
-                  <span class="stat-label">En Progreso</span>
+                  <div class="stat-content">
+                    <span class="stat-number">{{ getMemberStats(member.name).inProgress }}</span>
+                    <span class="stat-label">En Progreso</span>
+                  </div>
                 </div>
                 <div class="stat-item not-started">
                   <div class="stat-icon">
                     <mat-icon>play_circle_outline</mat-icon>
                   </div>
-                  <span class="stat-number">{{ getMemberStats(member.name).notStarted }}</span>
-                  <span class="stat-label">Sin Iniciar</span>
+                  <div class="stat-content">
+                    <span class="stat-number">{{ getMemberStats(member.name).notStarted }}</span>
+                    <span class="stat-label">Sin Iniciar</span>
+                  </div>
                 </div>
               </div>
               
@@ -152,16 +160,6 @@
                 </div>
               </div>
               
-              <div class="member-actions">
-                <button mat-button class="action-btn view-tasks" (click)="viewMemberTasks(member.name)">
-                  <mat-icon>visibility</mat-icon>
-                  Ver Tareas
-                </button>
-                <button mat-button class="action-btn edit-profile" (click)="editMemberProfile(member)">
-                  <mat-icon>edit</mat-icon>
-                  Editar
-                </button>
-              </div>
             </div>
           } @else {
             <div class="no-tasks">

@@ -31,26 +31,31 @@ import { TaskStatus } from '../../../../learning/domain/model/task.entity';
 
     .status-options {
       display: flex;
+      flex-direction: row;
       gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      align-items: center;
+      width: 100%;
     }
 
     .status-option {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
+      gap: 6px;
+      padding: 8px 12px;
       border: 2px solid transparent;
-      border-radius: 12px;
+      border-radius: 8px;
       background: #f5f5f5;
       color: #666;
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-width: 120px;
+      flex: 1;
       justify-content: center;
+      text-align: center;
+      min-width: 0;
     }
 
     .status-option:hover:not(.disabled) {
@@ -64,14 +69,18 @@ import { TaskStatus } from '../../../../learning/domain/model/task.entity';
     }
 
     .status-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
     }
 
     .status-label {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Not Started */
@@ -119,13 +128,22 @@ import { TaskStatus } from '../../../../learning/domain/model/task.entity';
     /* Responsive */
     @media (max-width: 480px) {
       .status-options {
-        flex-direction: column;
-        gap: 6px;
+        gap: 4px;
       }
 
       .status-option {
-        min-width: 100%;
-        padding: 10px 12px;
+        padding: 6px 8px;
+        font-size: 0.75rem;
+      }
+      
+      .status-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+      }
+      
+      .status-label {
+        font-size: 0.75rem;
       }
     }
   `]

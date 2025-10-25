@@ -1,5 +1,5 @@
 .header-toolbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #667eea;
   color: white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -371,7 +371,7 @@
 /* Mobile Navigation */
 .mobile-nav {
   display: none;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #667eea;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 16px;
   position: absolute;

@@ -1,25 +1,25 @@
 <div class="about-container">
   <!-- Header Section -->
   <div class="about-header">
-    <div class="header-content">
-      <div class="header-icon">
-        <mat-icon>dashboard</mat-icon>
-      </div>
+    <div class="header-icon">
+      <mat-icon>assignment</mat-icon>
+    </div>
+    <div class="header-text">
       <h1>Gestión de Tareas</h1>
       <p>Organiza, prioriza y gestiona tus tareas de manera eficiente con nuestro sistema inteligente de gestión de proyectos</p>
-      <div class="header-stats">
-        <div class="header-stat">
-          <mat-icon>trending_up</mat-icon>
-          <span>Productividad</span>
-        </div>
-        <div class="header-stat">
-          <mat-icon>group</mat-icon>
-          <span>Colaboración</span>
-        </div>
-        <div class="header-stat">
-          <mat-icon>analytics</mat-icon>
-          <span>Análisis</span>
-        </div>
+    </div>
+    <div class="header-stats">
+      <div class="header-stat">
+        <mat-icon>trending_up</mat-icon>
+        <span>Productividad</span>
+      </div>
+      <div class="header-stat">
+        <mat-icon>group</mat-icon>
+        <span>Colaboración</span>
+      </div>
+      <div class="header-stat">
+        <mat-icon>analytics</mat-icon>
+        <span>Análisis</span>
       </div>
     </div>
   </div>
@@ -143,33 +143,36 @@
                 <p class="task-description">{{ task.description }}</p>
               }
               
-              <div class="task-meta">
-                <span class="priority-chip priority-{{ task.priority }}">
-                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
-                  {{ task.priority | titlecase }}
-                </span>
-                @if (task.assignee) {
-                  <span class="assignee-chip">
-                    <mat-icon class="assignee-icon">person</mat-icon>
-                    {{ task.assignee }}
+              <div class="task-controls">
+                <div class="task-meta">
+                  <span class="priority-chip priority-{{ task.priority }}">
+                    <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                    {{ task.priority | titlecase }}
                   </span>
-                }
-              </div>
-              
-              <div class="task-status">
-                <app-status-selector
-                  [currentStatus]="getTaskStatusSignal(task.status)"
-                  [disabled]="getDisabledSignal()"
-                  (statusChange)="updateStatus(task.id, $event)">
-                </app-status-selector>
-              </div>
-
-              <div class="task-assignee">
-                <app-assignee-selector
-                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
-                  [disabled]="getDisabledSignal()"
-                  (assigneeChange)="updateAssignee(task.id, $event)">
-                </app-assignee-selector>
+                  @if (task.assignee) {
+                    <span class="assignee-chip">
+                      <mat-icon class="assignee-icon">person</mat-icon>
+                      {{ task.assignee }}
+                    </span>
+                  }
+                  <div class="task-assignee-selector">
+                    <app-assignee-selector
+                      [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                      [disabled]="getDisabledSignal()"
+                      (assigneeChange)="updateAssignee(task.id, $event)">
+                    </app-assignee-selector>
+                  </div>
+                </div>
+                
+                <div class="task-actions">
+                  <div class="task-status">
+                    <app-status-selector
+                      [currentStatus]="getTaskStatusSignal(task.status)"
+                      [disabled]="getDisabledSignal()"
+                      (statusChange)="updateStatus(task.id, $event)">
+                    </app-status-selector>
+                  </div>
+                </div>
               </div>
             </mat-card-content>
           </mat-card>
@@ -211,33 +214,36 @@
                 <p class="task-description">{{ task.description }}</p>
               }
               
-              <div class="task-meta">
-                <span class="priority-chip priority-{{ task.priority }}">
-                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
-                  {{ task.priority | titlecase }}
-                </span>
-                @if (task.assignee) {
-                  <span class="assignee-chip">
-                    <mat-icon class="assignee-icon">person</mat-icon>
-                    {{ task.assignee }}
+              <div class="task-controls">
+                <div class="task-meta">
+                  <span class="priority-chip priority-{{ task.priority }}">
+                    <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                    {{ task.priority | titlecase }}
                   </span>
-                }
-              </div>
-              
-              <div class="task-status">
-                <app-status-selector
-                  [currentStatus]="getTaskStatusSignal(task.status)"
-                  [disabled]="getDisabledSignal()"
-                  (statusChange)="updateStatus(task.id, $event)">
-                </app-status-selector>
-              </div>
-
-              <div class="task-assignee">
-                <app-assignee-selector
-                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
-                  [disabled]="getDisabledSignal()"
-                  (assigneeChange)="updateAssignee(task.id, $event)">
-                </app-assignee-selector>
+                  @if (task.assignee) {
+                    <span class="assignee-chip">
+                      <mat-icon class="assignee-icon">person</mat-icon>
+                      {{ task.assignee }}
+                    </span>
+                  }
+                  <div class="task-assignee-selector">
+                    <app-assignee-selector
+                      [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                      [disabled]="getDisabledSignal()"
+                      (assigneeChange)="updateAssignee(task.id, $event)">
+                    </app-assignee-selector>
+                  </div>
+                </div>
+                
+                <div class="task-actions">
+                  <div class="task-status">
+                    <app-status-selector
+                      [currentStatus]="getTaskStatusSignal(task.status)"
+                      [disabled]="getDisabledSignal()"
+                      (statusChange)="updateStatus(task.id, $event)">
+                    </app-status-selector>
+                  </div>
+                </div>
               </div>
             </mat-card-content>
           </mat-card>
@@ -279,33 +285,36 @@
                 <p class="task-description">{{ task.description }}</p>
               }
               
-              <div class="task-meta">
-                <span class="priority-chip priority-{{ task.priority }}">
-                  <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
-                  {{ task.priority | titlecase }}
-                </span>
-                @if (task.assignee) {
-                  <span class="assignee-chip">
-                    <mat-icon class="assignee-icon">person</mat-icon>
-                    {{ task.assignee }}
+              <div class="task-controls">
+                <div class="task-meta">
+                  <span class="priority-chip priority-{{ task.priority }}">
+                    <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
+                    {{ task.priority | titlecase }}
                   </span>
-                }
-              </div>
-              
-              <div class="task-status">
-                <app-status-selector
-                  [currentStatus]="getTaskStatusSignal(task.status)"
-                  [disabled]="getDisabledSignal()"
-                  (statusChange)="updateStatus(task.id, $event)">
-                </app-status-selector>
-              </div>
-
-              <div class="task-assignee">
-                <app-assignee-selector
-                  [selectedAssignee]="getTaskAssigneeSignal(task.id)"
-                  [disabled]="getDisabledSignal()"
-                  (assigneeChange)="updateAssignee(task.id, $event)">
-                </app-assignee-selector>
+                  @if (task.assignee) {
+                    <span class="assignee-chip">
+                      <mat-icon class="assignee-icon">person</mat-icon>
+                      {{ task.assignee }}
+                    </span>
+                  }
+                  <div class="task-assignee-selector">
+                    <app-assignee-selector
+                      [selectedAssignee]="getTaskAssigneeSignal(task.id)"
+                      [disabled]="getDisabledSignal()"
+                      (assigneeChange)="updateAssignee(task.id, $event)">
+                    </app-assignee-selector>
+                  </div>
+                </div>
+                
+                <div class="task-actions">
+                  <div class="task-status">
+                    <app-status-selector
+                      [currentStatus]="getTaskStatusSignal(task.status)"
+                      [disabled]="getDisabledSignal()"
+                      (statusChange)="updateStatus(task.id, $event)">
+                    </app-status-selector>
+                  </div>
+                </div>
               </div>
             </mat-card-content>
           </mat-card>

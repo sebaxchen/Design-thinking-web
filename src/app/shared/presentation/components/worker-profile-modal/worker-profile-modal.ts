@@ -503,30 +503,54 @@ export interface WorkerProfileData {
     }
 
     .achievements-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 16px;
       max-height: 400px;
       overflow-y: auto;
     }
 
     .achievement-item {
-      background: #f8f9fa;
-      border-radius: 8px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 12px;
       padding: 12px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
-      transition: transform 0.2s ease;
+      text-align: center;
+      gap: 8px;
+      transition: all 0.3s ease;
       cursor: pointer;
       border: 2px solid transparent;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      min-height: 120px;
+      justify-content: center;
+    }
+
+    .achievement-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .achievement-item:hover {
-      transform: translateY(-1px);
-      background: #e9ecef;
+      transform: translateY(-4px) scale(1.02);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       border-color: #667eea;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+    }
+
+    .achievement-item:hover::before {
+      opacity: 1;
     }
 
     .achievement-icon {
@@ -540,31 +564,47 @@ export interface WorkerProfileData {
       color: white;
       font-size: 18px;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .achievement-item:hover .achievement-icon {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
     }
 
     .achievement-details {
       flex: 1;
+      width: 100%;
     }
 
     .achievement-details h3 {
       margin: 0 0 4px 0;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: #2c3e50;
+      line-height: 1.2;
     }
 
     .achievement-details p {
       margin: 0 0 4px 0;
-      font-size: 12px;
+      font-size: 11px;
       color: #6c757d;
       line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .achievement-date {
-      font-size: 10px;
+      font-size: 9px;
       color: #95a5a6;
-      font-weight: 500;
+      font-weight: 600;
+      background: rgba(102, 126, 234, 0.1);
+      padding: 2px 6px;
+      border-radius: 8px;
+      display: inline-block;
     }
 
     .tasks-list {
@@ -710,6 +750,69 @@ export interface WorkerProfileData {
     .status-not-started {
       background: #6c757d !important;
       color: white !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .achievements-list {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .achievements-list {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 12px;
+      }
+      
+      .achievement-item {
+        padding: 10px;
+        min-height: 100px;
+      }
+      
+      .achievement-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+      
+      .achievement-details h3 {
+        font-size: 13px;
+      }
+      
+      .achievement-details p {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .achievements-list {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 8px;
+      }
+      
+      .achievement-item {
+        padding: 8px;
+        gap: 6px;
+        min-height: 80px;
+      }
+      
+      .achievement-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+      }
+      
+      .achievement-details h3 {
+        font-size: 12px;
+      }
+      
+      .achievement-details p {
+        font-size: 9px;
+      }
     }
   `]
 })

@@ -77,7 +77,7 @@ export interface Person {
 
     .assignee-button {
       width: 100%;
-      padding: 12px 16px;
+      padding: 8px 12px;
       border: 2px dashed #ddd;
       border-radius: 8px;
       background: #f8f9fa;
@@ -85,6 +85,7 @@ export interface Person {
       font-weight: 500;
       transition: all 0.3s ease;
       text-align: left;
+      font-size: 0.8rem;
     }
 
     .assignee-button:hover {
@@ -102,13 +103,13 @@ export interface Person {
     .assignee-content {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       width: 100%;
     }
 
     .assignee-avatar {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
@@ -120,31 +121,39 @@ export interface Person {
     .assignee-initials {
       color: white;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
     }
 
     .assignee-name {
       flex: 1;
       font-weight: 500;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .assign-icon {
       color: #999;
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
     }
 
     .assign-text {
       flex: 1;
       color: #666;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .dropdown-icon {
       color: #999;
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
     }
 
     .assignee-dropdown {
@@ -158,7 +167,36 @@ export interface Person {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       z-index: 1000;
       margin-top: 4px;
-      overflow: hidden;
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-width: 100%;
+    }
+
+    /* Custom scrollbar for the dropdown */
+    .assignee-dropdown::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .assignee-dropdown::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    .assignee-dropdown::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .assignee-dropdown::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    }
+
+    /* Firefox scrollbar */
+    .assignee-dropdown {
+      scrollbar-width: thin;
+      scrollbar-color: #667eea #f1f1f1;
     }
 
     .dropdown-item {

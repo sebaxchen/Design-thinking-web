@@ -4,11 +4,9 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/m
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatTabsModule } from '@angular/material/tabs';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { TeamService } from '../../../application/team.service';
 import { AchievementService } from '../../../../learning/application/achievement.service';
-import { ParticipationChartComponent } from '../../components/participation-chart/participation-chart';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,9 +19,7 @@ import { ParticipationChartComponent } from '../../components/participation-char
     MatCardTitle,
     MatIcon,
     MatProgressBar,
-    MatChipsModule,
-    MatTabsModule,
-    ParticipationChartComponent
+    MatChipsModule
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
@@ -120,40 +116,6 @@ export class DashboardComponent implements OnInit {
       .slice(0, 5);
   });
 
-  // Datos para gráficas de participación
-  readonly participationData = computed(() => {
-    const data = this.teamProductivity().map(member => ({
-      name: member.name,
-      value: member.completedTasks
-    }));
-    console.log('Participation data:', data);
-    return data;
-  });
-
-  readonly completionRateData = computed(() => {
-    return this.teamProductivity().map(member => ({
-      name: member.name,
-      value: member.completionRate
-    }));
-  });
-
-  readonly taskDistributionData = computed(() => {
-    const members = this.teamProductivity();
-    return [
-      {
-        name: 'Completadas',
-        value: members.reduce((sum, member) => sum + member.completedTasks, 0)
-      },
-      {
-        name: 'En Progreso',
-        value: members.reduce((sum, member) => sum + member.inProgress, 0)
-      },
-      {
-        name: 'Sin Iniciar',
-        value: members.reduce((sum, member) => sum + member.notStarted, 0)
-      }
-    ];
-  });
 
   // Métricas de tiempo
   readonly todayTasks = computed(() => {
