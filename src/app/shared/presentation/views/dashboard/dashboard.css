@@ -1,12 +1,10 @@
 .dashboard-container {
   padding: 24px;
   background: #ffffff;
-  min-height: auto;
-  height: auto;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  overflow: visible;
+  box-sizing: border-box;
 }
 
 .empty-dashboard-state {

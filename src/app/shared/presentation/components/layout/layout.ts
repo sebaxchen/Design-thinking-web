@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { Header } from '../header/header';
 import { AuthService } from '../../../application/auth.service';
 import { CommonModule } from '@angular/common';
+import { signal } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -15,5 +17,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './layout.css'
 })
 export class Layout {
-  constructor(public authService: AuthService) {}
+  showHeader = signal(true);
+  
+  constructor(public authService: AuthService, private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      const url = event.url;
+      // Hide header on splash, login, register
+      this.showHeader.set(
+        !url.includes('/splash') && 
+        !url.includes('/auth/login') && 
+        !url.includes('/auth/register')
+      );
+    });
+  }
 }

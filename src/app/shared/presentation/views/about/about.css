@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+/* Remove min-height from task column */
+.task-column {
+  min-height: auto;
+}
+
 /* Empty State Styles */
 .about-container .empty-about-state {
   display: flex !important;
@@ -61,7 +66,6 @@
   align-items: center;
   gap: 24px;
   margin-bottom: 32px;
-  min-height: 100px;
   padding: 24px 32px;
   width: 100%;
   background: #ffffff;
@@ -84,16 +88,6 @@
   border-radius: 8px 8px 0 0;
 }
 
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Icon Area - Left Position with Gradient Background Aura */
 .header-icon {
@@ -442,7 +436,6 @@
 .task-column {
   display: flex;
   flex-direction: column;
-  min-height: 600px;
 }
 
 /* Column Headers */
@@ -505,7 +498,6 @@
   flex-direction: column;
   gap: 12px;
   flex: 1;
-  min-height: 400px;
 }
 
 /* Task Cards in Columns */
@@ -523,16 +515,6 @@
   border-color: #d1d5db;
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 .task-card mat-card-content {
   padding: 16px !important;
@@ -752,7 +734,6 @@
   background: rgba(248, 249, 250, 0.5);
   border-radius: 12px;
   border: 2px dashed #ddd;
-  min-height: 200px;
   transition: all 0.3s ease;
 }
 

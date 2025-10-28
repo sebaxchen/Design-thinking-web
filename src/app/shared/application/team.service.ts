@@ -13,7 +13,40 @@ export interface TeamMember {
   providedIn: 'root'
 })
 export class TeamService {
-  private teamMembers = signal<TeamMember[]>([]);
+  private teamMembers = signal<TeamMember[]>([
+    {
+      id: '1',
+      name: 'Juan Pérez',
+      email: 'juan@empresa.com',
+      role: 'Manager',
+      avatar: 'JP',
+      joinDate: new Date('2024-01-15')
+    },
+    {
+      id: '2',
+      name: 'María García',
+      email: 'maria@empresa.com',
+      role: 'Developer',
+      avatar: 'MG',
+      joinDate: new Date('2024-02-01')
+    },
+    {
+      id: '3',
+      name: 'Carlos López',
+      email: 'carlos@empresa.com',
+      role: 'Designer',
+      avatar: 'CL',
+      joinDate: new Date('2024-02-15')
+    },
+    {
+      id: '4',
+      name: 'Ana Martínez',
+      email: 'ana@empresa.com',
+      role: 'Analyst',
+      avatar: 'AM',
+      joinDate: new Date('2024-03-01')
+    }
+  ]);
 
   // Getters
   get allMembers() {

@@ -1,0 +1,251 @@
+<div class="landing-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="logo-container">
+        <mat-icon class="app-logo">schedule</mat-icon>
+      </div>
+      <h1 class="app-title">NoteTo</h1>
+      <p class="hero-subtitle">La plataforma que organiza tu mundo</p>
+      <p class="hero-description">
+        Potencia tu productividad con la herramienta de gestión más inteligente. 
+        Todo en un solo lugar, simplemente perfecto.
+      </p>
+      <div class="hero-buttons">
+        <button class="primary-btn" (click)="enterApp()">
+          <span>Empezar Gratis</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+        <button class="secondary-btn">
+          <mat-icon>play_circle</mat-icon>
+          <span>Ver Demo</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="features-section">
+    <div class="section-header">
+      <h2 class="section-title">Todo lo que necesitas para ser productivo</h2>
+      <p class="section-subtitle">Potencia tu equipo con herramientas diseñadas para la excelencia</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>task_alt</mat-icon>
+        </div>
+        <h3 class="feature-title">Gestión Inteligente</h3>
+        <p class="feature-description">
+          Organiza y prioriza tareas con facilidad. 
+          Visualiza tu progreso en tiempo real.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <h3 class="feature-title">Colaboración Sin Límites</h3>
+        <p class="feature-description">
+          Trabaja en equipo, asigna tareas y mantén 
+          a todos sincronizados.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>architecture</mat-icon>
+        </div>
+        <h3 class="feature-title">Organización por Grupos</h3>
+        <p class="feature-description">
+          Crea equipos, gestiona proyectos y 
+          maximiza la eficiencia.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>cloud_upload</mat-icon>
+        </div>
+        <h3 class="feature-title">Comparte Sin Fronteras</h3>
+        <p class="feature-description">
+          Sube, comparte y accede a archivos 
+          desde cualquier lugar.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>dashboard</mat-icon>
+        </div>
+        <h3 class="feature-title">Visión Clara</h3>
+        <p class="feature-description">
+          Dashboard completo con métricas 
+          y estadísticas en tiempo real.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+        <h3 class="feature-title">Mejora Continua</h3>
+        <p class="feature-description">
+          Aprende mientras trabajas con categorías 
+          de aprendizaje integradas.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="pricing-section">
+    <div class="pricing-header">
+      <h2 class="pricing-title">Elige el plan perfecto</h2>
+      <p class="pricing-subtitle">Sin contratos ocultos, cancela cuando quieras</p>
+    </div>
+    
+    <div class="pricing-grid">
+      <!-- Plan Gratis -->
+      <div class="pricing-card">
+        <div class="pricing-badge free">Gratis</div>
+        <div class="pricing-content">
+          <h3 class="plan-name">Gratis</h3>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">0</span>
+            <span class="period">/mes</span>
+          </div>
+          <p class="plan-description">Perfecto para comenzar</p>
+          
+          <ul class="features-list">
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Hasta 10 tareas</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>3 miembros en equipo</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>5GB de almacenamiento</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Soporte por email</span>
+            </li>
+          </ul>
+          
+          <button class="pricing-button" (click)="enterApp()">
+            Comenzar Ahora
+          </button>
+        </div>
+      </div>
+
+      <!-- Plan Básico -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge popular">Más Popular</div>
+        <div class="pricing-content">
+          <h3 class="plan-name">Básico</h3>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">9</span>
+            <span class="period">/mes</span>
+          </div>
+          <p class="plan-description">Para equipos pequeños</p>
+          
+          <ul class="features-list">
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Tareas ilimitadas</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>15 miembros en equipo</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>50GB de almacenamiento</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Prioridad en soporte</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Análisis avanzado</span>
+            </li>
+          </ul>
+          
+          <button class="pricing-button primary" (click)="enterApp()">
+            Elegir Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Plan Premium -->
+      <div class="pricing-card">
+        <div class="pricing-badge premium">Premium</div>
+        <div class="pricing-content">
+          <h3 class="plan-name">Premium</h3>
+          <div class="price">
+            <span class="currency">$</span>
+            <span class="amount">19</span>
+            <span class="period">/mes</span>
+          </div>
+          <p class="plan-description">Para empresas grandes</p>
+          
+          <ul class="features-list">
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Todo de Básico</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Miembros ilimitados</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>500GB de almacenamiento</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>Soporte 24/7</span>
+            </li>
+            <li class="feature-item">
+              <mat-icon class="check-icon">check</mat-icon>
+              <span>API y webhooks</span>
+            </li>
+          </ul>
+          
+          <button class="pricing-button" (click)="enterApp()">
+            Elegir Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="cta-content">
+      <h2 class="cta-title">Listo para transformar tu productividad?</h2>
+      <p class="cta-description">
+        Únete a miles de profesionales que ya están trabajando de forma más inteligente
+      </p>
+      <button class="final-cta-button" (click)="enterApp()">
+        <span>Empezar Ahora</span>
+        <mat-icon>rocket_launch</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-content">
+      <p class="footer-text">© 2024 NoteTo. Hecho con pasión.</p>
+    </div>
+  </div>
+</div>

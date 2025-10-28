@@ -7,14 +7,16 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
-// MatChip not available in this Angular Material version
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogActions, MatDialogContent, MatDialog } from '@angular/material/dialog';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { Task, CreateTaskRequest, TaskStatus } from '../../../../learning/domain/model/task.entity';
 import { StatusSelector } from '../../components/status-selector/status-selector';
 import { AssigneeSelector } from '../../components/assignee-selector/assignee-selector';
+import { MultiAssigneeSelector } from '../../components/multi-assignee-selector/multi-assignee-selector';
 import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
 import { LottieAnimationComponent } from '../../components/lottie-animation/lottie-animation.component';
+import { GroupsService } from '../../../application/groups.service';
 
 @Component({
   selector: 'app-task-list',
@@ -36,7 +38,9 @@ import { LottieAnimationComponent } from '../../components/lottie-animation/lott
     MatDialogContent,
     StatusSelector,
     AssigneeSelector,
-    LottieAnimationComponent
+    MultiAssigneeSelector,
+    LottieAnimationComponent,
+    MatCheckboxModule
   ],
   templateUrl: './task-list.html',
   styleUrl: './task-list.css'
@@ -49,19 +53,70 @@ export class TaskList {
     description: '',
     priority: 'medium',
     status: 'not-started',
-    assignee: ''
+    assignee: '',
+    assignees: []
   });
 
   newTaskStatusSignal = signal<TaskStatus>('not-started');
   newTaskAssigneeSignal = signal<string>('');
+  newTaskAssigneesSignal = signal<string[]>([]);
+  selectedGroup = signal<string>('');
   disabledSignal = signal(false);
   enabledSignal = signal(false);
+
+  private groupsService = inject(GroupsService);
 
   constructor(
     public taskStore: TaskStore
   ) {}
 
   private dialog = inject(MatDialog);
+  
+  get groups() {
+    return this.groupsService.getAllGroups();
+  }
+
+  getTaskGroup(taskId: string): any | null {
+    const allGroups = this.groups();
+    for (const group of allGroups) {
+      const taskExists = group.tasks?.some(t => t.id === taskId);
+      if (taskExists) {
+        return group;
+      }
+    }
+    return null;
+  }
+  
+  updateSelectedGroup(groupName: string): void {
+    if (!groupName || groupName === '') {
+      this.selectedGroup.set('');
+      this.newTaskAssigneesSignal.set([]);
+      this.newTask.update(task => ({ ...task, assignees: [] }));
+      return;
+    }
+
+    this.selectedGroup.set(groupName);
+    // Find the group and add its members to assignees
+    const group = this.groups().find(g => g.name === groupName);
+    if (group) {
+      const memberNames = group.members.map(m => m.name);
+      this.newTaskAssigneesSignal.set(memberNames);
+      this.newTask.update(task => ({ ...task, assignees: memberNames }));
+    }
+  }
+  
+  removeMemberFromAssignees(memberName: string): void {
+    const currentAssignees = this.newTaskAssigneesSignal();
+    const filtered = currentAssignees.filter(m => m !== memberName);
+    this.newTaskAssigneesSignal.set(filtered);
+    this.newTask.update(task => ({ ...task, assignees: filtered }));
+  }
+
+  clearGroupSelection(): void {
+    this.selectedGroup.set('');
+    this.newTaskAssigneesSignal.set([]);
+    this.newTask.update(task => ({ ...task, assignees: [] }));
+  }
 
   openAddDialog(): void {
     this.isAddDialogOpen.set(true);
@@ -74,7 +129,26 @@ export class TaskList {
 
   addTask(): void {
     if (this.newTask().title.trim()) {
-      this.taskStore.addTask(this.newTask());
+      const task = this.taskStore.addTask(this.newTask());
+      
+      // If a group was selected, add the task to that group
+      const selectedGroupName = this.selectedGroup();
+      if (selectedGroupName) {
+        const group = this.groups().find(g => g.name === selectedGroupName);
+        if (group) {
+          const taskData = {
+            id: task.id,
+            title: task.title,
+            priority: task.priority,
+            createdAt: task.createdAt
+          };
+          
+          // Update the group with the new task
+          const updatedTasks = [...group.tasks, taskData];
+          this.groupsService.updateGroup(group.id!, { tasks: updatedTasks });
+        }
+      }
+      
       this.closeAddDialog();
       this.showSuccessConfirmation();
     }
@@ -120,6 +194,11 @@ export class TaskList {
     this.newTaskAssigneeSignal.set(assignee);
   }
 
+  updateNewTaskAssignees(assignees: string[]): void {
+    this.newTask.update(task => ({ ...task, assignees }));
+    this.newTaskAssigneesSignal.set(assignees);
+  }
+
   getTaskStatusSignal(taskId: string) {
     const task = this.taskStore.getTaskById(taskId);
     return signal(task?.status || 'not-started');
@@ -153,10 +232,12 @@ export class TaskList {
       description: '',
       priority: 'medium',
       status: 'not-started',
-      assignee: ''
+      assignee: '',
+      assignees: []
     });
     this.newTaskStatusSignal.set('not-started');
     this.newTaskAssigneeSignal.set('');
+    this.newTaskAssigneesSignal.set([]);
   }
 
   isFormValid(): boolean {

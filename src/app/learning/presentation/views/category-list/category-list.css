@@ -167,7 +167,6 @@
   position: relative;
   background: white;
   border: 1px solid #e5e7eb;
-  min-height: 140px;
 }
 
 .member-card:hover {
@@ -183,7 +182,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 60px;
   border-bottom: 1px solid #e1e5e9;
 }
 
@@ -368,7 +366,6 @@
   background: #f8f9fa;
   transition: all 0.2s ease;
   border: 1px solid #e1e5e9;
-  min-height: 52px;
   gap: 12px;
 }
 
@@ -571,7 +568,6 @@
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
-  min-height: 150px;
   transition: all 0.2s ease;
 }
 

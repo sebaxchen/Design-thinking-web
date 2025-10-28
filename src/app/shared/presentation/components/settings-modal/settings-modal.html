@@ -1,0 +1,187 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2 class="modal-title">Configuración</h2>
+      <button class="close-btn" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Content with Sidebar -->
+    <div class="modal-content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        @for (item of menuItems; track item.id) {
+          <button 
+            class="sidebar-item" 
+            [class.active]="selectedMenu === item.id"
+            (click)="selectedMenu = item.id">
+            <mat-icon class="sidebar-icon">{{ item.icon }}</mat-icon>
+            <span class="sidebar-label">{{ item.label }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        @if (selectedMenu === 'profile') {
+          <div class="content-section">
+            <h3 class="section-title">Perfil</h3>
+            <div class="settings-item">
+              <label class="settings-label">Nombre completo</label>
+              <input type="text" class="settings-input" [value]="getUserName()" readonly>
+            </div>
+            <div class="settings-item">
+              <label class="settings-label">Email</label>
+              <input type="email" class="settings-input" [value]="getUserEmail()" readonly>
+            </div>
+            <div class="settings-item">
+              <label class="settings-label">Bio</label>
+              <textarea class="settings-input textarea" rows="4" placeholder="Escribe algo sobre ti"></textarea>
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'account') {
+          <div class="content-section">
+            <h3 class="section-title">Cuenta</h3>
+            <div class="settings-item">
+              <label class="settings-label">Cambiar contraseña</label>
+              <input type="password" class="settings-input" placeholder="Nueva contraseña">
+            </div>
+            <div class="settings-item">
+              <label class="settings-label">Confirmar contraseña</label>
+              <input type="password" class="settings-input" placeholder="Confirma tu contraseña">
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'notifications') {
+          <div class="content-section">
+            <h3 class="section-title">Notificaciones</h3>
+            <div class="toggle-item">
+              <div class="toggle-info">
+                <span class="toggle-label">Notificaciones por email</span>
+                <span class="toggle-desc">Recibe actualizaciones por correo</span>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="email-notifications">
+                <label for="email-notifications" class="toggle"></label>
+              </div>
+            </div>
+            <div class="toggle-item">
+              <div class="toggle-info">
+                <span class="toggle-label">Notificaciones push</span>
+                <span class="toggle-desc">Recibe notificaciones en tiempo real</span>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="push-notifications" checked>
+                <label for="push-notifications" class="toggle"></label>
+              </div>
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'privacy') {
+          <div class="content-section">
+            <h3 class="section-title">Privacidad</h3>
+            <div class="toggle-item">
+              <div class="toggle-info">
+                <span class="toggle-label">Perfil público</span>
+                <span class="toggle-desc">Permite que otros vean tu perfil</span>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="public-profile" checked>
+                <label for="public-profile" class="toggle"></label>
+              </div>
+            </div>
+            <div class="toggle-item">
+              <div class="toggle-info">
+                <span class="toggle-label">Búsqueda en línea</span>
+                <span class="toggle-desc">Permite que aparezcas en búsquedas</span>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="searchable" checked>
+                <label for="searchable" class="toggle"></label>
+              </div>
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'preferences') {
+          <div class="content-section">
+            <h3 class="section-title">Preferencias</h3>
+            <div class="settings-item">
+              <label class="settings-label">Idioma</label>
+              <select class="settings-input select">
+                <option>Español</option>
+                <option>English</option>
+                <option>Français</option>
+              </select>
+            </div>
+            <div class="settings-item">
+              <label class="settings-label">Zona horaria</label>
+              <select class="settings-input select">
+                <option>UTC-5</option>
+                <option>UTC+0</option>
+                <option>UTC+1</option>
+              </select>
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'plans') {
+          <div class="content-section">
+            <h3 class="section-title">Planes</h3>
+            <div class="plans-grid">
+              @for (plan of plans; track plan.id) {
+                <div class="plan-card" [class.current]="currentPlan === plan.id" [class.recommended]="plan.id === 'basic'">
+                  @if (plan.id === 'basic') {
+                    <div class="popular-badge">Más Popular</div>
+                  }
+                  <div class="plan-header">
+                    <h4 class="plan-name">{{ plan.name }}</h4>
+                    <div class="plan-price">{{ plan.price }}</div>
+                  </div>
+                  <ul class="plan-features">
+                    @for (feature of plan.features; track feature) {
+                      <li class="plan-feature">
+                        <mat-icon class="feature-icon">check_circle</mat-icon>
+                        {{ feature }}
+                      </li>
+                    }
+                  </ul>
+                  <button class="plan-button" [class]="currentPlan === plan.id ? 'active' : (plan.id === 'premium' ? 'premium' : 'default')">
+                    @if (currentPlan === plan.id) {
+                      Plan Actual
+                    } @else {
+                      Seleccionar
+                    }
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (selectedMenu === 'about') {
+          <div class="content-section">
+            <h3 class="section-title">Acerca de</h3>
+            <div class="about-content">
+              <p class="about-text">NoteTo v1.0.0</p>
+              <p class="about-desc">Plataforma de gestión de tareas y proyectos</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="footer-btn cancel" (click)="closeModal()">Cancelar</button>
+      <button class="footer-btn save">Guardar Cambios</button>
+    </div>
+  </div>
+</div>
+

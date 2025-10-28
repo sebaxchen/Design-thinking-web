@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../application/user.service';
 import { AuthService } from '../../../application/auth.service';
+import { SettingsModal } from '../settings-modal/settings-modal';
 
 @Component({
   selector: 'app-header',
@@ -17,19 +18,23 @@ import { AuthService } from '../../../application/auth.service';
     MatButton,
     MatIcon,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    SettingsModal
   ],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class Header {
   isMenuOpen = false;
+  isSettingsOpen = false;
 
   options = [
     { link: '/home', label: 'Inicio', icon: 'home' },
     { link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { link: '/groups', label: 'Grupos', icon: 'groups' },
     { link: '/about', label: 'Gestión de Tareas', icon: 'info' },
-    { link: '/learning/categories', label: 'Trabajo en Equipo', icon: 'group' }
+    { link: '/learning/categories', label: 'Colaboradores', icon: 'group' },
+    { link: '/shared-files', label: 'Archivos', icon: 'cloud' }
   ];
 
   constructor(
@@ -43,6 +48,10 @@ export class Header {
 
   closeMenu() {
     this.isMenuOpen = false;
+  }
+
+  openSettings() {
+    this.isSettingsOpen = true;
   }
 
   logout() {

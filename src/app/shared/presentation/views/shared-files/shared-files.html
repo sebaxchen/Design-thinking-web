@@ -1,0 +1,239 @@
+<div class="files-container">
+  <div class="files-header">
+    <h1 class="files-title">Archivos Compartidos</h1>
+    @if (files().length > 0) {
+      <button class="upload-button" (click)="openUploadDialog()">
+        <mat-icon>upload</mat-icon>
+        <span>Subir Archivo</span>
+      </button>
+    }
+  </div>
+
+  @if (files().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon-container">
+        <mat-icon class="empty-icon">cloud_upload</mat-icon>
+      </div>
+      <h2 class="empty-title">No hay archivos compartidos</h2>
+      <p class="empty-description">Comienza compartiendo archivos con tu equipo</p>
+      <button class="empty-cta" (click)="openUploadDialog()">
+        <mat-icon>add</mat-icon>
+        Subir Primer Archivo
+      </button>
+    </div>
+  } @else {
+    <div class="files-list-container" 
+         [class.drag-over]="isDragOver()"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDrop($event)">
+      <div class="list-header">
+        <span class="header-item">Archivo</span>
+        <span class="header-item">Información</span>
+        <span class="header-item">Compartir</span>
+        <span class="header-item">Acciones</span>
+      </div>
+      
+      @for (file of files(); track file.id) {
+        <div class="file-row">
+          <div class="file-main">
+            <div class="file-icon-container">
+              <mat-icon class="file-icon">{{ getFileIcon(file.type) }}</mat-icon>
+            </div>
+            <div class="file-info">
+              <h3 class="file-name">{{ file.name }}</h3>
+              <p class="file-size">{{ formatFileSize(file.size) }}</p>
+            </div>
+          </div>
+          
+          <div class="file-meta">
+            <p class="file-date">{{ file.uploadedDate | date:'short' }}</p>
+            <div class="uploader-info">
+              <div class="uploader-avatar">
+                <span class="uploader-initials">{{ getInitials(file.uploadedBy) }}</span>
+              </div>
+              <span class="uploader-name">{{ file.uploadedBy }}</span>
+            </div>
+          </div>
+          
+          <div class="file-share">
+            <button class="share-btn" (click)="openShareDialog(file.id)">
+              <mat-icon>share</mat-icon>
+              <span>Compartir</span>
+            </button>
+            
+            <div class="shared-indicators">
+              @if ((file.sharedWithMembers && file.sharedWithMembers.length > 0) || (file.sharedWithGroups && file.sharedWithGroups.length > 0)) {
+                <div class="shared-status">
+                  <mat-icon class="shared-icon">group</mat-icon>
+                  <span class="shared-text">Compartido con:</span>
+                </div>
+                
+                <div class="shared-badges">
+                  @for (member of file.sharedWithMembers || []; track member) {
+                    <span class="shared-badge member">
+                      <mat-icon>person</mat-icon>
+                      {{ member }}
+                    </span>
+                  }
+                  @for (group of file.sharedWithGroups || []; track group) {
+                    <span class="shared-badge group">
+                      <mat-icon>groups</mat-icon>
+                      {{ group }}
+                    </span>
+                  }
+                </div>
+              } @else {
+                <div class="not-shared">
+                  <mat-icon class="not-shared-icon">lock</mat-icon>
+                  <span class="not-shared-text">No compartido</span>
+                </div>
+              }
+            </div>
+          </div>
+          
+          <div class="file-actions">
+            <button class="action-btn download" (click)="downloadFile(file)" title="Descargar">
+              <mat-icon>download</mat-icon>
+            </button>
+            <button class="action-btn delete" (click)="deleteFile(file.id)" title="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Share Dialog -->
+  @if (isShareDialogOpen()) {
+    <div class="share-dialog-overlay" (click)="closeShareDialog()">
+      <div class="share-dialog" (click)="$event.stopPropagation()">
+        <div class="dialog-header">
+          <h2 class="dialog-title">Compartir Archivo</h2>
+          <button class="close-btn" (click)="closeShareDialog()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div class="dialog-content">
+          <div class="share-section">
+            <h3 class="share-section-title">
+              <mat-icon>people</mat-icon>
+              Colaboradores
+            </h3>
+            @if (availableMembers().length === 0) {
+              <p class="empty-data">No hay colaboradores disponibles</p>
+            } @else {
+              <div class="selection-list">
+                @for (member of availableMembers(); track member.name || member.id) {
+                  <div class="selection-item" (click)="toggleMember(member.name)">
+                    <input 
+                      type="checkbox" 
+                      [checked]="selectedTeamMembers().includes(member.name)"
+                      (change)="toggleMember(member.name)">
+                    <label>{{ member.name }}</label>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="share-section">
+            <h3 class="share-section-title">
+              <mat-icon>groups</mat-icon>
+              Grupos
+            </h3>
+            @if (availableGroups().length === 0) {
+              <p class="empty-data">No hay grupos disponibles</p>
+            } @else {
+              <div class="selection-list">
+                @for (group of availableGroups(); track group.id || group.name) {
+                  <div class="selection-item" (click)="toggleGroup(group.name)">
+                    <input 
+                      type="checkbox" 
+                      [checked]="selectedGroups().includes(group.name)"
+                      (change)="toggleGroup(group.name)">
+                    <label>{{ group.name }}</label>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <button class="footer-btn cancel" (click)="closeShareDialog()">Cancelar</button>
+          <button class="footer-btn save" (click)="saveShareSettings()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Upload Dialog -->
+  @if (isUploadDialogOpen()) {
+    <div class="upload-dialog-overlay" (click)="closeUploadDialog()">
+      <div class="upload-dialog" (click)="$event.stopPropagation()">
+        <div class="dialog-header">
+          <h2 class="dialog-title">Subir Archivos</h2>
+          <button class="close-btn" (click)="closeUploadDialog()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div class="dialog-content">
+          <div class="upload-area" 
+               [class.drag-over]="isDragOver()"
+               (dragover)="onDragOver($event)"
+               (dragleave)="onDragLeave($event)"
+               (drop)="onDrop($event)">
+            <input 
+              type="file" 
+              id="fileInput" 
+              multiple 
+              (change)="onFileSelected($event)"
+              class="file-input">
+            <label for="fileInput" class="upload-label">
+              <mat-icon class="upload-icon">cloud_upload</mat-icon>
+              <span class="upload-text">Selecciona archivos o arrastra aquí</span>
+              <span class="upload-hint">Máximo 50MB por archivo</span>
+            </label>
+          </div>
+
+          @if (selectedFiles().length > 0) {
+            <div class="selected-files">
+              <h3 class="selected-title">Archivos seleccionados:</h3>
+              <div class="files-list">
+                @for (file of selectedFiles(); track file.name) {
+                  <div class="selected-file">
+                    <mat-icon class="list-icon">{{ getFileIcon(file.type) }}</mat-icon>
+                    <span class="list-name">{{ file.name }}</span>
+                    <span class="list-size">({{ formatFileSize(file.size) }})</span>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          @if (isUploading()) {
+            <div class="upload-progress">
+              <p>Subiendo archivos...</p>
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          }
+        </div>
+
+        <div class="dialog-footer">
+          <button class="footer-btn cancel" (click)="closeUploadDialog()">Cancelar</button>
+          <button 
+            class="footer-btn upload" 
+            (click)="uploadFiles()" 
+            [disabled]="selectedFiles().length === 0 || isUploading()">
+            Subir
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+

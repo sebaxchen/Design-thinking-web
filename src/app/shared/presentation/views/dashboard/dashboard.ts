@@ -6,7 +6,6 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { TeamService } from '../../../application/team.service';
-import { AchievementService } from '../../../../learning/application/achievement.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,14 +26,9 @@ import { AchievementService } from '../../../../learning/application/achievement
 export class DashboardComponent implements OnInit {
   private taskStore = inject(TaskStore);
   private teamService = inject(TeamService);
-  private achievementService = inject(AchievementService);
 
   ngOnInit(): void {
-    // Initialize with sample data if no tasks exist
-    // Commented out to start with empty app
-    // if (this.taskStore.taskCount() === 0) {
-    //   this.taskStore.initializeSampleData();
-    // }
+    // Component initialization
   }
 
   // Estadísticas generales
@@ -109,13 +103,6 @@ export class DashboardComponent implements OnInit {
     return productivity;
   });
 
-  // Logros recientes
-  readonly recentAchievements = computed(() => {
-    const allAchievements = this.achievementService['achievementsSubject'].value;
-    return allAchievements
-      .sort((a, b) => b.earnedAt.getTime() - a.earnedAt.getTime())
-      .slice(0, 5);
-  });
 
 
   // Métricas de tiempo

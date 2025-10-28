@@ -197,7 +197,7 @@ export class TaskStore {
   }
 
   // Actions
-  addTask(request: CreateTaskRequest): void {
+  addTask(request: CreateTaskRequest): Task {
     console.log('Adding task:', request);
     const newTask: Task = {
       id: this.generateId(),
@@ -207,6 +207,7 @@ export class TaskStore {
       priority: request.priority || 'medium',
       category: request.category,
       assignee: request.assignee || '',
+      assignees: request.assignees || [],
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -216,6 +217,8 @@ export class TaskStore {
       console.log('Updated tasks:', newTasks);
       return newTasks;
     });
+    
+    return newTask;
   }
 
   updateTask(request: UpdateTaskRequest): void {

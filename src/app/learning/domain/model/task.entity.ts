@@ -9,7 +9,8 @@ export interface Task {
   updatedAt: Date;
   priority: 'low' | 'medium' | 'high';
   category?: string;
-  assignee?: string;
+  assignee?: string; // Keep for backward compatibility
+  assignees?: string[]; // New field for multiple assignees
 }
 
 export interface CreateTaskRequest {
@@ -18,7 +19,8 @@ export interface CreateTaskRequest {
   priority?: 'low' | 'medium' | 'high';
   category?: string;
   status?: TaskStatus;
-  assignee?: string;
+  assignee?: string; // Keep for backward compatibility
+  assignees?: string[]; // New field for multiple assignees
 }
 
 export interface UpdateTaskRequest {
@@ -28,5 +30,6 @@ export interface UpdateTaskRequest {
   status?: TaskStatus;
   priority?: 'low' | 'medium' | 'high';
   category?: string;
-  assignee?: string;
+  assignee?: string; // Keep for backward compatibility
+  assignees?: string[]; // New field for multiple assignees
 }

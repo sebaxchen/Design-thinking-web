@@ -1,7 +1,7 @@
 <div class="task-container">
   @if (taskStore.allTasks().length > 0) {
     <div class="add-task-button-container">
-      <button mat-raised-button color="primary" (click)="openAddDialog()">
+      <button class="custom-add-button" (click)="openAddDialog()">
         <mat-icon>add</mat-icon>
         Añadir Nota
       </button>
@@ -104,6 +104,12 @@
                     {{ task.assignee }}
                   </span>
                 }
+                @if (getTaskGroup(task.id)) {
+                  <span class="group-chip">
+                    <mat-icon class="group-chip-icon">groups</mat-icon>
+                    {{ getTaskGroup(task.id)?.name }}
+                  </span>
+                }
               </div>
 
               <!-- Status Selector -->
@@ -126,83 +132,49 @@
 @if (isAddDialogOpen()) {
   <div class="dialog-overlay" (click)="closeAddDialog()">
     <div class="dialog-container" (click)="$event.stopPropagation()">
-      <!-- Modern Header with Gradient -->
+      <!-- Clean Header -->
       <div class="dialog-header">
-        <div class="header-background"></div>
         <div class="header-content">
-          <div class="header-icon-container">
-            <div class="header-icon">
-              <mat-icon>add_task</mat-icon>
-            </div>
-            <div class="icon-glow"></div>
-          </div>
-          <div class="header-text">
-            <h2 class="dialog-title">Crear Nueva Tarea</h2>
-            <p class="dialog-subtitle">Organiza tu trabajo de manera eficiente</p>
-          </div>
+          <h2 class="dialog-title">Crear Nueva Tarea</h2>
         </div>
-        <div class="header-actions">
-          <button mat-raised-button (click)="closeAddDialog()" class="cancel-btn">
-            <mat-icon>close</mat-icon>
-            <span>Cancelar</span>
-          </button>
-          <button mat-raised-button (click)="addTask()" class="create-btn" [disabled]="!isFormValid()">
-            <mat-icon>add</mat-icon>
-            <span>Crear Tarea</span>
-          </button>
-        </div>
+        <button class="close-icon-btn" (click)="closeAddDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
       
-      <!-- Enhanced Content with Better Layout -->
+      <!-- Clean Content -->
       <mat-dialog-content class="dialog-content">
         <div class="modal-layout">
           <!-- Left Column -->
           <div class="modal-column left-column">
-            <!-- Task Information Card -->
+            <!-- Task Info -->
             <div class="form-section task-info-card">
-              <div class="section-header">
-                <div class="section-icon-container">
-                  <mat-icon class="section-icon">edit_note</mat-icon>
-                </div>
-                <h3 class="section-title">Información de la Tarea</h3>
+              <label class="section-label">Título</label>
+              <div class="form-group">
+                <input 
+                  type="text"
+                  [(ngModel)]="newTask().title"
+                  placeholder="¿Qué necesitas hacer?"
+                  class="input-field"
+                  maxlength="100">
+                <mat-icon class="input-icon">title</mat-icon>
               </div>
-              
-              <div class="form-fields">
-                <mat-form-field appearance="outline" class="enhanced-field">
-                  <mat-label>Título de la tarea</mat-label>
-                  <input 
-                    matInput 
-                    [(ngModel)]="newTask().title"
-                    placeholder="¿Qué necesitas hacer?"
-                    maxlength="100"
-                    class="enhanced-input">
-                  <mat-hint>Máximo 100 caracteres</mat-hint>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline" class="enhanced-field">
-                  <mat-label>Descripción detallada</mat-label>
-                  <textarea 
-                    matInput 
-                    [(ngModel)]="newTask().description"
-                    placeholder="Describe los detalles de la tarea..."
-                    rows="4"
-                    maxlength="500"
-                    class="enhanced-textarea">
-                  </textarea>
-                  <mat-hint>Máximo 500 caracteres</mat-hint>
-                </mat-form-field>
+
+              <label class="section-label">Descripción</label>
+              <div class="form-group">
+                <textarea 
+                  [(ngModel)]="newTask().description"
+                  placeholder="Detalles adicionales..."
+                  rows="3"
+                  maxlength="500"
+                  class="input-field textarea-field">
+                </textarea>
               </div>
             </div>
 
-            <!-- Assignment Card -->
+            <!-- Assignment -->
             <div class="form-section assignment-card">
-              <div class="section-header">
-                <div class="section-icon-container">
-                  <mat-icon class="section-icon">person_add</mat-icon>
-                </div>
-                <h3 class="section-title">Asignación</h3>
-              </div>
-              
+              <label class="section-label">Asignar a</label>
               <div class="assignee-preview">
                 <app-assignee-selector
                   [selectedAssignee]="newTaskAssigneeSignal"
@@ -215,52 +187,25 @@
           
           <!-- Right Column -->
           <div class="modal-column right-column">
-            <!-- Priority Card -->
+            <!-- Priority -->
             <div class="form-section priority-card">
-              <div class="section-header">
-                <div class="section-icon-container">
-                  <mat-icon class="section-icon">flag</mat-icon>
-                </div>
-                <h3 class="section-title">Prioridad</h3>
-              </div>
+              <label class="section-label">Prioridad</label>
               
-              <mat-form-field appearance="outline" class="enhanced-field">
-                <mat-label>Selecciona la prioridad</mat-label>
-                <mat-select [(ngModel)]="newTask().priority" class="enhanced-select">
-                  <mat-option value="low">
-                    <div class="priority-option low-priority">
-                      <mat-icon class="priority-icon">keyboard_arrow_down</mat-icon>
-                      <span>Baja</span>
-                      <div class="priority-indicator"></div>
-                    </div>
-                  </mat-option>
-                  <mat-option value="medium">
-                    <div class="priority-option medium-priority">
-                      <mat-icon class="priority-icon">horizontal_rule</mat-icon>
-                      <span>Media</span>
-                      <div class="priority-indicator"></div>
-                    </div>
-                  </mat-option>
-                  <mat-option value="high">
-                    <div class="priority-option high-priority">
-                      <mat-icon class="priority-icon">priority_high</mat-icon>
-                      <span>Alta</span>
-                      <div class="priority-indicator"></div>
-                    </div>
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              <div class="form-group">
+                <select 
+                  [(ngModel)]="newTask().priority" 
+                  class="input-field select-field priority-select">
+                  <option value="low">Baja</option>
+                  <option value="medium">Media</option>
+                  <option value="high">Alta</option>
+                </select>
+                <mat-icon class="input-icon">flag</mat-icon>
+              </div>
             </div>
 
-            <!-- Status Card -->
+            <!-- Status -->
             <div class="form-section status-card">
-              <div class="section-header">
-                <div class="section-icon-container">
-                  <mat-icon class="section-icon">play_circle_outline</mat-icon>
-                </div>
-                <h3 class="section-title">Estado Inicial</h3>
-              </div>
-              
+              <label class="section-label">Estado</label>
               <div class="status-preview">
                 <app-status-selector
                   [currentStatus]="newTaskStatusSignal"
@@ -269,10 +214,61 @@
                 </app-status-selector>
               </div>
             </div>
+
+            <!-- Groups -->
+            <div class="form-section groups-card">
+              <label class="section-label">Grupo</label>
+              
+              @if (groups().length === 0) {
+                <div class="no-groups-message">
+                  <mat-icon class="empty-groups-icon">info</mat-icon>
+                  <p class="empty-groups-text">No hay grupos disponibles. Crea un grupo para asignar tareas.</p>
+                </div>
+              } @else {
+                <div class="form-group">
+                  <select 
+                    [value]="selectedGroup()" 
+                    (change)="updateSelectedGroup($any($event.target).value)"
+                    class="input-field select-field group-select">
+                    <option value="">Sin grupo</option>
+                    @for (group of groups(); track group.id || group.name) {
+                      <option [value]="group.name">
+                        {{ group.name }} ({{ group.members.length }} miembro(s))
+                      </option>
+                    }
+                  </select>
+                  <mat-icon class="input-icon">groups</mat-icon>
+                </div>
+
+                @if (selectedGroup()) {
+                  <div class="selected-members-preview">
+                    <p class="preview-label">Miembros asignados:</p>
+                    <div class="members-chips">
+                      @for (member of newTaskAssigneesSignal(); track member) {
+                        <div class="member-chip">
+                          <span class="member-chip-name">{{ member }}</span>
+                          <mat-icon class="chip-remove" (click)="removeMemberFromAssignees(member)">close</mat-icon>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                }
+              }
+            </div>
             
           </div>
         </div>
       </mat-dialog-content>
+
+      <!-- Clean Footer -->
+      <div class="dialog-footer">
+        <button (click)="closeAddDialog()" class="footer-btn cancel">
+          Cancelar
+        </button>
+        <button (click)="addTask()" class="footer-btn create" [disabled]="!isFormValid()">
+          Crear Tarea
+        </button>
+      </div>
     </div>
   </div>
 }

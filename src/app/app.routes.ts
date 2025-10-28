@@ -3,8 +3,11 @@ import {Home} from './shared/presentation/views/home/home';
 import { AuthGuard } from './shared/application/auth.guard';
 import { SplashComponent } from './shared/presentation/views/splash/splash';
 import { DashboardComponent } from './shared/presentation/views/dashboard/dashboard';
+import { LandingComponent } from './shared/presentation/views/landing/landing';
 
 const about = () => import('./shared/presentation/views/about/about').then(m => m.About);
+const groups = () => import('./shared/presentation/views/groups/groups').then(m => m.GroupsComponent);
+const sharedFiles = () => import('./shared/presentation/views/shared-files/shared-files').then(m => m.SharedFilesComponent);
 const pageNotFound = () => import('./shared/presentation/views/page-not-found/page-not-found')
   .then(m => m.PageNotFound);
 const login = () => import('./shared/presentation/views/login/login').then(m => m.Login);
@@ -12,6 +15,7 @@ const register = () => import('./shared/presentation/views/register/register').t
 
 const baseTitle = 'NoteTo';
 export const routes: Routes = [
+  { path: '', component: LandingComponent, title: `${baseTitle} - Inicio` },
   { path: 'splash', component: SplashComponent, title: `${baseTitle} - Bienvenido` },
   { 
     path: 'auth', 
@@ -26,8 +30,10 @@ export const routes: Routes = [
   { path: 'home', component: Home, title: `${baseTitle} - Home`, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, title: `${baseTitle} - Dashboard`, canActivate: [AuthGuard] },
   { path: 'about', loadComponent: about, title: `${baseTitle} - About`, canActivate: [AuthGuard] },
+  { path: 'groups', loadComponent: groups, title: `${baseTitle} - Grupos`, canActivate: [AuthGuard] },
+  { path: 'shared-files', loadComponent: sharedFiles, title: `${baseTitle} - Archivos Compartidos`, canActivate: [AuthGuard] },
   { path: 'learning', loadChildren: () =>
   import('./learning/presentation/views/learning.routes').then(m => m.learningRoutes), canActivate: [AuthGuard]},
-  { path: '', redirectTo: '/splash', pathMatch:'full' },
+  { path: 'landing', redirectTo: '/', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Page Not Found` },
 ];

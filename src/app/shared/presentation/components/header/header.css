@@ -1,10 +1,10 @@
 .header-toolbar {
-  background: #667eea;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #fafbfc;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .header-row {
@@ -27,7 +27,7 @@
   font-size: 1.5rem;
   width: 1.5rem;
   height: 1.5rem;
-  color: white;
+  color: #667eea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
-  color: white;
+  color: #111827;
   text-decoration: none;
   letter-spacing: 0;
 }
@@ -54,7 +54,7 @@
 }
 
 .nav-link {
-  color: white !important;
+  color: #374151 !important;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -63,15 +63,16 @@
   border-radius: 6px;
   transition: background 0.2s ease;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0);
+  background: transparent;
 }
 
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .nav-link.active {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(102, 126, 234, 0.15);
+  color: #667eea;
 }
 
 .nav-icon {
@@ -102,30 +103,31 @@
   align-items: center;
   gap: 12px;
   padding: 6px 12px 6px 16px;
-  background: rgba(255, 255, 255, 0);
+  background: transparent;
   border-radius: 8px;
   transition: background 0.2s ease;
+  cursor: pointer;
 }
 
 .user-info:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .logout-button {
-  color: white;
+  color: #374151;
   transition: background 0.2s ease;
   margin-left: 8px;
   width: 36px;
   height: 36px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0);
+  background: transparent;
   border: none;
   position: relative;
   z-index: 1;
 }
 
 .logout-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .logout-button mat-icon {
@@ -164,7 +166,7 @@
 }
 
 .user-name {
-  color: white;
+  color: #111827;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.2;
@@ -172,7 +174,7 @@
 }
 
 .user-role {
-  color: rgba(255, 255, 255, 0.8);
+  color: #6b7280;
   font-size: 0.75rem;
   line-height: 1.2;
   text-transform: uppercase;
@@ -183,29 +185,29 @@
 .divider {
   width: 1px;
   height: 24px;
-  background: rgba(255, 255, 255, 0.2);
+  background: #e5e7eb;
   margin: 0 8px;
 }
 
 
 .mobile-menu-button {
   display: none;
-  color: white !important;
-  background: rgba(255, 255, 255, 0);
+  color: #374151 !important;
+  background: transparent;
   border-radius: 6px;
   border: none;
   transition: background 0.2s ease;
 }
 
 .mobile-menu-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 126, 234, 0.1);
 }
 
 /* Mobile Navigation */
 .mobile-nav {
   display: none;
-  background: #667eea;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #fafbfc;
+  border-top: 1px solid #e5e7eb;
   padding: 16px;
   position: absolute;
   top: 100%;
@@ -225,7 +227,7 @@
 }
 
 .mobile-nav-link {
-  color: white !important;
+  color: #374151 !important;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -240,11 +242,12 @@
 }
 
 .mobile-nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(102, 126, 234, 0.1);
 }
 
 .mobile-nav-link.active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(102, 126, 234, 0.15);
+  color: #667eea !important;
 }
 
 .mobile-nav-icon {
@@ -263,24 +266,24 @@
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0);
+  background: transparent;
   margin-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .mobile-logout-button {
-  color: white;
+  color: #374151;
   transition: background 0.2s ease;
   margin-left: auto;
   width: 36px;
   height: 36px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0);
+  background: transparent;
   border: none;
 }
 
 .mobile-logout-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .mobile-logout-button mat-icon {
@@ -314,7 +317,7 @@
 }
 
 .mobile-user-name {
-  color: white;
+  color: #111827;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.2;
@@ -322,7 +325,7 @@
 }
 
 .mobile-user-role {
-  color: rgba(255, 255, 255, 0.8);
+  color: #6b7280;
   font-size: 0.75rem;
   line-height: 1.2;
   text-transform: uppercase;

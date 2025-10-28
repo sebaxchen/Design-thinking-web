@@ -12,45 +12,41 @@
   <div class="modal-content">
     <form (ngSubmit)="onAddMember()" class="member-form">
       <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Nombre completo</mat-label>
-          <input 
-            matInput 
-            type="text"
-            [(ngModel)]="name"
-            name="name"
-            placeholder="Nombre del miembro"
-            required>
-          <mat-icon matSuffix>person</mat-icon>
-        </mat-form-field>
+        <input 
+          type="text"
+          [(ngModel)]="name"
+          name="name"
+          placeholder="Nombre completo"
+          class="input-field"
+          required>
+        <mat-icon class="input-icon">person</mat-icon>
       </div>
 
       <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Correo electrónico</mat-label>
-          <input 
-            matInput 
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            placeholder="email@ejemplo.com"
-            required>
-          <mat-icon matSuffix>email</mat-icon>
-        </mat-form-field>
+        <input 
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Correo electrónico"
+          class="input-field"
+          required>
+        <mat-icon class="input-icon">email</mat-icon>
       </div>
 
       <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Rol en el equipo</mat-label>
-          <mat-select [(ngModel)]="role" name="role" required>
-            @for (roleOption of roles; track roleOption.value) {
-              <mat-option [value]="roleOption.value">
-                {{ roleOption.label }}
-              </mat-option>
-            }
-          </mat-select>
-          <mat-icon matSuffix>work</mat-icon>
-        </mat-form-field>
+        <select 
+          [(ngModel)]="role" 
+          name="role" 
+          class="input-field select-field"
+          required>
+          <option value="">Selecciona un rol</option>
+          @for (roleOption of roles; track roleOption.value) {
+            <option [value]="roleOption.value">
+              {{ roleOption.label }}
+            </option>
+          }
+        </select>
+        <mat-icon class="input-icon">work</mat-icon>
       </div>
 
       @if (errorMessage()) {

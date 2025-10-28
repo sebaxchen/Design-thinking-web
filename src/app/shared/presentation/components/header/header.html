@@ -24,7 +24,7 @@
       <!-- Right Section -->
       <div class="header-actions">
         <!-- User Info -->
-        <div class="user-info">
+        <div class="user-info" (click)="openSettings()">
           <div class="user-avatar">
             <span class="user-initials">{{ authService.getUserInitials() }}</span>
           </div>
@@ -32,11 +32,11 @@
             <span class="user-name">{{ authService.getUserName() }}</span>
             <span class="user-role">{{ authService.getUserRole() }}</span>
           </div>
-          <div class="divider"></div>
-          <button mat-icon-button (click)="logout()" class="logout-button" title="Cerrar sesión">
-            <mat-icon>logout</mat-icon>
-          </button>
         </div>
+        <div class="divider"></div>
+        <button mat-icon-button (click)="logout()" class="logout-button" title="Cerrar sesión">
+          <mat-icon>logout</mat-icon>
+        </button>
 
         
         <!-- Mobile Menu Button -->
@@ -79,4 +79,9 @@
       }
     </div>
   </mat-toolbar>
+
+  <!-- Settings Modal -->
+  @if (isSettingsOpen) {
+    <app-settings-modal (close)="isSettingsOpen = false"></app-settings-modal>
+  }
 }

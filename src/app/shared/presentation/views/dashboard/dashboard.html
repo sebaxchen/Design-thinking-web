@@ -190,66 +190,37 @@
   </mat-card>
 
 
-  <!-- Tareas Recientes y Logros -->
-  <div class="bottom-section">
-    <!-- Tareas Recientes -->
-    <mat-card class="recent-tasks-card">
-      <mat-card-header>
-        <mat-card-title>
-          <mat-icon>history</mat-icon>
-          Tareas Recientes
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="recent-tasks-list">
-          <div 
-            *ngFor="let task of recentTasks()" 
-            class="recent-task-item">
-            <div class="task-info">
-              <div class="task-title">{{ task.title }}</div>
-              <div class="task-meta">
-                <mat-chip [class]="'priority-' + task.priority">
-                  {{ getPriorityText(task.priority) }}
-                </mat-chip>
-                <mat-chip [class]="'status-' + task.status">
-                  {{ getStatusText(task.status) }}
-                </mat-chip>
-              </div>
-            </div>
-            <div class="task-assignee">
-              <mat-icon>person</mat-icon>
-              <span>{{ task.assignee || 'Sin asignar' }}</span>
+  <!-- Tareas Recientes -->
+  <mat-card class="recent-tasks-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>history</mat-icon>
+        Tareas Recientes
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="recent-tasks-list">
+        <div 
+          *ngFor="let task of recentTasks()" 
+          class="recent-task-item">
+          <div class="task-info">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-meta">
+              <mat-chip [class]="'priority-' + task.priority">
+                {{ getPriorityText(task.priority) }}
+              </mat-chip>
+              <mat-chip [class]="'status-' + task.status">
+                {{ getStatusText(task.status) }}
+              </mat-chip>
             </div>
           </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Logros Recientes -->
-    <mat-card class="achievements-card">
-      <mat-card-header>
-        <mat-card-title>
-          <mat-icon>emoji_events</mat-icon>
-          Logros Recientes
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="achievements-list">
-          <div 
-            *ngFor="let achievement of recentAchievements()" 
-            class="achievement-item">
-            <div class="achievement-icon">
-              <mat-icon>{{ achievement.icon }}</mat-icon>
-            </div>
-            <div class="achievement-info">
-              <div class="achievement-title">{{ achievement.title }}</div>
-              <div class="achievement-description">{{ achievement.description }}</div>
-              <div class="achievement-date">{{ achievement.earnedAt | date:'short' }}</div>
-            </div>
+          <div class="task-assignee">
+            <mat-icon>person</mat-icon>
+            <span>{{ task.assignee || 'Sin asignar' }}</span>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
   }
 </div>
