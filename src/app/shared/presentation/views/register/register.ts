@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
-import { MatCard, MatCardContent } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../application/auth.service';
 
@@ -17,9 +14,6 @@ import { AuthService } from '../../../application/auth.service';
     FormsModule,
     MatButton,
     MatIcon,
-    MatInput,
-    MatFormField,
-    MatLabel,
   ],
   templateUrl: './register.html',
   styleUrl: './register.css'

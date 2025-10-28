@@ -31,9 +31,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize with sample data if no tasks exist
-    if (this.taskStore.taskCount() === 0) {
-      this.taskStore.initializeSampleData();
-    }
+    // Commented out to start with empty app
+    // if (this.taskStore.taskCount() === 0) {
+    //   this.taskStore.initializeSampleData();
+    // }
   }
 
   // Estadísticas generales

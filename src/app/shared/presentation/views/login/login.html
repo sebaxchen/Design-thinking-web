@@ -17,39 +17,31 @@
       </div>
       <h1 class="brand-title">NoteTo</h1>
       <p class="welcome-text">¡Bienvenido de vuelta!</p>
-      <p class="subtitle">Inicia sesión para gestionar tus notas</p>
+      <p class="subtitle">Inicia sesión para gestionar tus tareas</p>
     </div>
 
     <!-- Form Section -->
     <form (ngSubmit)="onLogin()" class="auth-form">
       <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width enhanced-field">
-          <mat-label>Correo electrónico</mat-label>
-          <input 
-            matInput 
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            placeholder="tu@email.com"
-            class="enhanced-input"
-            required>
-          <mat-icon matSuffix class="field-icon">email</mat-icon>
-        </mat-form-field>
+        <input 
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Correo electrónico"
+          class="input-field"
+          required>
+        <mat-icon class="input-icon">email</mat-icon>
       </div>
 
       <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width enhanced-field">
-          <mat-label>Contraseña</mat-label>
-          <input 
-            matInput 
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="Tu contraseña"
-            class="enhanced-input"
-            required>
-          <mat-icon matSuffix class="field-icon">lock</mat-icon>
-        </mat-form-field>
+        <input 
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Contraseña"
+          class="input-field"
+          required>
+        <mat-icon class="input-icon">lock</mat-icon>
       </div>
 
       @if (errorMessage()) {

@@ -4,236 +4,61 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #667eea 50%, #764ba2 75%, #f093fb 100%);
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  overflow: hidden;
-  perspective: 1000px;
-}
-
-/* Partículas de fondo */
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: float 6s infinite linear;
-}
-
-.particle:nth-child(odd) {
-  background: rgba(102, 126, 234, 0.8);
-  animation-duration: 8s;
-}
-
-.particle:nth-child(even) {
-  background: rgba(118, 75, 162, 0.8);
-  animation-duration: 10s;
-}
-
-.particle:nth-child(3n) {
-  background: rgba(255, 255, 255, 0.6);
-  animation-duration: 12s;
-}
-
-/* Efectos de luz */
-.light-effects {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.light-beam {
-  position: absolute;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: lightSweep 4s infinite;
-}
-
-.light-beam-1 {
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.light-beam-2 {
-  left: 50%;
-  animation-delay: 1.5s;
-}
-
-.light-beam-3 {
-  left: 80%;
-  animation-delay: 3s;
 }
 
 .splash-content {
   text-align: center;
-  color: white;
-  position: relative;
-  z-index: 2;
-  animation: fadeInUp 1.5s ease-out;
+  color: #2c3e50;
 }
 
-/* Logo mejorado */
+.splash-content h1,
+.splash-content p {
+  color: #2c3e50 !important;
+}
+
 .logo-container {
-  margin-bottom: 3rem;
-  position: relative;
-  animation: logoEntrance 2s ease-out;
-}
-
-.logo-wrapper {
-  position: relative;
-  display: inline-block;
-  animation: logoFloat 3s ease-in-out infinite;
-}
-
-.logo-icon {
-  font-size: 8rem;
-  width: 8rem;
-  height: 8rem;
-  color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
+  margin-bottom: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.logo-icon {
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 5rem !important;
+  background: #667eea;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
   margin: 0 auto;
-  box-shadow: 
-    0 0 50px rgba(102, 126, 234, 0.5),
-    0 0 100px rgba(118, 75, 162, 0.3),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  z-index: 3;
-  animation: logoPulse 2s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.logo-glow {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: glowPulse 2s ease-in-out infinite;
-  z-index: 1;
-}
-
-.logo-ring {
-  position: absolute;
-  top: -30px;
-  left: -30px;
-  right: -30px;
-  bottom: -30px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  animation: ringRotate 4s linear infinite;
-  z-index: 2;
-}
-
-/* Nombre de la aplicación */
 .app-name {
-  font-size: 4.5rem;
-  font-weight: 900;
-  margin: 0 0 1.5rem 0;
-  text-shadow: 
-    0 0 30px rgba(255, 255, 255, 0.9),
-    0 0 60px rgba(102, 126, 234, 0.8),
-    0 0 90px rgba(118, 75, 162, 0.6),
-    0 4px 8px rgba(0, 0, 0, 0.3);
-  letter-spacing: 4px;
-  color: #ffffff;
-  animation: nameEntrance 1.5s ease-out 0.5s both, gradientShift 3s ease-in-out infinite;
-  position: relative;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
 }
 
-.app-name-letter {
-  display: inline-block;
-  animation: letterBounce 0.6s ease-out;
-  animation-fill-mode: both;
-}
-
-.app-name-letter:nth-child(1) { animation-delay: 0.1s; }
-.app-name-letter:nth-child(2) { animation-delay: 0.2s; }
-.app-name-letter:nth-child(3) { animation-delay: 0.3s; }
-.app-name-letter:nth-child(4) { animation-delay: 0.4s; }
-.app-name-letter:nth-child(5) { animation-delay: 0.5s; }
-.app-name-letter:nth-child(6) { animation-delay: 0.6s; }
-
-/* Eslogan */
 .app-slogan {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 400;
-  margin: 0 0 4rem 0;
-  opacity: 0.95;
-  letter-spacing: 2px;
-  animation: sloganEntrance 1.5s ease-out 1s both;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+  margin: 0 0 3rem 0;
+  color: #6c757d;
 }
 
-.slogan-word {
-  display: inline-block;
-  margin-right: 0.5rem;
-  animation: wordFadeIn 0.8s ease-out;
-  animation-fill-mode: both;
-}
-
-.slogan-word:nth-child(1) { animation-delay: 1.2s; }
-.slogan-word:nth-child(2) { animation-delay: 1.3s; }
-.slogan-word:nth-child(3) { animation-delay: 1.4s; }
-.slogan-word:nth-child(4) { animation-delay: 1.5s; }
-.slogan-word:nth-child(5) { animation-delay: 1.6s; }
-.slogan-word:nth-child(6) { animation-delay: 1.7s; }
-.slogan-word:nth-child(7) { animation-delay: 1.8s; }
-
-/* Sección de carga mejorada */
 .loading-section {
-  animation: loadingEntrance 1.5s ease-out 1.5s both;
-}
-
-.loading-text {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  opacity: 0.8;
-  letter-spacing: 1px;
-}
-
-.progress-bar {
-  width: 200px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-  margin: 0 auto 1rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  border-radius: 2px;
-  animation: progressFill 5s ease-out;
-  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+  margin-top: 2rem;
 }
 
 .loading-dots {
@@ -247,7 +72,8 @@
   height: 8px;
   background: #667eea;
   border-radius: 50%;
-  animation: dotBounce 1.4s ease-in-out infinite;
+  opacity: 0.5;
+  animation: dotPulse 1.4s ease-in-out infinite;
 }
 
 .dot:nth-child(1) { animation-delay: 0s; }
@@ -255,220 +81,30 @@
 .dot:nth-child(3) { animation-delay: 0.4s; }
 
 /* Animaciones */
-@keyframes float {
+@keyframes fadeIn {
   0% {
-    transform: translateY(100vh) rotate(0deg);
     opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
   }
   100% {
-    transform: translateY(-100px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes lightSweep {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100vw);
-    opacity: 0;
-  }
-}
-
-@keyframes logoEntrance {
-  0% {
-    transform: scale(0) rotate(180deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2) rotate(0deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
     opacity: 1;
   }
 }
 
-@keyframes logoFloat {
+@keyframes dotPulse {
   0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes logoPulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 50px rgba(102, 126, 234, 0.5),
-      0 0 100px rgba(118, 75, 162, 0.3),
-      inset 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    box-shadow: 
-      0 0 80px rgba(102, 126, 234, 0.8),
-      0 0 150px rgba(118, 75, 162, 0.5),
-      inset 0 0 30px rgba(255, 255, 255, 0.2);
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    opacity: 0.3;
+    opacity: 0.5;
     transform: scale(1);
   }
   50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-}
-
-@keyframes ringRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes nameEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(50px) scale(0.8);
-  }
-  100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes letterBounce {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.8);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes sloganEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes wordFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes loadingEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes progressFill {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-@keyframes dotBounce {
-  0%, 80%, 100% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  40% {
     transform: scale(1.2);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .app-name {
-    font-size: 3rem;
-    letter-spacing: 2px;
-  }
-  
-  .app-slogan {
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-  }
-  
-  .logo-icon {
-    font-size: 6rem;
-    width: 6rem;
-    height: 6rem;
-  }
-  
-  .progress-bar {
-    width: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-name {
     font-size: 2.5rem;
-    letter-spacing: 1px;
   }
   
   .app-slogan {
@@ -476,12 +112,24 @@
   }
   
   .logo-icon {
-    font-size: 5rem;
-    width: 5rem;
-    height: 5rem;
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 4rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-name {
+    font-size: 2rem;
   }
   
-  .progress-bar {
-    width: 120px;
+  .app-slogan {
+    font-size: 0.9rem;
+  }
+  
+  .logo-icon {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 3rem !important;
   }
 }

@@ -1,19 +1,9 @@
 <div class="team-container">
-  <!-- Hero Section -->
-  <div class="team-hero">
-    <div class="hero-content">
-      <div class="hero-icon">
-        <mat-icon>groups</mat-icon>
-      </div>
-      <div class="hero-text">
-        <h1>Trabajo en Equipo</h1>
-        <p>Gestiona el rendimiento y progreso de cada miembro del equipo de manera eficiente</p>
-      </div>
-      <button mat-raised-button color="primary" (click)="openAddMemberModal()" class="add-member-btn">
-        <mat-icon>person_add</mat-icon>
-        Añadir Miembro
-      </button>
-    </div>
+  <div class="add-member-button-container">
+    <button mat-raised-button color="primary" (click)="openAddMemberModal()">
+      <mat-icon>person_add</mat-icon>
+      Añadir Miembro
+    </button>
   </div>
 
   <!-- KPIs Section -->

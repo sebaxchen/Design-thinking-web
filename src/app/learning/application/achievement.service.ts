@@ -84,18 +84,13 @@ export class AchievementService {
 
   constructor() {
     this.loadAchievements();
-    this.createSampleAchievements();
+    // Commented out to start with empty achievements
+    // this.createSampleAchievements();
   }
 
   private loadAchievements(): void {
-    const savedAchievements = localStorage.getItem('achievements');
-    if (savedAchievements) {
-      const achievements = JSON.parse(savedAchievements).map((achievement: any) => ({
-        ...achievement,
-        earnedAt: new Date(achievement.earnedAt)
-      }));
-      this.achievementsSubject.next(achievements);
-    }
+    // Start with empty achievements for fresh start
+    this.achievementsSubject.next([]);
   }
 
   private saveAchievements(achievements: Achievement[]): void {

@@ -1,14 +1,12 @@
 .modal-container {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
   width: 100%;
   max-height: 90vh;
   overflow: hidden;
-  animation: slideUp 0.3s ease-out;
-  border: 1px solid #e1e5e9;
-  position: relative;
+  border: 1px solid #e5e7eb;
 }
 
 .modal-header {
@@ -16,80 +14,57 @@
   align-items: center;
   justify-content: space-between;
   padding: 24px 28px;
-  background: #667eea;
-  color: white;
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-  min-height: 80px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .modal-title {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .title-icon {
-  font-size: 1.3rem;
-  color: white;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.5rem;
+  color: #667eea;
 }
 
 .close-button {
-  color: white;
-  background: rgba(255, 255, 255, 0.15);
+  color: #6c757d;
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
   border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  transition: all 0.3s ease;
 }
 
 .close-button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+  background: #f3f4f6;
+  color: #dc3545;
 }
 
 .modal-content {
   padding: 28px;
   background: #ffffff;
-  max-height: 400px;
-  overflow-y: auto;
 }
 
 .member-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .form-group {
   position: relative;
-  background: #ffffff;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  padding: 20px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.form-group:hover {
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-}
-
-.form-group:focus-within {
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .full-width {
@@ -106,14 +81,12 @@
   align-items: center;
   gap: 12px;
   color: #dc3545;
-  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-  padding: 16px 20px;
-  border-radius: 10px;
-  border: 2px solid #f5c6cb;
-  font-size: 0.9rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
-  animation: shake 0.5s ease-in-out;
+  background: #fee2e2;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  font-size: 0.95rem;
+  font-weight: 500;
   margin-top: 8px;
 }
 
@@ -125,65 +98,54 @@
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 12px;
   margin-top: 24px;
   padding: 24px 28px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-top: 2px solid #e1e5e9;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  background: #f8f9fa;
+  border-top: 1px solid #e5e7eb;
 }
 
 .cancel-button {
-  background: #6c757d;
-  color: white;
+  background: #9ca3af;
+  color: white !important;
   font-weight: 600;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   border: none;
-  box-shadow: 0 2px 6px rgba(108, 117, 125, 0.2);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .cancel-button:hover {
-  background: #5a6268;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  background: #6b7280;
 }
 
 .add-button {
-  background: #667eea;
+  background: #667eea !important;
   color: white !important;
-  font-weight: 700;
-  padding: 12px 24px;
+  font-weight: 600;
+  padding: 10px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.2);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 140px;
-  border: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
+  border: none !important;
+  font-size: 0.95rem;
 }
 
 .add-button:hover:not(:disabled) {
-  background: #5a6fd8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  background: #5568d3 !important;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .add-button:disabled {
-  background: #6c757d;
-  transform: none;
+  background: #9ca3af !important;
   box-shadow: none;
   opacity: 0.7;
 }
@@ -194,29 +156,6 @@
 
 .spinning {
   animation: spin 1s linear infinite;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
 }
 
 @keyframes spin {
@@ -244,7 +183,7 @@
 }
 
 ::ng-deep .mat-mdc-form-field .mat-mdc-form-field-outline {
-  color: #e1e5e9;
+  color: #e5e7eb;
 }
 
 ::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline {
@@ -262,13 +201,13 @@
 
 ::ng-deep .mat-mdc-input-element {
   color: #2c3e50;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
 ::ng-deep .mat-mdc-select {
   color: #2c3e50;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
@@ -278,11 +217,11 @@
 }
 
 ::ng-deep .mat-mdc-option:hover {
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(102, 126, 234, 0.05);
 }
 
 ::ng-deep .mat-mdc-option.mdc-list-item--selected {
-  background: rgba(102, 126, 234, 0.15);
+  background: rgba(102, 126, 234, 0.1);
   color: #667eea;
 }
 
@@ -295,9 +234,6 @@
   
   .modal-header {
     padding: 20px;
-    flex-direction: column;
-    gap: 16px;
-    min-height: auto;
   }
   
   .modal-content {
@@ -318,9 +254,5 @@
   .add-button {
     width: 100%;
     justify-content: center;
-  }
-  
-  .form-group {
-    padding: 16px;
   }
 }

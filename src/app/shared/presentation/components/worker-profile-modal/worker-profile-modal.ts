@@ -183,13 +183,13 @@ export interface WorkerProfileData {
     .modal-container {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      border-radius: 20px;
+      background: #ffffff;
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e1e5e9;
       position: relative;
     }
 
@@ -199,132 +199,108 @@ export interface WorkerProfileData {
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
+      height: 4px;
+      background: #667eea;
     }
 
     .modal-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 32px 24px;
+      background: #f8f9fa;
+      color: #2c3e50;
+      padding: 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: relative;
-      border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .modal-header::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+      border-bottom: 1px solid #e1e5e9;
     }
 
     .user-profile {
       display: flex;
       align-items: center;
-      gap: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 16px 20px;
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      gap: 16px;
+      background: transparent;
+      padding: 0;
     }
 
     .avatar {
-      width: 70px;
-      height: 70px;
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      background: #667eea;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      font-size: 24px;
+      color: white;
+      border: none;
     }
 
     .user-info h1 {
-      margin: 0 0 8px 0;
-      font-size: 28px;
-      font-weight: 800;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      letter-spacing: 0.5px;
+      margin: 0 0 4px 0;
+      font-size: 22px;
+      font-weight: 600;
+      color: #2c3e50;
+      text-shadow: none;
+      letter-spacing: 0;
     }
 
     .user-info p {
       margin: 0 0 8px 0;
-      opacity: 0.95;
-      font-size: 16px;
-      font-weight: 500;
+      color: #6c757d;
+      font-size: 14px;
+      font-weight: 400;
     }
 
     .status-indicator {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(76, 175, 80, 0.9);
-      padding: 8px 16px;
-      border-radius: 25px;
-      font-size: 14px;
-      font-weight: 700;
-      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      gap: 6px;
+      background: #e8f5e8;
+      color: #2e7d32;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid #c8e6c9;
     }
 
     .status-dot {
-      width: 10px;
-      height: 10px;
-      background: #ffffff;
+      width: 8px;
+      height: 8px;
+      background: #4caf50;
       border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
     }
 
     .close-button {
-      color: white;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
+      color: #6c757d;
+      background: transparent;
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      transition: all 0.2s ease;
     }
 
     .close-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background: #fee;
+      color: #f44336;
     }
 
     .modal-content {
       flex: 1;
-      padding: 32px;
+      padding: 24px;
       overflow-y: auto;
       position: relative;
       z-index: 1;
     }
 
     .stats-section {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e1e5e9;
       position: relative;
       overflow: hidden;
     }
@@ -335,81 +311,63 @@ export interface WorkerProfileData {
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      height: 3px;
+      background: #667eea;
     }
 
     .stats-section h2 {
-      margin: 0 0 12px 0;
+      margin: 0 0 16px 0;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       color: #2c3e50;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-bottom: 8px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .stat-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      background: #f8f9fa;
       border-radius: 8px;
-      padding: 8px;
+      padding: 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      gap: 10px;
+      transition: all 0.2s ease;
+      border: 1px solid #e1e5e9;
     }
 
     .stat-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      background: #ffffff;
+      border-color: #667eea;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .stat-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s ease;
+      font-size: 18px;
     }
 
     .stat-card.completed .stat-icon { 
-      background: linear-gradient(135deg, #28a745, #20c997);
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      background: #4caf50;
     }
     .stat-card.in-progress .stat-icon { 
-      background: linear-gradient(135deg, #ffc107, #ffb300);
-      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+      background: #ff9800;
     }
     .stat-card.pending .stat-icon { 
-      background: linear-gradient(135deg, #6c757d, #868e96);
-      box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+      background: #9e9e9e;
     }
     .stat-card.efficiency .stat-icon { 
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      background: #667eea;
     }
 
     .stat-info {
@@ -418,47 +376,46 @@ export interface WorkerProfileData {
     }
 
     .stat-number {
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 600;
       color: #2c3e50;
     }
 
     .stat-label {
-      font-size: 9px;
+      font-size: 11px;
       color: #6c757d;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
     }
 
     .progress-section {
       background: #f8f9fa;
-      border-radius: 6px;
-      padding: 6px;
+      border-radius: 8px;
+      padding: 12px;
     }
 
     .progress-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       font-weight: 600;
       color: #2c3e50;
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .progress-bar {
-      height: 4px;
-      border-radius: 2px;
+      height: 6px;
+      border-radius: 3px;
     }
 
     .achievements-section,
     .tasks-section {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e1e5e9;
       position: relative;
       overflow: hidden;
     }
@@ -470,8 +427,8 @@ export interface WorkerProfileData {
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      height: 3px;
+      background: #667eea;
     }
 
     .section-header {
@@ -483,23 +440,21 @@ export interface WorkerProfileData {
     
     .section-header h2 {
       margin: 0;
-      font-size: 20px;
-      font-weight: 800;
+      font-size: 18px;
+      font-weight: 600;
       color: #2c3e50;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      letter-spacing: 0.5px;
+      text-shadow: none;
+      letter-spacing: 0;
     }
 
     .achievement-count {
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: #667eea;
       color: white;
       padding: 6px 12px;
-      border-radius: 16px;
+      border-radius: 6px;
       font-size: 12px;
-      font-weight: 700;
-      box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      font-weight: 600;
+      border: none;
     }
 
     .achievements-list {
@@ -512,65 +467,43 @@ export interface WorkerProfileData {
     }
 
     .achievement-item {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 12px;
+      background: #f8f9fa;
+      border-radius: 10px;
       padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       gap: 8px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
-      border: 2px solid transparent;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      position: relative;
-      overflow: hidden;
+      border: 1px solid #e1e5e9;
       min-height: 120px;
       justify-content: center;
     }
 
-    .achievement-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
     .achievement-item:hover {
-      transform: translateY(-4px) scale(1.02);
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      background: #ffffff;
       border-color: #667eea;
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-    }
-
-    .achievement-item:hover::before {
-      opacity: 1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .achievement-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background: #667eea;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 18px;
+      font-size: 20px;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     .achievement-item:hover .achievement-icon {
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+      transform: scale(1.05);
     }
 
     .achievement-details {
@@ -598,49 +531,37 @@ export interface WorkerProfileData {
     }
 
     .achievement-date {
-      font-size: 9px;
-      color: #95a5a6;
-      font-weight: 600;
-      background: rgba(102, 126, 234, 0.1);
-      padding: 2px 6px;
-      border-radius: 8px;
+      font-size: 10px;
+      color: #6c757d;
+      font-weight: 500;
+      background: #e8f5e8;
+      padding: 4px 8px;
+      border-radius: 6px;
       display: inline-block;
     }
 
     .tasks-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 12px;
       max-height: 300px;
       overflow-y: auto;
     }
 
     .task-item {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 12px;
+      background: #f8f9fa;
+      border-radius: 10px;
       padding: 16px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 1px solid #e1e5e9;
       position: relative;
-      overflow: hidden;
-    }
-
-    .task-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
     }
 
     .task-item:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      background: #ffffff;
       border-color: #667eea;
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .task-header {
@@ -679,35 +600,35 @@ export interface WorkerProfileData {
     }
 
     .task-priority {
-      font-weight: 700;
+      font-weight: 500;
       padding: 4px 8px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
 
     .task-priority.priority-high {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-      color: white;
-      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #ffcdd2;
     }
 
     .task-priority.priority-medium {
-      background: linear-gradient(135deg, #ffd93d, #ffb347);
-      color: white;
-      box-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);
+      background: #fff8e1;
+      color: #e65100;
+      border: 1px solid #ffecb3;
     }
 
     .task-priority.priority-low {
-      background: linear-gradient(135deg, #6bcf7f, #4dabf7);
-      color: white;
-      box-shadow: 0 2px 8px rgba(107, 207, 127, 0.3);
+      background: #e8f5e8;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
     }
 
     .task-date {
-      font-weight: 600;
-      color: #667eea;
+      font-weight: 500;
+      color: #6c757d;
     }
 
     .empty-state {
@@ -721,7 +642,7 @@ export interface WorkerProfileData {
       width: 48px;
       height: 48px;
       margin-bottom: 16px;
-      color: #dee2e6;
+      color: #adb5bd;
     }
 
     .empty-state h3 {
@@ -738,18 +659,21 @@ export interface WorkerProfileData {
     }
 
     .status-completed {
-      background: #28a745 !important;
-      color: white !important;
+      background: #e8f5e8 !important;
+      color: #2e7d32 !important;
+      border: 1px solid #c8e6c9 !important;
     }
 
     .status-in-progress {
-      background: #ffc107 !important;
-      color: white !important;
+      background: #fff8e1 !important;
+      color: #f57c00 !important;
+      border: 1px solid #ffecb3 !important;
     }
 
     .status-not-started {
-      background: #6c757d !important;
-      color: white !important;
+      background: #f5f5f5 !important;
+      color: #6c757d !important;
+      border: 1px solid #e0e0e0 !important;
     }
 
     /* Responsive Design */

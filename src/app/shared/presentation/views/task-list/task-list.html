@@ -1,19 +1,12 @@
 <div class="task-container">
-  <div class="task-header" [class.no-button]="taskStore.allTasks().length === 0">
-    <div class="task-icon">
-      <mat-icon>assignment</mat-icon>
-    </div>
-    <div class="task-text">
-      <h2>Gestión de Tareas</h2>
-      <p>Organiza y gestiona tus tareas de manera eficiente</p>
-    </div>
-    @if (taskStore.allTasks().length > 0) {
+  @if (taskStore.allTasks().length > 0) {
+    <div class="add-task-button-container">
       <button mat-raised-button color="primary" (click)="openAddDialog()">
         <mat-icon>add</mat-icon>
         Añadir Nota
       </button>
-    }
-  </div>
+    </div>
+  }
 
   <!-- Success Confirmation -->
   @if (showSuccessAnimation()) {
@@ -73,7 +66,7 @@
     } @else {
       <div class="tasks-grid">
         @for (task of taskStore.allTasks(); track task.id) {
-          <mat-card class="task-card" [class]="'task-card task-' + task.status + (task.assignee ? '' : ' unassigned')">
+          <mat-card class="task-card" [class]="'task-card task-' + task.status + ' priority-' + task.priority + (task.assignee ? '' : ' unassigned')">
             <!-- Status Dot - Top Right Corner -->
             <div class="status-dot" [class]="'status-dot-' + task.status + (task.assignee ? '' : ' unassigned')"></div>
             
