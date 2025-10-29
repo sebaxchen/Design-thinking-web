@@ -186,14 +186,14 @@ import { SessionTimerService } from '../../../application/session-timer.service'
     }
 
     .continue-btn {
-      background: #ffffff;
-      color: #1a1a1a;
+      background: #1a1a1a;
+      color: #ffffff;
       border: 2px solid #1a1a1a;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .continue-btn:hover {
-      background: #1a1a1a;
+      background: #2d2d2d;
       color: #ffffff;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -207,16 +207,21 @@ import { SessionTimerService } from '../../../application/session-timer.service'
     }
 
     .take-break-btn:hover {
-      background: #ffffff;
-      color: #1a1a1a;
+      background: #2d2d2d;
+      color: #ffffff;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .break-btn {
+      color: #ffffff;
     }
 
     .break-btn mat-icon {
       font-size: 18px;
       width: 18px;
       height: 18px;
+      color: #ffffff;
     }
 
     /* Responsive */

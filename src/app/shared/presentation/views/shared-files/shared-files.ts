@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthService } from '../../../application/auth.service';
 import { TeamService } from '../../../application/team.service';
 import { GroupColorsService } from '../../../application/group-colors.service';
+import { GroupsService } from '../../../application/groups.service';
 
 export interface SharedFile {
   id: string;
@@ -31,13 +32,13 @@ export interface SharedFile {
     MatProgressBarModule
   ],
   templateUrl: './shared-files.html',
-  styleUrl: './shared-files.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './shared-files.css'
 })
 export class SharedFilesComponent {
   authService = inject(AuthService);
   teamService = inject(TeamService);
   groupColorsService = inject(GroupColorsService);
+  groupsService = inject(GroupsService);
   files = signal<SharedFile[]>([]);
   isUploadDialogOpen = signal(false);
   selectedFiles = signal<File[]>([]);
@@ -58,11 +59,18 @@ export class SharedFilesComponent {
   loadFiles() {
     const savedFiles = localStorage.getItem('sharedFiles');
     if (savedFiles) {
-      const parsedFiles = JSON.parse(savedFiles).map((file: any) => ({
-        ...file,
-        uploadedDate: new Date(file.uploadedDate)
-      }));
-      this.files.set(parsedFiles);
+      try {
+        const parsedFiles = JSON.parse(savedFiles).map((file: any) => ({
+          ...file,
+          uploadedDate: new Date(file.uploadedDate),
+          sharedWithMembers: Array.isArray(file.sharedWithMembers) ? file.sharedWithMembers : [],
+          sharedWithGroups: Array.isArray(file.sharedWithGroups) ? file.sharedWithGroups : []
+        }));
+        this.files.set(parsedFiles);
+      } catch (error) {
+        console.error('Error loading files:', error);
+        this.files.set([]);
+      }
     }
   }
 
@@ -97,7 +105,8 @@ export class SharedFilesComponent {
         sharedWithGroups: []
       }));
 
-      this.files.update(current => [...current, ...newFiles]);
+      const allFiles = [...this.files(), ...newFiles];
+      this.files.set(allFiles);
       this.saveFiles();
       
       this.isUploading.set(false);
@@ -134,7 +143,8 @@ export class SharedFilesComponent {
   }
 
   deleteFile(fileId: string) {
-    this.files.update(current => current.filter(f => f.id !== fileId));
+    const updated = this.files().filter(f => f.id !== fileId);
+    this.files.set(updated);
     this.saveFiles();
   }
 
@@ -144,12 +154,16 @@ export class SharedFilesComponent {
   }
 
   openShareDialog(fileId: string) {
+    this.loadTeamData();
     this.selectedFileId.set(fileId);
     this.isShareDialogOpen.set(true);
     const file = this.files().find(f => f.id === fileId);
     if (file) {
-      this.selectedTeamMembers.set(file.sharedWithMembers || []);
-      this.selectedGroups.set(file.sharedWithGroups || []);
+      this.selectedTeamMembers.set(file.sharedWithMembers ? [...file.sharedWithMembers] : []);
+      this.selectedGroups.set(file.sharedWithGroups ? [...file.sharedWithGroups] : []);
+    } else {
+      this.selectedTeamMembers.set([]);
+      this.selectedGroups.set([]);
     }
   }
 
@@ -164,11 +178,9 @@ export class SharedFilesComponent {
     // Load members from TeamService
     this.availableMembers.set(this.teamService.allMembers());
     
-    // Load groups from localStorage
-    const groups = localStorage.getItem('groups');
-    if (groups) {
-      this.availableGroups.set(JSON.parse(groups));
-    }
+    // Load groups from GroupsService
+    const groups = this.groupsService.getAllGroups();
+    this.availableGroups.set(groups());
   }
 
   toggleMember(memberName: string) {
@@ -190,21 +202,26 @@ export class SharedFilesComponent {
   }
 
   saveShareSettings() {
-    if (!this.selectedFileId()) return;
-
     const fileId = this.selectedFileId();
-    this.files.update(current =>
-      current.map(file =>
-        file.id === fileId
-          ? {
-              ...file,
-              sharedWithMembers: this.selectedTeamMembers(),
-              sharedWithGroups: this.selectedGroups()
-            }
-          : file
-      )
-    );
-    this.saveFiles();
+    if (!fileId) return;
+
+    const members = [...this.selectedTeamMembers()];
+    const groups = [...this.selectedGroups()];
+    
+    // Actualizar el archivo en el array
+    const allFiles = [...this.files()];
+    const fileIndex = allFiles.findIndex(f => f.id === fileId);
+    
+    if (fileIndex !== -1) {
+      allFiles[fileIndex] = {
+        ...allFiles[fileIndex],
+        sharedWithMembers: members,
+        sharedWithGroups: groups
+      };
+      this.files.set(allFiles);
+      this.saveFiles();
+    }
+    
     this.closeShareDialog();
   }
 
@@ -216,19 +233,16 @@ export class SharedFilesComponent {
     return file.sharedWithGroups?.includes(groupName) || false;
   }
 
-  // Verifica si el archivo está compartido con algún miembro o grupo
   hasShares(file: SharedFile): boolean {
     const hasMembers = !!(file.sharedWithMembers && file.sharedWithMembers.length > 0);
     const hasGroups = !!(file.sharedWithGroups && file.sharedWithGroups.length > 0);
     return hasMembers || hasGroups;
   }
 
-  // Obtiene los miembros compartidos (retorna array vacío si no hay)
   getSharedMembers(file: SharedFile): string[] {
     return file.sharedWithMembers || [];
   }
 
-  // Obtiene los grupos compartidos (retorna array vacío si no hay)
   getSharedGroups(file: SharedFile): string[] {
     return file.sharedWithGroups || [];
   }
