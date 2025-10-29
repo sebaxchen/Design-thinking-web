@@ -49,7 +49,7 @@
           <div class="file-meta">
             <p class="file-date">{{ file.uploadedDate | date:'short' }}</p>
             <div class="uploader-info">
-              <div class="uploader-avatar">
+              <div class="uploader-avatar" [style.background-color]="getMemberColor(file.uploadedBy)">
                 <span class="uploader-initials">{{ getInitials(file.uploadedBy) }}</span>
               </div>
               <span class="uploader-name">{{ file.uploadedBy }}</span>
@@ -132,6 +132,9 @@
                       type="checkbox" 
                       [checked]="selectedTeamMembers().includes(member.name)"
                       (change)="toggleMember(member.name)">
+                    <div class="member-avatar-small" [style.background-color]="getMemberColor(member.name)">
+                      <span class="member-initials-small">{{ getInitials(member.name) }}</span>
+                    </div>
                     <label>{{ member.name }}</label>
                   </div>
                 }

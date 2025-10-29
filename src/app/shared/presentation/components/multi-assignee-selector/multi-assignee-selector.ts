@@ -37,7 +37,7 @@ interface Person {
           @for (person of people; track person.id) {
             <button class="dropdown-item" (click)="togglePerson(person.name)">
               <div class="person-option">
-                <div class="person-avatar">
+                <div class="person-avatar" [style.background-color]="getMemberColor(person.name)">
                   <span class="person-initials">{{ person.initials }}</span>
                 </div>
                 <div class="person-info">
@@ -59,7 +59,7 @@ interface Person {
         <div class="selected-assignees">
           @for (assignee of selectedAssignees(); track assignee) {
             <div class="assignee-chip">
-              <div class="assignee-avatar-small">
+              <div class="assignee-avatar-small" [style.background-color]="getMemberColor(assignee)">
                 <span class="assignee-initials-small">{{ getInitials(assignee) }}</span>
               </div>
               <span class="assignee-name-small">{{ assignee }}</span>
@@ -178,7 +178,6 @@ interface Person {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -238,7 +237,6 @@ interface Person {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -320,6 +318,11 @@ export class MultiAssigneeSelector {
   getInitials(name: string): string {
     const person = this.people.find(p => p.name === name);
     return person?.initials || name.substring(0, 2).toUpperCase();
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
   }
 }
 

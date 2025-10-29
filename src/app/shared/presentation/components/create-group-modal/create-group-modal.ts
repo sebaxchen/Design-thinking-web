@@ -87,7 +87,7 @@ interface GroupTask {
                       [disabled]="!member.selected && getSelectedMembersCount() >= 6"
                       (change)="onMemberChange()">
                       <div class="member-info">
-                        <div class="member-avatar">
+                        <div class="member-avatar" [style.--dynamic-color]="getMemberColor(member.name)" [style.background-color]="getMemberColor(member.name)">
                           {{ getInitials(member.name) }}
                         </div>
                         <span class="member-name">{{ member.name }}</span>
@@ -198,7 +198,7 @@ interface GroupTask {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: #667eea;
+      background: #1a1a1a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -233,7 +233,7 @@ interface GroupTask {
     }
 
     .close-button:hover {
-      background: #f0f4ff;
+      background: #f8f9fa;
     }
 
     .modal-content {
@@ -258,7 +258,7 @@ interface GroupTask {
     }
 
     .section-icon {
-      color: #667eea;
+      color: #1a1a1a;
       font-size: 20px;
       width: 20px;
       height: 20px;
@@ -277,7 +277,7 @@ interface GroupTask {
       color: #6c757d;
       font-weight: 600;
       padding: 4px 12px;
-      background: #f0f4ff;
+      background: #f8f9fa;
       border-radius: 12px;
     }
 
@@ -339,13 +339,21 @@ interface GroupTask {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: 600;
       font-size: 0.875rem;
+    }
+
+    .member-avatar[style*="background-color"] {
+      background-color: inherit !important;
+    }
+
+    /* Asegurar que el color dinámico se aplique */
+    .member-info .member-avatar {
+      background-color: var(--dynamic-color) !important;
     }
 
     .member-name {
@@ -426,12 +434,14 @@ interface GroupTask {
     }
 
     .create-button {
-      background: #667eea;
-      color: white;
+      background: #ffffff;
+      color: #1a1a1a;
+      border: 1px solid #e8eaed;
     }
 
     .create-button:hover:not(:disabled) {
-      background: #5568d3;
+      background: #f8f9fa;
+      border-color: #d1d5db;
     }
 
     .create-button:disabled {
@@ -597,6 +607,11 @@ export class CreateGroupModal implements OnChanges {
       case 'low': return 'Baja';
       default: return 'Media';
     }
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
   }
 }
 

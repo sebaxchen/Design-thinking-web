@@ -30,22 +30,23 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #667eea;
-  color: white;
-  border: none;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   visibility: visible !important;
   opacity: 1 !important;
 }
 
 .upload-button:hover {
-  background: #5568d3;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  background: #f8f9fa;
+  border-color: #d1d5db;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
@@ -81,7 +82,7 @@
   font-size: 60px;
   width: 60px;
   height: 60px;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .empty-title {
@@ -102,9 +103,9 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #667eea;
-  color: white;
-  border: none;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
@@ -112,7 +113,8 @@
 }
 
 .empty-cta:hover {
-  background: #5568d3;
+  background: #f8f9fa;
+  border-color: #d1d5db;
 }
 
 .empty-cta mat-icon {
@@ -131,10 +133,10 @@
 }
 
 .files-list-container.drag-over {
-  border-color: #667eea;
+  border-color: #1a1a1a;
   border-width: 2px;
-  background: #f0f4ff;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: #f8f9fa;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .list-header {
@@ -198,9 +200,9 @@
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
-  background: #667eea;
-  color: white;
-  border: none;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -209,7 +211,8 @@
 }
 
 .share-btn:hover {
-  background: #5568d3;
+  background: #f8f9fa;
+  border-color: #d1d5db;
 }
 
 .share-btn mat-icon {
@@ -233,7 +236,7 @@
   font-size: 16px;
   width: 16px;
   height: 16px;
-  color: #10b981;
+  color: #1a1a1a;
 }
 
 .shared-text {
@@ -260,29 +263,29 @@
 }
 
 .shared-badge.member {
-  background: #dbeafe;
-  color: #1e40af;
-  border: 1px solid #bfdbfe;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
 }
 
 .shared-badge.member mat-icon {
   font-size: 14px;
   width: 14px;
   height: 14px;
-  color: #1e40af;
+  color: #1a1a1a;
 }
 
 .shared-badge.group {
-  background: #f0f9ff;
-  color: #0c4a6e;
-  border: 1px solid #bae6fd;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
 }
 
 .shared-badge.group mat-icon {
   font-size: 14px;
   width: 14px;
   height: 14px;
-  color: #0c4a6e;
+  color: #1a1a1a;
 }
 
 .not-shared {
@@ -344,7 +347,7 @@
   font-size: 32px;
   width: 32px;
   height: 32px;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .file-info {
@@ -380,7 +383,6 @@
 .uploader-avatar {
   width: 32px;
   height: 32px;
-  background: #667eea;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -391,6 +393,24 @@
   color: white;
   font-weight: 700;
   font-size: 0.75rem;
+}
+
+/* Avatares pequeños en el modal de compartir */
+.member-avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.member-initials-small {
+  color: white;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.3px;
 }
 
 .uploader-name {
@@ -417,8 +437,8 @@
 }
 
 .action-btn.download {
-  background: #f3f4f6;
-  color: #667eea;
+  background: #f8f9fa;
+  color: #1a1a1a;
 }
 
 .action-btn.download:hover {
@@ -523,8 +543,8 @@
 }
 
 .upload-area.drag-over {
-  border-color: #667eea;
-  background: #f0f4ff;
+  border-color: #1a1a1a;
+  background: #f8f9fa;
   border-width: 3px;
 }
 
@@ -544,7 +564,7 @@
   font-size: 48px;
   width: 48px;
   height: 48px;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .upload-text {
@@ -588,7 +608,7 @@
   font-size: 24px;
   width: 24px;
   height: 24px;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .list-name {
@@ -641,12 +661,14 @@
 }
 
 .footer-btn.upload {
-  background: #667eea;
-  color: white;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
 }
 
 .footer-btn.upload:hover:not(:disabled) {
-  background: #5568d3;
+  background: #f8f9fa;
+  border-color: #d1d5db;
 }
 
 .footer-btn:disabled {
@@ -699,7 +721,7 @@
   font-size: 20px;
   width: 20px;
   height: 20px;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .empty-data {
@@ -747,15 +769,18 @@
   font-size: 0.875rem;
   color: #374151;
   cursor: pointer;
+  flex: 1;
 }
 
 .footer-btn.save {
-  background: #667eea;
-  color: white;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e8eaed;
 }
 
 .footer-btn.save:hover:not(:disabled) {
-  background: #5568d3;
+  background: #f8f9fa;
+  border-color: #d1d5db;
 }
 
 /* Responsive */

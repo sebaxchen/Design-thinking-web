@@ -25,7 +25,7 @@ export interface Person {
         [class.assigned]="selectedAssignee()">
         <div class="assignee-content">
           @if (selectedAssignee()) {
-            <div class="assignee-avatar">
+            <div class="assignee-avatar" [style.background-color]="getMemberColor(selectedAssignee()!)">
               <span class="assignee-initials">{{ getAssigneeInitials() }}</span>
             </div>
             <span class="assignee-name">{{ selectedAssignee() }}</span>
@@ -46,7 +46,7 @@ export interface Person {
           @for (person of people; track person.id) {
             <button class="dropdown-item" (click)="selectAssignee(person.name)">
               <div class="person-option">
-                <div class="person-avatar">
+                <div class="person-avatar" [style.background-color]="getMemberColor(person.name)">
                   <span class="person-initials">{{ person.initials }}</span>
                 </div>
                 <div class="person-info">
@@ -237,7 +237,6 @@ export interface Person {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -331,5 +330,10 @@ export class AssigneeSelector {
     
     const person = this.people.find(p => p.name === assignee);
     return person?.initials || assignee.substring(0, 2).toUpperCase();
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
   }
 }

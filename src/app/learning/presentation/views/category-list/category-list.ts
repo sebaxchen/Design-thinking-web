@@ -170,5 +170,9 @@ export class CategoryList {
     console.log('Editar perfil de:', member.name);
   }
 
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
+  }
 
 }

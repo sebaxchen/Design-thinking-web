@@ -19,7 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23667eea" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23667eea" opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%23667eea" opacity="0.03"/><circle cx="10" cy="60" r="0.5" fill="%23667eea" opacity="0.03"/><circle cx="90" cy="40" r="0.5" fill="%23667eea" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%231a1a1a" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%231a1a1a" opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%231a1a1a" opacity="0.03"/><circle cx="10" cy="60" r="0.5" fill="%231a1a1a" opacity="0.03"/><circle cx="90" cy="40" r="0.5" fill="%231a1a1a" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
   opacity: 1;
 }
 
@@ -48,7 +48,7 @@
   width: 140px !important;
   height: 140px !important;
   font-size: 5.5rem !important;
-  background: #667eea;
+  background: #1a1a1a;
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -56,10 +56,10 @@
   color: white !important;
   margin: 0 auto;
   box-shadow: 
-    0 8px 32px rgba(102, 126, 234, 0.25),
-    0 0 0 1px rgba(102, 126, 234, 0.05),
+    0 8px 32px rgba(26, 26, 26, 0.25),
+    0 0 0 1px rgba(26, 26, 26, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(26, 26, 26, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -96,11 +96,11 @@
 .dot {
   width: 12px;
   height: 12px;
-  background: #667eea;
+  background: #1a1a1a;
   border-radius: 50%;
   opacity: 0.6;
   animation: dotPulse 1.6s ease-in-out infinite;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 2px 4px rgba(26, 26, 26, 0.2);
 }
 
 .dot:nth-child(1) { animation-delay: 0s; }

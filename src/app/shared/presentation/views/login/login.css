@@ -26,8 +26,8 @@
 }
 
 .input-field:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
 }
 
 .input-field:not(:placeholder-shown) {
@@ -48,7 +48,7 @@
 }
 
 .form-group:focus-within .input-icon {
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 /* Error Message */
@@ -76,13 +76,13 @@
   font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
-  background: #667eea !important;
-  color: white !important;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   text-transform: none;
   letter-spacing: 0.3px;
-  border: none !important;
+  border: 1px solid #e8eaed !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -98,15 +98,17 @@
 }
 
 .auth-button:hover:not(:disabled) {
-  background: #5568d3 !important;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
-  color: white !important;
+  background: #f8f9fa !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  color: #1a1a1a !important;
+  border-color: #d1d5db !important;
 }
 
 .auth-button:active:not(:disabled) {
-  background: #5568d3 !important;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
-  color: white !important;
+  background: #f8f9fa !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a !important;
+  border-color: #d1d5db !important;
 }
 
 .auth-button:disabled {
@@ -120,7 +122,7 @@
   font-size: 1.2rem;
   width: 1.2rem;
   height: 1.2rem;
-  color: white;
+  color: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +176,7 @@
 }
 
 .link-button {
-  color: #667eea;
+  color: #1a1a1a;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -185,13 +187,13 @@
   gap: 6px;
   font-size: 0.95rem;
   background: transparent;
-  border: 1px solid #667eea;
+  border: 1px solid #e8eaed;
 }
 
 .link-button:hover {
-  color: #5568d3;
-  border-color: #5568d3;
-  background: rgba(102, 126, 234, 0.05);
+  color: #1a1a1a;
+  border-color: #d1d5db;
+  background: #f8f9fa;
 }
 
 /* Features Section */
@@ -216,12 +218,12 @@
 }
 
 .feature-item:hover {
-  background: rgba(102, 126, 234, 0.05);
+  background: #f8f9fa;
 }
 
 .feature-icon {
   font-size: 1.2rem;
-  color: #667eea;
+  color: #1a1a1a;
   margin-bottom: 2px;
 }
 

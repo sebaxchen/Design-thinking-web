@@ -70,22 +70,6 @@ body {
   }
 }
 
-/* Force blue button in add-task-button-container */
-.add-task-button-container button {
-  background: #667eea !important;
-  background-color: #667eea !important;
-  color: white !important;
-}
-
-.add-task-button-container button:hover {
-  background: #5568d3 !important;
-  background-color: #5568d3 !important;
-}
-
-.add-task-button-container button mat-icon {
-  color: white !important;
-}
-
 /* Achievement toast styles */
 .achievement-toast {
   animation: slideIn 0.3s ease-out;

@@ -76,7 +76,10 @@
                    <div class="traffic-light" [ngClass]="getTrafficLightClass(getMemberStats(member.name).total)">
                      <div class="light-dot"></div>
                    </div>
-                   <div class="member-avatar" (click)="openWorkerProfileModal(member)" title="Ver perfil">
+                   <div class="member-avatar" 
+                        (click)="openWorkerProfileModal(member)" 
+                        title="Ver perfil"
+                        [style.background-color]="getMemberColor(member.name)">
                      <span class="member-initials">{{ member.avatar }}</span>
                    </div>
                    <button 

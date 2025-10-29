@@ -139,7 +139,7 @@
 }
 
 .stat-card:nth-child(1)::before { 
-  background: #667eea;
+  background: #8b5cf6;
 }
 
 .stat-card:nth-child(2)::before { 
@@ -151,7 +151,7 @@
 }
 
 .stat-card:nth-child(4)::before { 
-  background: #ef4444;
+  background: #06b6d4;
 }
 
 .stat-card:hover {
@@ -193,6 +193,23 @@
   width: 1.2rem;
   height: 1.2rem;
   opacity: 0.8;
+}
+
+/* Colores específicos para iconos de estadísticas */
+.stat-card:nth-child(1) mat-icon {
+  color: #8b5cf6;
+}
+
+.stat-card:nth-child(2) mat-icon {
+  color: #10b981;
+}
+
+.stat-card:nth-child(3) mat-icon {
+  color: #f59e0b;
+}
+
+.stat-card:nth-child(4) mat-icon {
+  color: #06b6d4;
 }
 
 .stat-number {

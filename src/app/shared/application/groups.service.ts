@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
+import { GroupColorsService } from './group-colors.service';
 
 export interface Group {
   id?: string;
@@ -6,6 +7,7 @@ export interface Group {
   members: { id: string; name: string }[];
   tasks: { id: string; title: string; priority: string; createdAt: Date }[];
   createdAt?: Date;
+  color?: string;
 }
 
 @Injectable({
@@ -13,6 +15,7 @@ export interface Group {
 })
 export class GroupsService {
   private groups = signal<Group[]>([]);
+  private groupColorsService = inject(GroupColorsService);
 
   constructor() {
     this.loadGroups();
@@ -42,6 +45,11 @@ export class GroupsService {
   }
 
   addGroup(group: Group): void {
+    // Asignar color automáticamente si no tiene uno
+    if (!group.color) {
+      group.color = this.groupColorsService.getGroupColor(group.name);
+    }
+    
     const newGroup = {
       ...group,
       id: this.generateId(),
@@ -74,6 +82,16 @@ export class GroupsService {
 
   getGroupById(groupId: string): Group | undefined {
     return this.groups().find(g => g.id === groupId);
+  }
+
+  // Método para obtener el color de un grupo
+  getGroupColor(groupName: string): string {
+    const group = this.groups().find(g => g.name === groupName);
+    if (group && group.color) {
+      return group.color;
+    }
+    // Si no existe el grupo o no tiene color, obtener uno del servicio
+    return this.groupColorsService.getGroupColor(groupName);
   }
 
   private generateId(): string {

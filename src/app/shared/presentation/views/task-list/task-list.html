@@ -8,21 +8,6 @@
     </div>
   }
 
-  <!-- Success Confirmation -->
-  @if (showSuccessAnimation()) {
-    <div class="success-confirmation">
-      <div class="success-content">
-        <div class="success-icon">
-          <mat-icon>check_circle</mat-icon>
-        </div>
-        <div class="success-text">
-          <h3>¡Tarea creada exitosamente!</h3>
-          <p>Tu nueva tarea ha sido añadida a la lista</p>
-        </div>
-      </div>
-    </div>
-  }
-
   <!-- Tasks Grid -->
   <div class="tasks-container">
     @if (taskStore.allTasks().length === 0) {
@@ -66,23 +51,15 @@
     } @else {
       <div class="tasks-grid">
         @for (task of taskStore.allTasks(); track task.id) {
-          <mat-card class="task-card" [class]="'task-card task-' + task.status + ' priority-' + task.priority + (task.assignee ? '' : ' unassigned')">
-            <!-- Status Dot - Top Right Corner -->
-            <div class="status-dot" [class]="'status-dot-' + task.status + (task.assignee ? '' : ' unassigned')"></div>
-            
-            <!-- Delete Button - Top Right Corner -->
-            <button 
-              mat-icon-button 
-              color="warn"
-              (click)="deleteTask(task.id)"
-              class="delete-btn-top">
-              <mat-icon>delete</mat-icon>
-            </button>
-            
-            <mat-card-content class="task-content">
-              <div class="task-main">
-                <div class="task-info">
-                  <h3 class="task-title-text" [class.completed-text]="task.status === 'completed'">
+          <div class="task-card" [class]="'task-card task-' + task.status + ' priority-' + task.priority + (isTaskAssigned(task) ? '' : ' unassigned')">
+            <!-- Card Header -->
+            <div class="card-header">
+              <div class="task-info">
+                <div class="task-icon-container">
+                  <mat-icon class="task-icon">{{ getPriorityIcon(task.priority) }}</mat-icon>
+                </div>
+                <div class="task-details">
+                  <h3 class="task-title" [class.completed-text]="task.status === 'completed'">
                     {{ task.title }}
                   </h3>
                   @if (task.description) {
@@ -90,38 +67,62 @@
                   }
                 </div>
               </div>
-              
-              <div class="task-meta">
-                <span 
-                  class="priority-chip"
-                  [class]="'priority-' + task.priority">
-                  <mat-icon class="priority-icon">{{ getPriorityIcon(task.priority) }}</mat-icon>
-                  {{ task.priority | titlecase }}
-                </span>
+              <div class="card-actions">
+                <button mat-icon-button (click)="deleteTask(task.id)" class="action-btn delete-btn" title="Eliminar tarea">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="card-content">
+              <!-- Metadata Section -->
+              <div class="metadata-section">
                 @if (task.assignee) {
-                  <span class="assignee-chip">
-                    <mat-icon class="assignee-icon">person</mat-icon>
-                    {{ task.assignee }}
-                  </span>
+                  <div class="metadata-item">
+                    <div class="metadata-label">
+                      <mat-icon class="label-icon">person</mat-icon>
+                      <span class="label-text">Asignado</span>
+                    </div>
+                    <div class="assignee-info">
+                      <div class="assignee-avatar" [style.--dynamic-color]="getMemberColor(task.assignee)" [style.background-color]="getMemberColor(task.assignee)">
+                        {{ task.assignee.charAt(0).toUpperCase() }}
+                      </div>
+                      <span class="assignee-name">{{ task.assignee }}</span>
+                    </div>
+                  </div>
                 }
+
                 @if (getTaskGroup(task.id)) {
-                  <span class="group-chip">
-                    <mat-icon class="group-chip-icon">groups</mat-icon>
-                    {{ getTaskGroup(task.id)?.name }}
-                  </span>
+                  <div class="metadata-item">
+                    <div class="metadata-label">
+                      <mat-icon class="label-icon">groups</mat-icon>
+                      <span class="label-text">Grupo</span>
+                    </div>
+                    <div class="group-info">
+                      <div class="group-avatar" [style.--dynamic-color]="getGroupColor(getTaskGroup(task.id)?.name!)" [style.background-color]="getGroupColor(getTaskGroup(task.id)?.name!)">
+                        {{ getTaskGroup(task.id)?.name.charAt(0).toUpperCase() }}
+                      </div>
+                      <span class="group-name">{{ getTaskGroup(task.id)?.name }}</span>
+                    </div>
+                  </div>
                 }
               </div>
 
-              <!-- Status Selector -->
-              <div class="task-status">
+              <!-- Status Section -->
+              <div class="status-section">
+                <div class="status-label">
+                  <mat-icon class="label-icon">track_changes</mat-icon>
+                  <span class="label-text">Estado</span>
+                </div>
                 <app-status-selector
                   [currentStatus]="getTaskStatusSignal(task.id)"
                   [disabled]="enabledSignal"
                   (statusChange)="updateStatus(task.id, $event)">
                 </app-status-selector>
               </div>
-            </mat-card-content>
-          </mat-card>
+            </div>
+          </div>
         }
       </div>
     }

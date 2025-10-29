@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../../application/user.service';
 import { AuthService } from '../../../application/auth.service';
 import { SettingsModal } from '../settings-modal/settings-modal';
+import { TeamService } from '../../../application/team.service';
 
 @Component({
   selector: 'app-header',
@@ -27,14 +28,15 @@ import { SettingsModal } from '../settings-modal/settings-modal';
 export class Header {
   isMenuOpen = false;
   isSettingsOpen = false;
+  private teamService = inject(TeamService);
 
   options = [
-    { link: '/home', label: 'Inicio', icon: 'home' },
-    { link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
-    { link: '/groups', label: 'Grupos', icon: 'groups' },
-    { link: '/about', label: 'Gestión de Tareas', icon: 'info' },
-    { link: '/learning/categories', label: 'Colaboradores', icon: 'group' },
-    { link: '/shared-files', label: 'Archivos', icon: 'cloud' }
+    { link: '/home', label: 'Inicio', icon: 'home', color: '#10b981' },
+    { link: '/dashboard', label: 'Dashboard', icon: 'dashboard', color: '#8b5cf6' },
+    { link: '/groups', label: 'Grupos', icon: 'groups', color: '#f59e0b' },
+    { link: '/about', label: 'Gestión de Tareas', icon: 'info', color: '#06b6d4' },
+    { link: '/learning/categories', label: 'Colaboradores', icon: 'group', color: '#ec4899' },
+    { link: '/shared-files', label: 'Archivos', icon: 'cloud', color: '#eab308' }
   ];
 
   constructor(
@@ -56,5 +58,11 @@ export class Header {
 
   logout() {
     this.authService.logout();
+  }
+
+  // Método para obtener el color del usuario
+  getUserColor(): string {
+    const userName = this.authService.getUserName();
+    return this.teamService.getMemberColor(userName);
   }
 }

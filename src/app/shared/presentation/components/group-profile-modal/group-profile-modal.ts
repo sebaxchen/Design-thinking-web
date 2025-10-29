@@ -9,7 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskStore } from '../../../../learning/application/task.store';
 import { TeamService } from '../../../application/team.service';
-import { Group } from '../../../application/groups.service';
+import { Group, GroupsService } from '../../../application/groups.service';
 
 @Component({
   selector: 'app-group-profile-modal',
@@ -24,11 +24,11 @@ import { Group } from '../../../application/groups.service';
     MatDividerModule
   ],
   template: `
-    <div class="modal-container">
+    <div class="modal-container" [style.--group-color]="getGroupColor()">
       <!-- Header -->
       <div class="modal-header">
         <div class="group-profile">
-          <div class="avatar">
+          <div class="avatar" [style.background-color]="getGroupColor()">
             <mat-icon>groups</mat-icon>
           </div>
           <div class="group-info">
@@ -105,7 +105,7 @@ import { Group } from '../../../application/groups.service';
           </div>
           <div class="members-grid">
             <div *ngFor="let member of group.members" class="member-card">
-              <div class="member-avatar">
+              <div class="member-avatar" [style.--dynamic-color]="getMemberColor(member.name)" [style.background-color]="getMemberColor(member.name)">
                 {{ getMemberInitials(member.name) }}
               </div>
               <div class="member-details">
@@ -177,7 +177,7 @@ import { Group } from '../../../application/groups.service';
       left: 0;
       right: 0;
       height: 4px;
-      background: #667eea;
+      background: var(--group-color, #1a1a1a);
     }
 
     .modal-header {
@@ -199,7 +199,6 @@ import { Group } from '../../../application/groups.service';
     .avatar {
       width: 64px;
       height: 64px;
-      background: #667eea;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -276,7 +275,7 @@ import { Group } from '../../../application/groups.service';
 
     .stat-card:hover {
       background: #ffffff;
-      border-color: #667eea;
+      border-color: #1a1a1a;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
@@ -291,7 +290,7 @@ import { Group } from '../../../application/groups.service';
       font-size: 20px;
     }
 
-    .stat-card.total-tasks .stat-icon { background: #667eea; }
+    .stat-card.total-tasks .stat-icon { background: #1a1a1a; }
     .stat-card.completed .stat-icon { background: #4caf50; }
     .stat-card.in-progress .stat-icon { background: #ff9800; }
     .stat-card.pending .stat-icon { background: #9e9e9e; }
@@ -358,7 +357,7 @@ import { Group } from '../../../application/groups.service';
     }
 
     .member-count {
-      background: #667eea;
+      background: var(--group-color, #1a1a1a);
       color: white;
       padding: 6px 12px;
       border-radius: 6px;
@@ -385,14 +384,13 @@ import { Group } from '../../../application/groups.service';
 
     .member-card:hover {
       background: #ffffff;
-      border-color: #667eea;
+      border-color: #1a1a1a;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .member-avatar {
       width: 48px;
       height: 48px;
-      background: #667eea;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -401,6 +399,15 @@ import { Group } from '../../../application/groups.service';
       font-weight: 600;
       font-size: 16px;
       flex-shrink: 0;
+    }
+
+    .member-avatar[style*="background-color"] {
+      background-color: inherit !important;
+    }
+
+    /* Asegurar que el color dinámico se aplique */
+    .member-card .member-avatar {
+      background-color: var(--dynamic-color) !important;
     }
 
     .member-details {
@@ -454,7 +461,7 @@ import { Group } from '../../../application/groups.service';
 
     .task-item:hover {
       background: #ffffff;
-      border-color: #667eea;
+      border-color: #1a1a1a;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
@@ -573,6 +580,7 @@ export class GroupProfileModal {
   dialogRef = inject(MatDialogRef<GroupProfileModal>);
   taskStore: TaskStore = inject(TaskStore);
   teamService: TeamService = inject(TeamService);
+  private groupsService = inject(GroupsService);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { group: Group }) {
     this.group = data.group;
@@ -646,6 +654,16 @@ export class GroupProfileModal {
 
   closeModal(): void {
     this.dialogRef.close();
+  }
+
+  // Método para obtener el color del grupo
+  getGroupColor(): string {
+    return this.groupsService.getGroupColor(this.group.name);
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
   }
 }
 

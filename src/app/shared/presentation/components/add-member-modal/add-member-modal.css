@@ -30,7 +30,7 @@
 
 .title-icon {
   font-size: 1.5rem;
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .close-button {
@@ -91,8 +91,8 @@
 }
 
 .input-field:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
 }
 
 .input-field:not(:placeholder-shown) {
@@ -113,13 +113,13 @@
 }
 
 .form-group:focus-within .input-icon {
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 .select-field {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%23667eea' d='M7 10.5L2 5.5h10L7 10.5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%231a1a1a' d='M7 10.5L2 5.5h10L7 10.5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-color: #ffffff;
@@ -131,8 +131,8 @@
 }
 
 .select-field:focus {
-  border-color: #667eea;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%23667eea' d='M7 10.5L2 5.5h10L7 10.5z'/%3E%3C/svg%3E");
+  border-color: #1a1a1a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%231a1a1a' d='M7 10.5L2 5.5h10L7 10.5z'/%3E%3C/svg%3E");
 }
 
 .select-field option {
@@ -146,11 +146,11 @@
 
 .select-field option:hover,
 .select-field option:focus {
-  background: #f0f4ff;
+  background: #f8f9fa;
 }
 
 .select-field option:checked {
-  background: #667eea;
+  background: #1a1a1a;
   color: #ffffff;
 }
 
@@ -202,24 +202,25 @@
 }
 
 .add-button {
-  background: #667eea !important;
-  color: white !important;
+  background: #ffffff !important;
+  color: #1a1a1a !important;
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 6px;
   min-width: 140px;
-  border: none !important;
+  border: 1px solid #e8eaed !important;
   font-size: 0.95rem;
 }
 
 .add-button:hover:not(:disabled) {
-  background: #5568d3 !important;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  background: #f8f9fa !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #d1d5db !important;
 }
 
 .add-button:disabled {
@@ -229,7 +230,7 @@
 }
 
 .add-button mat-icon {
-  color: white !important;
+  color: #1a1a1a !important;
 }
 
 .spinning {

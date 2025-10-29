@@ -17,6 +17,7 @@ import { MultiAssigneeSelector } from '../../components/multi-assignee-selector/
 import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
 import { LottieAnimationComponent } from '../../components/lottie-animation/lottie-animation.component';
 import { GroupsService } from '../../../application/groups.service';
+import { TeamService } from '../../../application/team.service';
 
 @Component({
   selector: 'app-task-list',
@@ -47,7 +48,6 @@ import { GroupsService } from '../../../application/groups.service';
 })
 export class TaskList {
   isAddDialogOpen = signal(false);
-  showSuccessAnimation = signal(false);
   newTask = signal<CreateTaskRequest>({
     title: '',
     description: '',
@@ -65,6 +65,7 @@ export class TaskList {
   enabledSignal = signal(false);
 
   private groupsService = inject(GroupsService);
+  private teamService = inject(TeamService);
 
   constructor(
     public taskStore: TaskStore
@@ -85,6 +86,26 @@ export class TaskList {
       }
     }
     return null;
+  }
+
+  isTaskAssigned(task: any): boolean {
+    // Check if task has an individual assignee
+    if (task.assignee && task.assignee.trim() !== '') {
+      return true;
+    }
+    
+    // Check if task has multiple assignees
+    if (task.assignees && task.assignees.length > 0) {
+      return true;
+    }
+    
+    // Check if task belongs to any group
+    const taskGroup = this.getTaskGroup(task.id);
+    if (taskGroup) {
+      return true;
+    }
+    
+    return false;
   }
   
   updateSelectedGroup(groupName: string): void {
@@ -150,15 +171,7 @@ export class TaskList {
       }
       
       this.closeAddDialog();
-      this.showSuccessConfirmation();
     }
-  }
-
-  showSuccessConfirmation(): void {
-    this.showSuccessAnimation.set(true);
-    setTimeout(() => {
-      this.showSuccessAnimation.set(false);
-    }, 3000);
   }
 
   deleteTask(id: string): void {
@@ -217,15 +230,6 @@ export class TaskList {
     }
   }
 
-  getPriorityIcon(priority: string): string {
-    switch (priority) {
-      case 'high': return 'priority_high';
-      case 'medium': return 'remove';
-      case 'low': return 'keyboard_arrow_down';
-      default: return 'remove';
-    }
-  }
-
   private resetNewTask(): void {
     this.newTask.set({
       title: '',
@@ -243,5 +247,29 @@ export class TaskList {
   isFormValid(): boolean {
     const task = this.newTask();
     return !!(task.title && task.title.trim().length > 0);
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
+  }
+
+  // Método para obtener el color de un grupo
+  getGroupColor(groupName: string): string {
+    return this.groupsService.getGroupColor(groupName);
+  }
+
+  // Método para obtener el icono según la prioridad
+  getPriorityIcon(priority: string): string {
+    switch (priority) {
+      case 'high':
+        return 'keyboard_arrow_up'; // Flecha hacia arriba para alta prioridad
+      case 'medium':
+        return 'remove'; // Línea horizontal para media prioridad
+      case 'low':
+        return 'keyboard_arrow_down'; // Flecha hacia abajo para baja prioridad
+      default:
+        return 'assignment';
+    }
   }
 }

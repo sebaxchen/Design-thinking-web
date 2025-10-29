@@ -50,104 +50,101 @@
   } @else {
     <div class="groups-list">
       @for (group of groups(); track group.id || group.name) {
-        <mat-card class="group-card">
-          <mat-card-header>
-            <div class="group-header">
-              <div class="group-title-section">
-                <mat-icon class="group-icon" (click)="openGroupProfile(group)">groups</mat-icon>
-                <div class="group-title-info">
-                  <mat-card-title class="group-name">{{ group.name }}</mat-card-title>
-                  <p class="group-meta">{{ group.members.length }} miembro(s) • {{ group.tasks.length }} tarea(s)</p>
+        <div class="group-card">
+          <!-- Card Header -->
+          <div class="card-header">
+            <div class="group-info">
+              <div class="group-icon-container" 
+                   (click)="openGroupProfile(group)"
+                   [style.background-color]="getGroupColor(group.name)">
+                <mat-icon class="group-icon">groups</mat-icon>
+              </div>
+              <div class="group-details">
+                <h3 class="group-name">{{ group.name }}</h3>
+                <div class="group-stats">
+                  <span class="stat-item">
+                    <mat-icon class="stat-icon">people</mat-icon>
+                    {{ group.members.length }}
+                  </span>
+                  <span class="stat-item">
+                    <mat-icon class="stat-icon">assignment</mat-icon>
+                    {{ group.tasks.length }}
+                  </span>
                 </div>
               </div>
-              <div class="group-actions">
-                <button mat-icon-button (click)="editGroup(group)" class="edit-button" title="Editar grupo">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button (click)="deleteGroup(group.name)" class="delete-button" title="Eliminar grupo">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
             </div>
-          </mat-card-header>
+            <div class="card-actions">
+              <button mat-icon-button (click)="editGroup(group)" class="action-btn edit-btn" title="Editar grupo">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteGroup(group.name)" class="action-btn delete-btn" title="Eliminar grupo">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
 
-          <mat-card-content>
+          <!-- Card Content -->
+          <div class="card-content">
             <!-- Members Section -->
-            <div class="group-section">
-              <div class="section-header">
-                <mat-icon class="section-icon">people</mat-icon>
-                <h4 class="section-title">Miembros</h4>
+            <div class="content-section">
+              <div class="section-label">
+                <mat-icon class="label-icon">people</mat-icon>
+                <span class="label-text">Miembros</span>
               </div>
               
-              <div class="members-indicators">
-                @if (group.members && group.members.length > 0) {
-                  <div class="members-status">
-                    <mat-icon class="members-icon">group</mat-icon>
-                    <span class="members-text">{{ group.members.length }} miembro(s) en el grupo:</span>
-                  </div>
-                  
-                  <div class="members-display">
-                    @for (member of group.members; track member.id) {
-                      <div class="member-badge">
-                        <div class="member-avatar-small">
-                          {{ getInitials(member.name) }}
-                        </div>
-                        <span class="member-name-small">{{ member.name }}</span>
+              @if (group.members && group.members.length > 0) {
+                <div class="members-grid">
+                  @for (member of group.members; track member.id) {
+                    <div class="member-item">
+                      <div class="member-avatar" [style.background-color]="getMemberColor(member.name)">
+                        {{ getInitials(member.name) }}
                       </div>
-                    }
-                  </div>
-                } @else {
-                  <div class="no-members">
-                    <mat-icon class="no-members-icon">person_off</mat-icon>
-                    <span class="no-members-text">No hay miembros asignados</span>
-                  </div>
-                }
-              </div>
+                      <span class="member-name">{{ member.name }}</span>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <div class="empty-state">
+                  <mat-icon class="empty-icon">person_add</mat-icon>
+                  <span class="empty-text">Sin miembros</span>
+                </div>
+              }
             </div>
 
             <!-- Tasks Section -->
-            <div class="group-section">
-              <div class="section-header">
-                <mat-icon class="section-icon">assignment</mat-icon>
-                <h4 class="section-title">Tareas</h4>
+            <div class="content-section">
+              <div class="section-label">
+                <mat-icon class="label-icon">assignment</mat-icon>
+                <span class="label-text">Tareas</span>
               </div>
               
-              <div class="tasks-indicators">
-                @if (group.tasks && group.tasks.length > 0) {
-                  <div class="tasks-status">
-                    <mat-icon class="tasks-icon">assignment</mat-icon>
-                    <span class="tasks-text">{{ group.tasks.length }} tarea(s) asignada(s):</span>
-                  </div>
-                  
-                  <div class="tasks-display">
-                    @for (task of group.tasks; track task.id) {
-                      <div class="task-item">
-                        <div class="task-info">
-                          <span class="task-title-text">{{ task.title }}</span>
-                          <div class="task-tags">
-                            <span class="priority-tag" [class]="'priority-' + task.priority">
-                              <mat-icon>{{ getPriorityIcon(task.priority) }}</mat-icon>
-                              {{ getPriorityText(task.priority) }}
-                            </span>
-                            <span class="time-tag">
-                              <mat-icon>schedule</mat-icon>
-                              {{ getElapsedTime(task.createdAt) }}
-                            </span>
-                          </div>
+              @if (group.tasks && group.tasks.length > 0) {
+                <div class="tasks-list">
+                  @for (task of group.tasks; track task.id) {
+                    <div class="task-item">
+                      <div class="task-content">
+                        <span class="task-title">{{ task.title }}</span>
+                        <div class="task-meta">
+                          <span class="priority-indicator" [class]="'priority-' + task.priority">
+                            {{ getPriorityText(task.priority) }}
+                          </span>
+                          <span class="time-indicator">
+                            {{ getElapsedTime(task.createdAt) }}
+                          </span>
                         </div>
                       </div>
-                    }
-                  </div>
-                } @else {
-                  <div class="no-tasks">
-                    <mat-icon class="no-tasks-icon">assignment_turned_in</mat-icon>
-                    <span class="no-tasks-text">No hay tareas asignadas</span>
-                  </div>
-                }
-              </div>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <div class="empty-state">
+                  <mat-icon class="empty-icon">assignment_turned_in</mat-icon>
+                  <span class="empty-text">Sin tareas</span>
+                </div>
+              }
             </div>
-          </mat-card-content>
-        </mat-card>
+          </div>
+        </div>
       }
     </div>
   }

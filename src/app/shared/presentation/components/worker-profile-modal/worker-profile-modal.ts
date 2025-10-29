@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, signal, computed, effect } from '@angular/core';
+import { Component, Inject, OnInit, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,11 +10,11 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskStore } from '../../../../learning/application/task.store';
-import { inject } from '@angular/core';
 import { Task } from '../../../../learning/domain/model/task.entity';
 import { AchievementService } from '../../../../learning/application/achievement.service';
 import { AchievementTrackerService } from '../../../../learning/application/achievement-tracker.service';
 import { Achievement } from '../../../../learning/domain/model/achievement.entity';
+import { TeamService } from '../../../application/team.service';
 
 export interface WorkerProfileData {
   member: {
@@ -40,11 +40,11 @@ export interface WorkerProfileData {
     MatTooltipModule
   ],
   template: `
-    <div class="modal-container">
+    <div class="modal-container" [style.--user-color]="getUserColor()">
       <!-- Header -->
       <div class="modal-header">
         <div class="user-profile">
-          <div class="avatar">
+          <div class="avatar" [style.background-color]="getUserColor()">
             <mat-icon>person</mat-icon>
           </div>
           <div class="user-info">
@@ -200,7 +200,7 @@ export interface WorkerProfileData {
       left: 0;
       right: 0;
       height: 4px;
-      background: #667eea;
+      background: var(--user-color, #667eea);
     }
 
     .modal-header {
@@ -225,7 +225,6 @@ export interface WorkerProfileData {
     .avatar {
       width: 56px;
       height: 56px;
-      background: #667eea;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -312,7 +311,7 @@ export interface WorkerProfileData {
       left: 0;
       right: 0;
       height: 3px;
-      background: #667eea;
+      background: var(--user-color, #667eea);
     }
 
     .stats-section h2 {
@@ -428,7 +427,7 @@ export interface WorkerProfileData {
       left: 0;
       right: 0;
       height: 3px;
-      background: #667eea;
+      background: var(--user-color, #667eea);
     }
 
     .section-header {
@@ -448,7 +447,7 @@ export interface WorkerProfileData {
     }
 
     .achievement-count {
-      background: #667eea;
+      background: var(--user-color, #667eea);
       color: white;
       padding: 6px 12px;
       border-radius: 6px;
@@ -745,6 +744,7 @@ export class WorkerProfileModal {
   taskStore: TaskStore = inject(TaskStore);
   achievementService: AchievementService = inject(AchievementService);
   achievementTracker: AchievementTrackerService = inject(AchievementTrackerService);
+  private teamService = inject(TeamService);
   
   member: any;
   userAchievements: Achievement[] = [];
@@ -1013,5 +1013,10 @@ export class WorkerProfileModal {
 
   closeModal() {
     this.dialogRef.close();
+  }
+
+  // Método para obtener el color del usuario
+  getUserColor(): string {
+    return this.teamService.getMemberColor(this.member.name);
   }
 }

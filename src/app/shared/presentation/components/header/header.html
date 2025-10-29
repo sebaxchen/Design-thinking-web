@@ -14,7 +14,8 @@
             mat-button 
             [routerLink]="option.link" 
             routerLinkActive="active"
-            class="nav-link">
+            class="nav-link"
+            [style.--nav-color]="option.color">
             <mat-icon class="nav-icon">{{ option.icon }}</mat-icon>
             <span class="nav-text">{{ option.label }}</span>
           </a>
@@ -25,7 +26,7 @@
       <div class="header-actions">
         <!-- User Info -->
         <div class="user-info" (click)="openSettings()">
-          <div class="user-avatar">
+          <div class="user-avatar" [style.background-color]="getUserColor()">
             <span class="user-initials">{{ authService.getUserInitials() }}</span>
           </div>
           <div class="user-details">
@@ -54,7 +55,7 @@
     <div class="mobile-nav" [class.open]="isMenuOpen">
       <!-- Mobile User Info -->
       <div class="mobile-user-info">
-        <div class="mobile-user-avatar">
+        <div class="mobile-user-avatar" [style.background-color]="getUserColor()">
           <span class="mobile-user-initials">{{ authService.getUserInitials() }}</span>
         </div>
         <div class="mobile-user-details">
@@ -72,7 +73,8 @@
           [routerLink]="option.link" 
           routerLinkActive="active"
           (click)="closeMenu()"
-          class="mobile-nav-link">
+          class="mobile-nav-link"
+          [style.--nav-color]="option.color">
           <mat-icon class="mobile-nav-icon">{{ option.icon }}</mat-icon>
           <span class="mobile-nav-text">{{ option.label }}</span>
         </a>

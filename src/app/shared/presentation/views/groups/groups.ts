@@ -8,6 +8,7 @@ import { CreateGroupModal } from '../../components/create-group-modal/create-gro
 import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
 import { GroupProfileModal } from '../../components/group-profile-modal/group-profile-modal';
 import { GroupsService } from '../../../application/groups.service';
+import { TeamService } from '../../../application/team.service';
 
 @Component({
   selector: 'app-groups',
@@ -31,6 +32,7 @@ export class GroupsComponent {
   
   private dialog = inject(MatDialog);
   private groupsService = inject(GroupsService);
+  private teamService = inject(TeamService);
   
   get groups() {
     return this.groupsService.getAllGroups();
@@ -140,6 +142,16 @@ export class GroupsComponent {
       panelClass: 'group-profile-modal',
       data: { group }
     });
+  }
+
+  // Método para obtener el color de un miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
+  }
+
+  // Método para obtener el color de un grupo
+  getGroupColor(groupName: string): string {
+    return this.groupsService.getGroupColor(groupName);
   }
 }
 
