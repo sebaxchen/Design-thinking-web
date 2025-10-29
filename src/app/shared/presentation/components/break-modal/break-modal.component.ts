@@ -99,13 +99,13 @@ import { SessionTimerService } from '../../../application/session-timer.service'
     .break-icon {
       width: 80px;
       height: 80px;
-      background: linear-gradient(135deg, #f59e0b, #f97316);
+      background: #1a1a1a;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 24px;
-      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .break-icon mat-icon {
@@ -186,27 +186,31 @@ import { SessionTimerService } from '../../../application/session-timer.service'
     }
 
     .continue-btn {
-      background: #f8f9fa;
-      color: #6b7280;
-      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      color: #1a1a1a;
+      border: 2px solid #1a1a1a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .continue-btn:hover {
-      background: #e5e7eb;
-      color: #4b5563;
+      background: #1a1a1a;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .take-break-btn {
-      background: #f59e0b;
-      color: white;
-      border: 1px solid #f59e0b;
+      background: #1a1a1a;
+      color: #ffffff;
+      border: 2px solid #1a1a1a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .take-break-btn:hover {
-      background: #d97706;
-      border-color: #d97706;
+      background: #ffffff;
+      color: #1a1a1a;
       transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .break-btn mat-icon {
