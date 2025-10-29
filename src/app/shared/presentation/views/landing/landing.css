@@ -26,18 +26,23 @@
   justify-content: center;
 }
 
-.app-logo {
-  font-size: 64px !important;
-  width: 64px !important;
-  height: 64px !important;
-  color: #667eea;
-  background: #f0f4ff;
+.logo-circle {
+  width: 80px;
+  height: 80px;
   border-radius: 16px;
-  padding: 16px;
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #e0e7ff;
+  border: 2px solid #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.app-logo {
+  font-size: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  color: #ffffff;
 }
 
 .app-title {
@@ -77,21 +82,21 @@
   align-items: center;
   gap: 10px;
   padding: 16px 32px;
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
   border: none;
   border-radius: 12px;
   font-size: 1.0625rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
   transition: all 0.2s ease;
 }
 
 .primary-btn:hover {
-  background: #5568d3;
+  background: #333333;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(26, 26, 26, 0.4);
 }
 
 .primary-btn mat-icon {
@@ -106,8 +111,8 @@
   gap: 10px;
   padding: 16px 32px;
   background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
   border-radius: 12px;
   font-size: 1.0625rem;
   font-weight: 600;
@@ -116,9 +121,9 @@
 }
 
 .secondary-btn:hover {
-  background: #f0f4ff;
-  border-color: #5568d3;
-  color: #5568d3;
+  background: #f8f9fa;
+  border-color: #333333;
+  color: #333333;
 }
 
 .secondary-btn mat-icon {
@@ -127,8 +132,8 @@
   height: 20px;
 }
 
-/* Features Section */
-.features-section {
+/* App Views Section */
+.app-views-section {
   padding: 100px 24px;
   background: white;
   position: relative;
@@ -152,59 +157,75 @@
   margin: 0;
 }
 
-.features-grid {
+.app-views-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.feature-card {
+.view-card {
   padding: 32px;
   background: white;
   border-radius: 12px;
   border: 2px solid #e5e7eb;
   transition: all 0.3s ease;
+  position: relative;
 }
 
-.feature-card:hover {
-  border-color: #667eea;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+.view-card:hover {
+  border-color: var(--view-color);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--view-color) 15%, transparent);
   transform: translateY(-4px);
 }
 
-.feature-icon {
+.view-icon {
   width: 56px;
   height: 56px;
   border-radius: 12px;
-  background: #f0f4ff;
-  border: 2px solid #e0e7ff;
+  background: var(--view-color);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
 }
 
-.feature-icon mat-icon {
+.view-icon mat-icon {
   font-size: 28px;
   width: 28px;
   height: 28px;
-  color: #667eea;
+  color: white;
 }
 
-.feature-title {
+.view-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: #1f2937;
   margin: 0 0 0.75rem 0;
 }
 
-.feature-description {
+.view-description {
   font-size: 1rem;
   color: #6b7280;
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.view-features {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feature-tag {
+  background: color-mix(in srgb, var(--view-color) 10%, transparent);
+  color: var(--view-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--view-color) 20%, transparent);
 }
 
 /* Pricing Section */
@@ -250,16 +271,16 @@
 }
 
 .pricing-card:hover {
-  border-color: #667eea;
-  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.15);
+  border-color: #1a1a1a;
+  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.15);
   transform: translateY(-4px);
 }
 
 .pricing-card.featured {
-  border-color: #667eea;
+  border-color: #1a1a1a;
   border-width: 3px;
   background: #fafbfc;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+  box-shadow: 0 8px 24px rgba(26, 26, 26, 0.15);
 }
 
 .pricing-badge {
@@ -281,9 +302,9 @@
 }
 
 .pricing-badge.popular {
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
 }
 
 .pricing-badge.premium {
@@ -312,7 +333,7 @@
 .currency {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #667eea;
+  color: #1a1a1a;
   margin-right: 4px;
 }
 
@@ -372,8 +393,8 @@
   width: 100%;
   padding: 14px 24px;
   background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
   border-radius: 10px;
   font-size: 1.0625rem;
   font-weight: 600;
@@ -382,27 +403,27 @@
 }
 
 .pricing-button:hover {
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 16px rgba(26, 26, 26, 0.3);
 }
 
 .pricing-button.primary {
-  background: #667eea;
+  background: #1a1a1a;
   color: white;
-  border-color: #667eea;
+  border-color: #1a1a1a;
 }
 
 .pricing-button.primary:hover {
-  background: #5568d3;
-  border-color: #5568d3;
+  background: #333333;
+  border-color: #333333;
 }
 
 /* Final CTA */
 .final-cta {
   padding: 100px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
   text-align: center;
 }
 
@@ -431,7 +452,7 @@
   gap: 12px;
   padding: 18px 40px;
   background: white;
-  color: #667eea;
+  color: #1a1a1a;
   border: none;
   border-radius: 12px;
   font-size: 1.125rem;
@@ -504,6 +525,7 @@
   }
   
   .features-grid,
+  .app-views-grid,
   .pricing-grid {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -525,6 +547,7 @@
   }
   
   .features-section,
+  .app-views-section,
   .pricing-section,
   .final-cta {
     padding: 60px 16px;

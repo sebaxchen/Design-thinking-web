@@ -22,6 +22,7 @@
   flex-direction: column;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  border: 1px solid #e5e7eb;
 }
 
 .modal-header {
@@ -30,13 +31,14 @@
   justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .close-btn {
@@ -56,7 +58,7 @@
 
 .close-btn:hover {
   background: #f3f4f6;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .close-btn mat-icon {
@@ -76,7 +78,7 @@
 .sidebar {
   width: 250px;
   border-right: 1px solid #e5e7eb;
-  background: #fafbfc;
+  background: #ffffff;
   overflow-y: auto;
   padding: 16px 0;
 }
@@ -91,7 +93,7 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #374151;
+  color: #6b7280;
   font-size: 0.9375rem;
   font-weight: 500;
   text-align: left;
@@ -99,13 +101,13 @@
 
 .sidebar-item:hover {
   background: #f3f4f6;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .sidebar-item.active {
-  background: #eff6ff;
-  color: #667eea;
-  border-right: 3px solid #667eea;
+  background: #f3f4f6;
+  color: #1a1a1a;
+  border-right: 3px solid #1a1a1a;
 }
 
 .sidebar-icon {
@@ -123,6 +125,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 32px;
+  background: #ffffff;
 }
 
 .content-section {
@@ -135,8 +138,8 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #111827;
-  border-bottom: 2px solid #667eea;
+  color: #1a1a1a;
+  border-bottom: 2px solid #1a1a1a;
   padding-bottom: 8px;
 }
 
@@ -149,14 +152,14 @@
 .settings-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: #6b7280;
 }
 
 .settings-input {
   width: 100%;
   padding: 10px 12px;
   font-size: 0.9375rem;
-  color: #111827;
+  color: #1a1a1a;
   background: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -169,7 +172,7 @@
 }
 
 .settings-input:focus {
-  border-color: #667eea;
+  border-color: #1a1a1a;
 }
 
 .settings-input.textarea {
@@ -187,7 +190,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  background: #fafbfc;
+  background: #f9fafb;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
 }
@@ -201,7 +204,7 @@
 .toggle-label {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .toggle-desc {
@@ -242,17 +245,18 @@
 }
 
 .toggle-switch input[type="checkbox"]:checked + .toggle {
-  background: #667eea;
+  background: #1a1a1a;
 }
 
 .toggle-switch input[type="checkbox"]:checked + .toggle::after {
   left: 27px;
+  background: #ffffff;
 }
 
 /* About Section */
 .about-content {
   padding: 24px;
-  background: #fafbfc;
+  background: #f9fafb;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
 }
@@ -261,7 +265,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .about-desc {
@@ -290,16 +294,16 @@
 
 .plan-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: #667eea;
+  border-color: #1a1a1a;
 }
 
 .plan-card.current {
-  border-color: #10b981;
+  border-color: #1a1a1a;
   border-width: 2px;
 }
 
 .plan-card.recommended {
-  border-color: #667eea;
+  border-color: #1a1a1a;
   border-width: 2px;
 }
 
@@ -308,8 +312,8 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #667eea;
-  color: white;
+  background: #1a1a1a;
+  color: #ffffff;
   padding: 4px 16px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -325,13 +329,13 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #111827;
+  color: #1a1a1a;
 }
 
 .plan-price {
   font-size: 2rem;
   font-weight: 700;
-  color: #667eea;
+  color: #1a1a1a;
   margin: 0;
 }
 
@@ -348,14 +352,14 @@
   gap: 8px;
   padding: 8px 0;
   font-size: 0.875rem;
-  color: #374151;
+  color: #6b7280;
 }
 
 .feature-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
-  color: #10b981;
+  color: #1a1a1a;
 }
 
 .plan-button {
@@ -370,27 +374,30 @@
 }
 
 .plan-button.default {
-  background: #f3f4f6;
-  color: #374151;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e5e7eb;
 }
 
 .plan-button.default:hover {
-  background: #e5e7eb;
+  background: #f9fafb;
+  border-color: #d1d5db;
 }
 
 .plan-button.premium {
-  background: #667eea;
-  color: white;
+  background: #1a1a1a;
+  color: #ffffff;
 }
 
 .plan-button.premium:hover {
-  background: #5568d3;
+  background: #374151;
 }
 
 .plan-button.active {
-  background: #10b981;
-  color: white;
+  background: #f9fafb;
+  color: #1a1a1a;
   cursor: not-allowed;
+  border: 1px solid #e5e7eb;
 }
 
 /* Responsive for Plans */
@@ -407,7 +414,7 @@
   gap: 12px;
   padding: 16px 24px;
   border-top: 1px solid #e5e7eb;
-  background: #fafbfc;
+  background: #ffffff;
 }
 
 .footer-btn {
@@ -421,21 +428,23 @@
 }
 
 .footer-btn.cancel {
-  background: #f3f4f6;
-  color: #374151;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e5e7eb;
 }
 
 .footer-btn.cancel:hover {
-  background: #e5e7eb;
+  background: #f9fafb;
+  border-color: #d1d5db;
 }
 
 .footer-btn.save {
-  background: #667eea;
+  background: #1a1a1a;
   color: #ffffff;
 }
 
 .footer-btn.save:hover {
-  background: #5568d3;
+  background: #374151;
 }
 
 /* Responsive */
@@ -465,7 +474,7 @@
 
   .sidebar-item.active {
     border-right: none;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid #1a1a1a;
   }
 
   .main-content {

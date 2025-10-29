@@ -8,6 +8,7 @@ import { Task, TaskStatus } from '../../../../learning/domain/model/task.entity'
 import { StatusSelector } from '../../components/status-selector/status-selector';
 import { AssigneeSelector } from '../../components/assignee-selector/assignee-selector';
 import { ConfirmDeleteTaskModal } from '../../components/confirm-delete-task-modal/confirm-delete-task-modal';
+import { TeamService } from '../../../application/team.service';
 
 @Component({
   selector: 'app-about',
@@ -29,6 +30,7 @@ export class About {
   constructor(public taskStore: TaskStore) {}
   
   private dialog = inject(MatDialog);
+  private teamService = inject(TeamService);
 
   updateStatus(id: string, status: TaskStatus): void {
     this.taskStore.updateStatus(id, status);
@@ -118,5 +120,10 @@ export class About {
       default:
         return 0;
     }
+  }
+
+  // Función para obtener el color único del miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
   }
 }

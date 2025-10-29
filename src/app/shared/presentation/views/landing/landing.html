@@ -3,7 +3,9 @@
   <div class="hero-section">
     <div class="hero-content">
       <div class="logo-container">
-        <mat-icon class="app-logo">schedule</mat-icon>
+        <div class="logo-circle">
+          <mat-icon class="app-logo">schedule</mat-icon>
+        </div>
       </div>
       <h1 class="app-title">NoteTo</h1>
       <p class="hero-subtitle">La plataforma que organiza tu mundo</p>
@@ -24,77 +26,95 @@
     </div>
   </div>
 
-  <!-- Features Section -->
-  <div class="features-section">
+  <!-- App Views Section -->
+  <div class="app-views-section">
     <div class="section-header">
-      <h2 class="section-title">Todo lo que necesitas para ser productivo</h2>
-      <p class="section-subtitle">Potencia tu equipo con herramientas diseñadas para la excelencia</p>
+      <h2 class="section-title">Descubre las vistas de NoteTo</h2>
+      <p class="section-subtitle">Cada vista está diseñada para optimizar tu flujo de trabajo</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <mat-icon>task_alt</mat-icon>
+    <div class="app-views-grid">
+      <div class="view-card" style="--view-color: #10b981">
+        <div class="view-icon">
+          <mat-icon>home</mat-icon>
         </div>
-        <h3 class="feature-title">Gestión Inteligente</h3>
-        <p class="feature-description">
-          Organiza y prioriza tareas con facilidad. 
-          Visualiza tu progreso en tiempo real.
+        <h3 class="view-title">Inicio</h3>
+        <p class="view-description">
+          Tu centro de control principal. Crea y gestiona tus notas de forma rápida y eficiente.
         </p>
+        <div class="view-features">
+          <span class="feature-tag">Crear notas</span>
+          <span class="feature-tag">Vista rápida</span>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">
-          <mat-icon>groups</mat-icon>
-        </div>
-        <h3 class="feature-title">Colaboración Sin Límites</h3>
-        <p class="feature-description">
-          Trabaja en equipo, asigna tareas y mantén 
-          a todos sincronizados.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <mat-icon>architecture</mat-icon>
-        </div>
-        <h3 class="feature-title">Organización por Grupos</h3>
-        <p class="feature-description">
-          Crea equipos, gestiona proyectos y 
-          maximiza la eficiencia.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <mat-icon>cloud_upload</mat-icon>
-        </div>
-        <h3 class="feature-title">Comparte Sin Fronteras</h3>
-        <p class="feature-description">
-          Sube, comparte y accede a archivos 
-          desde cualquier lugar.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
+      <div class="view-card" style="--view-color: #8b5cf6">
+        <div class="view-icon">
           <mat-icon>dashboard</mat-icon>
         </div>
-        <h3 class="feature-title">Visión Clara</h3>
-        <p class="feature-description">
-          Dashboard completo con métricas 
-          y estadísticas en tiempo real.
+        <h3 class="view-title">Dashboard</h3>
+        <p class="view-description">
+          Visualiza métricas clave y estadísticas de tu productividad en tiempo real.
         </p>
+        <div class="view-features">
+          <span class="feature-tag">KPIs</span>
+          <span class="feature-tag">Estadísticas</span>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">
-          <mat-icon>trending_up</mat-icon>
+      <div class="view-card" style="--view-color: #f59e0b">
+        <div class="view-icon">
+          <mat-icon>groups</mat-icon>
         </div>
-        <h3 class="feature-title">Mejora Continua</h3>
-        <p class="feature-description">
-          Aprende mientras trabajas con categorías 
-          de aprendizaje integradas.
+        <h3 class="view-title">Grupos</h3>
+        <p class="view-description">
+          Organiza tu trabajo en grupos temáticos y colabora con tu equipo de manera eficiente.
         </p>
+        <div class="view-features">
+          <span class="feature-tag">Colaboración</span>
+          <span class="feature-tag">Organización</span>
+        </div>
+      </div>
+
+      <div class="view-card" style="--view-color: #06b6d4">
+        <div class="view-icon">
+          <mat-icon>info</mat-icon>
+        </div>
+        <h3 class="view-title">Gestión de Tareas</h3>
+        <p class="view-description">
+          Administra todas tus tareas, asigna responsables y sigue el progreso de cada proyecto.
+        </p>
+        <div class="view-features">
+          <span class="feature-tag">Tareas</span>
+          <span class="feature-tag">Asignaciones</span>
+        </div>
+      </div>
+
+      <div class="view-card" style="--view-color: #ec4899">
+        <div class="view-icon">
+          <mat-icon>group</mat-icon>
+        </div>
+        <h3 class="view-title">Colaboradores</h3>
+        <p class="view-description">
+          Gestiona tu equipo, visualiza el rendimiento individual y fomenta el crecimiento profesional.
+        </p>
+        <div class="view-features">
+          <span class="feature-tag">Equipo</span>
+          <span class="feature-tag">Rendimiento</span>
+        </div>
+      </div>
+
+      <div class="view-card" style="--view-color: #eab308">
+        <div class="view-icon">
+          <mat-icon>cloud</mat-icon>
+        </div>
+        <h3 class="view-title">Archivos</h3>
+        <p class="view-description">
+          Comparte archivos de forma segura, organiza documentos y mantén todo accesible.
+        </p>
+        <div class="view-features">
+          <span class="feature-tag">Archivos</span>
+          <span class="feature-tag">Compartir</span>
+        </div>
       </div>
     </div>
   </div>

@@ -24,6 +24,13 @@
 
       <!-- Right Section -->
       <div class="header-actions">
+        <!-- Session Timer -->
+        <div class="session-timer" [style.--timer-color]="getTimerColor()">
+          <mat-icon class="timer-icon">schedule</mat-icon>
+          <span class="timer-text">{{ getFormattedTime() }}</span>
+        </div>
+        <div class="divider"></div>
+        
         <!-- User Info -->
         <div class="user-info" (click)="openSettings()">
           <div class="user-avatar" [style.background-color]="getUserColor()">
@@ -53,6 +60,12 @@
 
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav" [class.open]="isMenuOpen">
+      <!-- Mobile Session Timer -->
+      <div class="mobile-session-timer" [style.--timer-color]="getTimerColor()">
+        <mat-icon class="mobile-timer-icon">schedule</mat-icon>
+        <span class="mobile-timer-text">{{ getFormattedTime() }}</span>
+      </div>
+      
       <!-- Mobile User Info -->
       <div class="mobile-user-info">
         <div class="mobile-user-avatar" [style.background-color]="getUserColor()">
@@ -86,4 +99,7 @@
   @if (isSettingsOpen) {
     <app-settings-modal (close)="isSettingsOpen = false"></app-settings-modal>
   }
+
+  <!-- Break Modal -->
+  <app-break-modal></app-break-modal>
 }

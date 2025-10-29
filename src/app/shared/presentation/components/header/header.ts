@@ -8,6 +8,8 @@ import { UserService } from '../../../application/user.service';
 import { AuthService } from '../../../application/auth.service';
 import { SettingsModal } from '../settings-modal/settings-modal';
 import { TeamService } from '../../../application/team.service';
+import { SessionTimerService } from '../../../application/session-timer.service';
+import { BreakModalComponent } from '../break-modal/break-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +22,8 @@ import { TeamService } from '../../../application/team.service';
     MatIcon,
     RouterLink,
     RouterLinkActive,
-    SettingsModal
+    SettingsModal,
+    BreakModalComponent
   ],
   templateUrl: './header.html',
   styleUrl: './header.css'
@@ -29,6 +32,7 @@ export class Header {
   isMenuOpen = false;
   isSettingsOpen = false;
   private teamService = inject(TeamService);
+  private sessionTimerService = inject(SessionTimerService);
 
   options = [
     { link: '/home', label: 'Inicio', icon: 'home', color: '#10b981' },
@@ -64,5 +68,14 @@ export class Header {
   getUserColor(): string {
     const userName = this.authService.getUserName();
     return this.teamService.getMemberColor(userName);
+  }
+
+  // Session Timer Methods
+  getFormattedTime(): string {
+    return this.sessionTimerService.formatTime(this.sessionTimerService.sessionState().elapsedTime);
+  }
+
+  getTimerColor(): string {
+    return this.sessionTimerService.getTimerColor(this.sessionTimerService.sessionState().status);
   }
 }

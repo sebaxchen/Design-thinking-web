@@ -129,7 +129,9 @@
                   </span>
                   @if (task.assignee) {
                     <span class="assignee-chip">
-                      <mat-icon class="assignee-icon">person</mat-icon>
+                      <div class="assignee-avatar" [style.background-color]="getMemberColor(task.assignee)">
+                        {{ task.assignee.charAt(0).toUpperCase() }}
+                      </div>
                       {{ task.assignee }}
                     </span>
                   }
@@ -200,7 +202,9 @@
                   </span>
                   @if (task.assignee) {
                     <span class="assignee-chip">
-                      <mat-icon class="assignee-icon">person</mat-icon>
+                      <div class="assignee-avatar" [style.background-color]="getMemberColor(task.assignee)">
+                        {{ task.assignee.charAt(0).toUpperCase() }}
+                      </div>
                       {{ task.assignee }}
                     </span>
                   }
@@ -271,7 +275,9 @@
                   </span>
                   @if (task.assignee) {
                     <span class="assignee-chip">
-                      <mat-icon class="assignee-icon">person</mat-icon>
+                      <div class="assignee-avatar" [style.background-color]="getMemberColor(task.assignee)">
+                        {{ task.assignee.charAt(0).toUpperCase() }}
+                      </div>
                       {{ task.assignee }}
                     </span>
                   }

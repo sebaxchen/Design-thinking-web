@@ -739,6 +739,20 @@
   margin-right: 4px;
 }
 
+.assignee-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
 /* Empty State */
 .empty-state {
   display: flex;

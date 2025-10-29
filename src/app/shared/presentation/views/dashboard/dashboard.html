@@ -157,7 +157,7 @@
           [class.needs-improvement]="member.completionRate < 40">
           
           <div class="member-header">
-            <div class="member-avatar">{{ member.avatar }}</div>
+            <div class="member-avatar" [style.background-color]="getMemberColor(member.name)">{{ member.avatar }}</div>
             <div class="member-info">
               <div class="member-name">{{ member.name }}</div>
               <div class="member-completion">{{ member.completionRate }}% completado</div>

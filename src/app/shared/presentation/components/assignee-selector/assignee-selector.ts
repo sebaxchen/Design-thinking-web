@@ -89,15 +89,15 @@ export interface Person {
     }
 
     .assignee-button:hover {
-      border-color: #667eea;
-      background: #f0f2ff;
-      color: #667eea;
+      border-color: #1a1a1a;
+      background: #f8f9fa;
+      color: #1a1a1a;
     }
 
     .assignee-button.assigned {
-      border: 2px solid #667eea;
-      background: #f0f2ff;
-      color: #667eea;
+      border: 2px solid #1a1a1a;
+      background: #f8f9fa;
+      color: #1a1a1a;
     }
 
     .assignee-content {
@@ -111,7 +111,6 @@ export interface Person {
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -184,19 +183,19 @@ export interface Person {
     }
 
     .assignee-dropdown::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: #1a1a1a;
       border-radius: 3px;
       transition: all 0.3s ease;
     }
 
     .assignee-dropdown::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #5a6fd8, #6a4190);
+      background: #333333;
     }
 
     /* Firefox scrollbar */
     .assignee-dropdown {
       scrollbar-width: thin;
-      scrollbar-color: #667eea #f1f1f1;
+      scrollbar-color: #1a1a1a #f1f1f1;
     }
 
     .dropdown-item {

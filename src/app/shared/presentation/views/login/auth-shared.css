@@ -62,7 +62,7 @@ html, body {
   width: 70px;
   height: 70px;
   border-radius: 12px;
-  background: #667eea;
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@ html, body {
   font-size: 2.2rem;
   width: 2.2rem;
   height: 2.2rem;
-  color: white;
+  color: #ffffff;
 }
 
 .brand-title {
@@ -137,8 +137,8 @@ html, body {
 
 .input-field:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
 }
 
 .input-field::placeholder {
@@ -158,14 +158,14 @@ html, body {
 }
 
 .form-group:focus-within .input-icon {
-  color: #667eea;
+  color: #1a1a1a;
 }
 
 /* Button Styles */
 .auth-button {
   width: 100%;
   padding: 14px 20px;
-  background: #667eea;
+  background: #10b981;
   color: white;
   border: none;
   border-radius: 8px;
@@ -177,9 +177,9 @@ html, body {
 }
 
 .auth-button:hover {
-  background: #5568d3;
+  background: #059669;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .auth-button:active {
@@ -206,14 +206,14 @@ html, body {
 }
 
 .auth-link {
-  color: #667eea;
+  color: #1a1a1a;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .auth-link:hover {
-  color: #5568d3;
+  color: #1a1a1a;
   text-decoration: underline;
 }
 

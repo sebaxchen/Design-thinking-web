@@ -181,4 +181,9 @@ export class DashboardComponent implements OnInit {
       default: return 'Media';
     }
   }
+
+  // Función para obtener el color único del miembro
+  getMemberColor(memberName: string): string {
+    return this.teamService.getMemberColor(memberName);
+  }
 }
