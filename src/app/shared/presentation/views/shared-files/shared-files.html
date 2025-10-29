@@ -63,23 +63,27 @@
             </button>
             
             <div class="shared-indicators">
-              @if ((file.sharedWithMembers && file.sharedWithMembers.length > 0) || (file.sharedWithGroups && file.sharedWithGroups.length > 0)) {
+              @if (hasShares(file)) {
                 <div class="shared-status">
                   <mat-icon class="shared-icon">group</mat-icon>
                   <span class="shared-text">Compartido con:</span>
                 </div>
                 
                 <div class="shared-badges">
-                  @for (member of file.sharedWithMembers || []; track member) {
+                  @for (member of getSharedMembers(file); track member) {
                     <span class="shared-badge member">
-                      <mat-icon>person</mat-icon>
-                      {{ member }}
+                      <div class="member-avatar-badge" [style.background-color]="getMemberColor(member)">
+                        <span class="member-initials-badge">{{ getInitials(member) }}</span>
+                      </div>
+                      <span class="badge-text">{{ member }}</span>
                     </span>
                   }
-                  @for (group of file.sharedWithGroups || []; track group) {
+                  @for (group of getSharedGroups(file); track group) {
                     <span class="shared-badge group">
-                      <mat-icon>groups</mat-icon>
-                      {{ group }}
+                      <div class="group-avatar-badge" [style.background-color]="getGroupColor(group)">
+                        <span class="group-initials-badge">{{ getGroupInitials(group) }}</span>
+                      </div>
+                      <span class="badge-text">{{ group }}</span>
                     </span>
                   }
                 </div>
@@ -157,6 +161,9 @@
                       type="checkbox" 
                       [checked]="selectedGroups().includes(group.name)"
                       (change)="toggleGroup(group.name)">
+                    <div class="group-avatar-small" [style.background-color]="getGroupColor(group.name)">
+                      <span class="group-initials-small">{{ getGroupInitials(group.name) }}</span>
+                    </div>
                     <label>{{ group.name }}</label>
                   </div>
                 }

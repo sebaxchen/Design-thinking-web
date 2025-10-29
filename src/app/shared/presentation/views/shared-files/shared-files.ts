@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthService } from '../../../application/auth.service';
 import { TeamService } from '../../../application/team.service';
+import { GroupColorsService } from '../../../application/group-colors.service';
 
 export interface SharedFile {
   id: string;
@@ -36,6 +37,7 @@ export interface SharedFile {
 export class SharedFilesComponent {
   authService = inject(AuthService);
   teamService = inject(TeamService);
+  groupColorsService = inject(GroupColorsService);
   files = signal<SharedFile[]>([]);
   isUploadDialogOpen = signal(false);
   selectedFiles = signal<File[]>([]);
@@ -214,6 +216,23 @@ export class SharedFilesComponent {
     return file.sharedWithGroups?.includes(groupName) || false;
   }
 
+  // Verifica si el archivo está compartido con algún miembro o grupo
+  hasShares(file: SharedFile): boolean {
+    const hasMembers = !!(file.sharedWithMembers && file.sharedWithMembers.length > 0);
+    const hasGroups = !!(file.sharedWithGroups && file.sharedWithGroups.length > 0);
+    return hasMembers || hasGroups;
+  }
+
+  // Obtiene los miembros compartidos (retorna array vacío si no hay)
+  getSharedMembers(file: SharedFile): string[] {
+    return file.sharedWithMembers || [];
+  }
+
+  // Obtiene los grupos compartidos (retorna array vacío si no hay)
+  getSharedGroups(file: SharedFile): string[] {
+    return file.sharedWithGroups || [];
+  }
+
   formatFileSize(bytes: number): string {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -241,6 +260,16 @@ export class SharedFilesComponent {
   // Método para obtener el color de un miembro
   getMemberColor(memberName: string): string {
     return this.teamService.getMemberColor(memberName);
+  }
+
+  // Método para obtener el color de un grupo
+  getGroupColor(groupName: string): string {
+    return this.groupColorsService.getGroupColor(groupName);
+  }
+
+  // Método para obtener las iniciales de un grupo (primeras letras de cada palabra)
+  getGroupInitials(groupName: string): string {
+    return groupName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   }
 }
 

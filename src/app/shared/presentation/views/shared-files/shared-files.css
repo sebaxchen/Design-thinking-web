@@ -254,7 +254,7 @@
 .shared-badge {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   padding: 6px 10px;
   border-radius: 16px;
   font-size: 0.75rem;
@@ -268,23 +268,33 @@
   border: 1px solid #e8eaed;
 }
 
-.shared-badge.member mat-icon {
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
-  color: #1a1a1a;
-}
-
 .shared-badge.group {
   background: #f8f9fa;
   color: #1a1a1a;
   border: 1px solid #e8eaed;
 }
 
-.shared-badge.group mat-icon {
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
+.member-avatar-badge,
+.group-avatar-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.member-initials-badge,
+.group-initials-badge {
+  color: white;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.3px;
+}
+
+.badge-text {
+  font-size: 0.75rem;
   color: #1a1a1a;
 }
 
@@ -396,7 +406,8 @@
 }
 
 /* Avatares pequeños en el modal de compartir */
-.member-avatar-small {
+.member-avatar-small,
+.group-avatar-small {
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -404,9 +415,11 @@
   align-items: center;
   justify-content: center;
   margin-right: 8px;
+  flex-shrink: 0;
 }
 
-.member-initials-small {
+.member-initials-small,
+.group-initials-small {
   color: white;
   font-weight: 600;
   font-size: 0.7rem;
