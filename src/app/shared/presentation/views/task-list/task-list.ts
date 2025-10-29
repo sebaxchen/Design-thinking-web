@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -44,7 +44,8 @@ import { TeamService } from '../../../application/team.service';
     MatCheckboxModule
   ],
   templateUrl: './task-list.html',
-  styleUrl: './task-list.css'
+  styleUrl: './task-list.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskList {
   isAddDialogOpen = signal(false);

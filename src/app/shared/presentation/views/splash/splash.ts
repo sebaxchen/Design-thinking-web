@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './splash.html',
-  styleUrl: './splash.css'
+  styleUrl: './splash.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SplashComponent implements OnInit {
   loadingDots: number[] = [];

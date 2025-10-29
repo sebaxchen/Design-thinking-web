@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './landing.html',
-  styleUrl: './landing.css'
+  styleUrl: './landing.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LandingComponent {
   constructor(private router: Router) {}

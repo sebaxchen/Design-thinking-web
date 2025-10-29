@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -24,7 +24,8 @@ import { TeamService } from '../../../application/team.service';
     AssigneeSelector
   ],
   templateUrl: './about.html',
-  styleUrl: './about.css'
+  styleUrl: './about.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class About {
   constructor(public taskStore: TaskStore) {}

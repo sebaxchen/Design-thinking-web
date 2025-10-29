@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthService } from '../../../application/auth.service';
 import { TeamService } from '../../../application/team.service';
-import { inject } from '@angular/core';
 
 export interface SharedFile {
   id: string;
@@ -31,7 +30,8 @@ export interface SharedFile {
     MatProgressBarModule
   ],
   templateUrl: './shared-files.html',
-  styleUrl: './shared-files.css'
+  styleUrl: './shared-files.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SharedFilesComponent {
   authService = inject(AuthService);

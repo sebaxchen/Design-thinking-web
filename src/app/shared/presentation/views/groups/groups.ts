@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
@@ -24,7 +24,8 @@ import { TeamService } from '../../../application/team.service';
     CreateGroupModal
   ],
   templateUrl: './groups.html',
-  styleUrl: './groups.css'
+  styleUrl: './groups.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupsComponent {
   isModalOpen = signal(false);

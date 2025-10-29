@@ -7,17 +7,24 @@ import { Task, CreateTaskRequest, UpdateTaskRequest, TaskStatus } from '../domai
 export class TaskStore {
   private tasks = signal<Task[]>([]);
 
-  // Computed values
-  readonly allTasks = computed(() => this.tasks().sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
+  // Precompute sorted tasks once for better performance
+  private sortedTasks = computed(() => [...this.tasks()].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
+  
+  // Computed values - using cached sorted tasks for better performance
+  readonly allTasks = computed(() => this.sortedTasks());
+  
   readonly notStartedTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'not-started').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    this.sortedTasks().filter(task => task.status === 'not-started')
   );
+  
   readonly inProgressTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'in-progress').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    this.sortedTasks().filter(task => task.status === 'in-progress')
   );
+  
   readonly completedTasks = computed(() => 
-    this.tasks().filter(task => task.status === 'completed').sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    this.sortedTasks().filter(task => task.status === 'completed')
   );
+  
   readonly taskCount = computed(() => this.tasks().length);
   readonly completedCount = computed(() => this.completedTasks().length);
   readonly inProgressCount = computed(() => this.inProgressTasks().length);

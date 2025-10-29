@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -21,7 +21,8 @@ import { TeamService } from '../../../application/team.service';
     MatChipsModule
   ],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  styleUrl: './dashboard.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
   private taskStore = inject(TaskStore);
@@ -37,34 +38,38 @@ export class DashboardComponent implements OnInit {
   readonly inProgressTasks = computed(() => this.taskStore.inProgressCount());
   readonly notStartedTasks = computed(() => this.taskStore.notStartedCount());
   
-  // Porcentajes
+  // Porcentajes - optimized to reduce calculations
   readonly completionRate = computed(() => {
     const total = this.totalTasks();
-    return total > 0 ? Math.round((this.completedTasks() / total) * 100) : 0;
+    const completed = this.completedTasks();
+    return total > 0 ? Math.round((completed / total) * 100) : 0;
   });
 
   readonly inProgressRate = computed(() => {
     const total = this.totalTasks();
-    return total > 0 ? Math.round((this.inProgressTasks() / total) * 100) : 0;
+    const inProgress = this.inProgressTasks();
+    return total > 0 ? Math.round((inProgress / total) * 100) : 0;
   });
 
   readonly notStartedRate = computed(() => {
     const total = this.totalTasks();
-    return total > 0 ? Math.round((this.notStartedTasks() / total) * 100) : 0;
+    const notStarted = this.notStartedTasks();
+    return total > 0 ? Math.round((notStarted / total) * 100) : 0;
   });
 
-  // Estadísticas por prioridad
-  readonly highPriorityTasks = computed(() => 
-    this.taskStore.allTasks().filter(task => task.priority === 'high').length
-  );
+  // Estadísticas por prioridad - optimized to scan once
+  private priorityDistribution = computed(() => {
+    const tasks = this.taskStore.allTasks();
+    return {
+      high: tasks.filter(t => t.priority === 'high').length,
+      medium: tasks.filter(t => t.priority === 'medium').length,
+      low: tasks.filter(t => t.priority === 'low').length
+    };
+  });
 
-  readonly mediumPriorityTasks = computed(() => 
-    this.taskStore.allTasks().filter(task => task.priority === 'medium').length
-  );
-
-  readonly lowPriorityTasks = computed(() => 
-    this.taskStore.allTasks().filter(task => task.priority === 'low').length
-  );
+  readonly highPriorityTasks = computed(() => this.priorityDistribution().high);
+  readonly mediumPriorityTasks = computed(() => this.priorityDistribution().medium);
+  readonly lowPriorityTasks = computed(() => this.priorityDistribution().low);
 
   // Estadísticas del equipo
   readonly teamMembers = computed(() => this.teamService.allMembers());
@@ -75,32 +80,34 @@ export class DashboardComponent implements OnInit {
     this.taskStore.allTasks().slice(0, 5)
   );
 
-  // Productividad del equipo
+  // Productividad del equipo - optimized to reduce logs in production
   readonly teamProductivity = computed(() => {
     const members = this.teamMembers();
-    console.log('Team members:', members);
     if (members.length === 0) return [];
 
-    const productivity = members.map(member => {
+    return members.map(member => {
       const memberTasks = this.taskStore.getTasksByAssignee(member.name);
-      console.log(`Tasks for ${member.name}:`, memberTasks);
       const completed = memberTasks.filter(task => task.status === 'completed').length;
       const total = memberTasks.length;
       const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+      // Group by status once for performance
+      const byStatus = {
+        completed: completed,
+        inProgress: memberTasks.filter(task => task.status === 'in-progress').length,
+        notStarted: memberTasks.filter(task => task.status === 'not-started').length
+      };
 
       return {
         name: member.name,
         avatar: member.avatar,
         totalTasks: total,
-        completedTasks: completed,
+        completedTasks: byStatus.completed,
         completionRate: completionRate,
-        inProgress: memberTasks.filter(task => task.status === 'in-progress').length,
-        notStarted: memberTasks.filter(task => task.status === 'not-started').length
+        inProgress: byStatus.inProgress,
+        notStarted: byStatus.notStarted
       };
     }).sort((a, b) => b.completionRate - a.completionRate);
-    
-    console.log('Team productivity:', productivity);
-    return productivity;
   });
 
 

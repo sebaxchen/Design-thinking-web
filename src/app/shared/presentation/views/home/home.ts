@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TaskList } from '../task-list/task-list';
 
 @Component({
@@ -8,7 +8,8 @@ import { TaskList } from '../task-list/task-list';
     TaskList
   ],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
 
